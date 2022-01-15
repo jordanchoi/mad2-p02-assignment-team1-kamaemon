@@ -20,6 +20,7 @@
 		E66E64C7279308B2002BBE7E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C6279308B2002BBE7E /* FirebaseDatabase */; };
 		E66E64C9279308B2002BBE7E /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C8279308B2002BBE7E /* FirebaseDatabaseSwift-Beta */; };
 		E66E64CC27930989002BBE7E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64CB27930989002BBE7E /* FirebaseAnalytics */; };
+		E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66E64CD279335C4002BBE7E /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		A04445802791BF3600689F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A04445822791BF3600689F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E66E64CD279335C4002BBE7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				A04445822791BF3600689F32 /* Info.plist */,
 				A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */,
 				E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */,
+				E66E64CD279335C4002BBE7E /* HomeViewController.swift */,
 			);
 			path = Kamaemon;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
 				A04445762791BF3300689F32 /* ViewController.swift in Sources */,
 				A04445722791BF3300689F32 /* AppDelegate.swift in Sources */,
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
