@@ -24,7 +24,7 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
 
        //data for the slides
        var titles = ["Community Spirit","A Win Win Situation","Competitive Kindness"]
-       var descs = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit.","Lorem ipsum dolor sit amet, consectetur adipiscing elit.","Lorem ipsum dolor sit amet, consectetur adipiscing elit."]
+       var descs = ["Add requests for assistance anytime. Our volunteers are more than happy to help.","Algorithm that filters volunteers based on their certification and interests.","Gamified system using leader board and dashboard of volunteer."]
        var imgs = ["hug","family","giving-person"]
 
        //get dynamic width and height of scrollview and save it
@@ -64,10 +64,10 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
                txt1.numberOfLines = 3
                txt1.text = titles[index]
 
-               let txt2 = UILabel.init(frame: CGRect(x:32,y:txt1.frame.maxY+10,width:scrollWidth-64,height:50))
+               let txt2 = UILabel.init(frame: CGRect(x:32,y:txt1.frame.maxY+10,width:scrollWidth-64,height:70))
                txt2.textAlignment = .center
-               txt2.numberOfLines = 3
-               txt2.font = UIFont.systemFont(ofSize: 18.0)
+               txt2.numberOfLines = 4
+               txt2.font = UIFont.systemFont(ofSize: 15.0)
                txt2.text = descs[index]
 
                slide.addSubview(imageView)

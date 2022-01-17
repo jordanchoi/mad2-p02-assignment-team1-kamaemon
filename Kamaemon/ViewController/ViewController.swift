@@ -7,11 +7,8 @@
 
 import UIKit
 import FirebaseAuth
-import Lottie
 
 class ViewController: UIViewController, UITextFieldDelegate{
-    
-    @IBOutlet weak var errorgraphicslabel: AnimationView!
     @IBOutlet weak var EmailAddress: UITextField!
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var newUser: UILabel!
