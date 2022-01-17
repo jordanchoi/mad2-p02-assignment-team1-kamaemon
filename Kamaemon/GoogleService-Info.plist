@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>543529030086-hfnjlatchvuhl8fic57q6iu0tgrdm3tp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.543529030086-hfnjlatchvuhl8fic57q6iu0tgrdm3tp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBzacFqXwH5ZuT858RwDgI8n8wSC5zwTwM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>543529030086</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>sg.mad2.p02.team1.Kamaemon</string>
+	<key>PROJECT_ID</key>
+	<string>kamaemon</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kamaemon.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:543529030086:ios:7da9167189b4214737a2c7</string>
+</dict>
+</plist>

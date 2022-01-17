@@ -57,11 +57,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
                    print("Error: \(error.localizedDescription)")
                }
              } else {
-               print("User signs in successfully")
-               let userInfo = Auth.auth().currentUser
-               let email = userInfo?.email
-               let storyboard = UIStoryboard(name: "Main", bundle: nil)
-               let home = storyboard.instantiateViewController(withIdentifier: "home") as! UIViewController
+                 print("User signs in successfully")
+                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                 let home = storyboard.instantiateViewController(withIdentifier: "home") as! UIViewController
                  home.modalPresentationStyle = .fullScreen
                  self.present(home, animated: true, completion: nil)
              }
@@ -86,6 +84,13 @@ class ViewController: UIViewController, UITextFieldDelegate{
         self.Password.layer.borderWidth = 0
         self.errorlabel.text = ""
         return true
+    }
+    @IBAction func here(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let home = storyboard.instantiateViewController(withIdentifier: "register") as! UIViewController
+        home.modalPresentationStyle = .fullScreen
+        self.present(home, animated: true, completion: nil)
     }
 }
 

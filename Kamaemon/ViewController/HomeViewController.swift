@@ -14,12 +14,13 @@ class HomeViewController : UIViewController{
     @IBOutlet weak var user: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        let userInfo = Auth.auth().currentUser
-        let email = userInfo?.email
-        user.text = "Hello, " + "Balqis" + " 👋"
+        // Do any additional setup after loading the view.\
+        let displayName = "Balqris"
         
-        print("Email: \(email)")
+        
+        user.text = "Hello, " + displayName + " 👋"
+        
+
 
         
     }

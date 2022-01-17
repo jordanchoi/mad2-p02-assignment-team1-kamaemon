@@ -24,6 +24,8 @@
 		E66E64C9279308B2002BBE7E /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C8279308B2002BBE7E /* FirebaseDatabaseSwift-Beta */; };
 		E66E64CC27930989002BBE7E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64CB27930989002BBE7E /* FirebaseAnalytics */; };
 		E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66E64CD279335C4002BBE7E /* HomeViewController.swift */; };
+		E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */; };
+		E6AE62622795530F00B41E63 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE62612795530F00B41E63 /* user.swift */; };
 		F11DCE44C9B0BD8C8FFED90B /* Pods_Kamaemon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8277D75FE11026BF39AF58D /* Pods_Kamaemon.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		C8277D75FE11026BF39AF58D /* Pods_Kamaemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kamaemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E66E64CD279335C4002BBE7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPageViewController.swift; sourceTree = "<group>"; };
+		E6AE62612795530F00B41E63 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,7 @@
 				E66E64CD279335C4002BBE7E /* HomeViewController.swift */,
 				A04445752791BF3300689F32 /* ViewController.swift */,
 				0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */,
+				E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 				A04445822791BF3600689F32 /* Info.plist */,
 				A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */,
 				E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */,
+				E6AE62612795530F00B41E63 /* user.swift */,
 			);
 			path = Kamaemon;
 			sourceTree = "<group>";
@@ -285,11 +291,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6AE62622795530F00B41E63 /* user.swift in Sources */,
 				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
 				A04445762791BF3300689F32 /* ViewController.swift in Sources */,
 				0EB49D242794578200C00848 /* UITextField.swift in Sources */,
 				0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */,
 				A04445722791BF3300689F32 /* AppDelegate.swift in Sources */,
+				E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */,
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
 				0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */,
 				A04445742791BF3300689F32 /* SceneDelegate.swift in Sources */,
@@ -458,7 +466,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mad2-p02-assignment-team1-kamaemon";
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -490,7 +498,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mad2-p02-assignment-team1-kamaemon";
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
