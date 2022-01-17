@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import Firebase
-
+import FirebaseAuth
 class RegisterPageViewController : UIViewController {
         
     @IBOutlet weak var Name: UITextField!
@@ -38,14 +38,29 @@ class RegisterPageViewController : UIViewController {
     
     @IBAction func createAccount(_ sender: Any) {
         
+    
+//        do {
+//            try Auth.auth().signOut()
+//        } catch let error {
+//            print("(error)")
+//        }
         Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { authResult, error in
             print("success")
+            print(authResult?.user.uid)
+            let u = User(userUID: (authResult?.user.uid)!, userCategory: self.cat.currentTitle!, name: self.Name.text!)
+            var ref: DatabaseReference!
+            ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+            ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "userCategory" : u.Category, "Name" : u.n])
         }
-        let u = User(userUID: Auth.auth().currentUser!.uid, userCategory: cat.currentTitle!, name: Name.text!)
-        var ref: DatabaseReference!
-        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-        ref.child("users").child(Auth.auth().currentUser!.uid).setValue(["userUID" : u.UID, "userCategory" : u.Category, "Name" : u.n])
+        
+    
+    
+        
     }
+
     
     
 }
+    
+    
+    
