@@ -7,23 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */; };
+		0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E947A1B2794030D00A2D7B9 /* UIView.swift */; };
+		0EB49D2227943A9E00C00848 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A044457D2791BF3600689F32 /* Assets.xcassets */; };
+		0EB49D242794578200C00848 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB49D232794578200C00848 /* UITextField.swift */; };
+		0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */; };
 		A04445722791BF3300689F32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04445712791BF3300689F32 /* AppDelegate.swift */; };
 		A04445742791BF3300689F32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04445732791BF3300689F32 /* SceneDelegate.swift */; };
 		A04445762791BF3300689F32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04445752791BF3300689F32 /* ViewController.swift */; };
 		A04445792791BF3300689F32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A04445772791BF3300689F32 /* Main.storyboard */; };
 		A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */; };
-		A044457E2791BF3600689F32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A044457D2791BF3600689F32 /* Assets.xcassets */; };
 		A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A044457F2791BF3600689F32 /* LaunchScreen.storyboard */; };
-		E66E64C0279307DC002BBE7E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */; };
 		E66E64C3279308B2002BBE7E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C2279308B2002BBE7E /* FirebaseAuth */; };
 		E66E64C5279308B2002BBE7E /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C4279308B2002BBE7E /* FirebaseAuthCombine-Community */; };
 		E66E64C7279308B2002BBE7E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C6279308B2002BBE7E /* FirebaseDatabase */; };
 		E66E64C9279308B2002BBE7E /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C8279308B2002BBE7E /* FirebaseDatabaseSwift-Beta */; };
 		E66E64CC27930989002BBE7E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64CB27930989002BBE7E /* FirebaseAnalytics */; };
 		E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66E64CD279335C4002BBE7E /* HomeViewController.swift */; };
+		F11DCE44C9B0BD8C8FFED90B /* Pods_Kamaemon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8277D75FE11026BF39AF58D /* Pods_Kamaemon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E947A1B2794030D00A2D7B9 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		0EB49D232794578200C00848 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		228B20F5DE47162060C349D7 /* Pods-Kamaemon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.debug.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.debug.xcconfig"; sourceTree = "<group>"; };
+		23178E38098C53CF8B432ADE /* Pods-Kamaemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.release.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.release.xcconfig"; sourceTree = "<group>"; };
 		A044456E2791BF3300689F32 /* Kamaemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kamaemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A04445712791BF3300689F32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A04445732791BF3300689F32 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +42,8 @@
 		A044457D2791BF3600689F32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A04445802791BF3600689F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A04445822791BF3600689F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C8277D75FE11026BF39AF58D /* Pods_Kamaemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kamaemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E66E64CD279335C4002BBE7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,18 +57,63 @@
 				E66E64C9279308B2002BBE7E /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				E66E64CC27930989002BBE7E /* FirebaseAnalytics in Frameworks */,
 				E66E64C5279308B2002BBE7E /* FirebaseAuthCombine-Community in Frameworks */,
+				F11DCE44C9B0BD8C8FFED90B /* Pods_Kamaemon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E947A19279402AE00A2D7B9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E66E64CD279335C4002BBE7E /* HomeViewController.swift */,
+				A04445752791BF3300689F32 /* ViewController.swift */,
+				0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0E947A1A279402C800A2D7B9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0E947A1B2794030D00A2D7B9 /* UIView.swift */,
+				0EB49D232794578200C00848 /* UITextField.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0EB49D272794766D00C00848 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0EB884862794B61600F5D971 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				A044457F2791BF3600689F32 /* LaunchScreen.storyboard */,
+				A04445772791BF3300689F32 /* Main.storyboard */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		0EE11CD527941E150068234D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A044457D2791BF3600689F32 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		A04445652791BF3300689F32 = {
 			isa = PBXGroup;
 			children = (
 				A04445702791BF3300689F32 /* Kamaemon */,
 				A044456F2791BF3300689F32 /* Products */,
-				E66E64CA27930988002BBE7E /* Frameworks */,
+				F30F6FB407DCFE09E6818F57 /* Pods */,
+				C94F1EB4D434F87DB6ADC083 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,25 +128,35 @@
 		A04445702791BF3300689F32 /* Kamaemon */ = {
 			isa = PBXGroup;
 			children = (
+				0EB884862794B61600F5D971 /* Screens */,
+				0EB49D272794766D00C00848 /* Models */,
+				0EE11CD527941E150068234D /* Assets */,
+				0E947A1A279402C800A2D7B9 /* Extensions */,
+				0E947A19279402AE00A2D7B9 /* ViewController */,
 				A04445712791BF3300689F32 /* AppDelegate.swift */,
 				A04445732791BF3300689F32 /* SceneDelegate.swift */,
-				A04445752791BF3300689F32 /* ViewController.swift */,
-				A04445772791BF3300689F32 /* Main.storyboard */,
-				A044457D2791BF3600689F32 /* Assets.xcassets */,
-				A044457F2791BF3600689F32 /* LaunchScreen.storyboard */,
 				A04445822791BF3600689F32 /* Info.plist */,
 				A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */,
 				E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */,
-				E66E64CD279335C4002BBE7E /* HomeViewController.swift */,
 			);
 			path = Kamaemon;
 			sourceTree = "<group>";
 		};
-		E66E64CA27930988002BBE7E /* Frameworks */ = {
+		C94F1EB4D434F87DB6ADC083 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8277D75FE11026BF39AF58D /* Pods_Kamaemon.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F30F6FB407DCFE09E6818F57 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				228B20F5DE47162060C349D7 /* Pods-Kamaemon.debug.xcconfig */,
+				23178E38098C53CF8B432ADE /* Pods-Kamaemon.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,9 +166,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A04445852791BF3600689F32 /* Build configuration list for PBXNativeTarget "Kamaemon" */;
 			buildPhases = (
+				1BD9BB5CA76EABAAD4CBD5A2 /* [CP] Check Pods Manifest.lock */,
 				A044456A2791BF3300689F32 /* Sources */,
 				A044456B2791BF3300689F32 /* Frameworks */,
 				A044456C2791BF3300689F32 /* Resources */,
+				DBDDD7081B831750B0583D05 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -162,14 +229,56 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */,
 				A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */,
-				E66E64C0279307DC002BBE7E /* GoogleService-Info.plist in Resources */,
-				A044457E2791BF3600689F32 /* Assets.xcassets in Resources */,
 				A04445792791BF3300689F32 /* Main.storyboard in Resources */,
+				0EB49D2227943A9E00C00848 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1BD9BB5CA76EABAAD4CBD5A2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kamaemon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBDDD7081B831750B0583D05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kamaemon/Pods-Kamaemon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kamaemon/Pods-Kamaemon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kamaemon/Pods-Kamaemon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A044456A2791BF3300689F32 /* Sources */ = {
@@ -178,8 +287,11 @@
 			files = (
 				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
 				A04445762791BF3300689F32 /* ViewController.swift in Sources */,
+				0EB49D242794578200C00848 /* UITextField.swift in Sources */,
+				0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */,
 				A04445722791BF3300689F32 /* AppDelegate.swift in Sources */,
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
+				0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */,
 				A04445742791BF3300689F32 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,11 +436,14 @@
 		};
 		A04445862791BF3600689F32 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 228B20F5DE47162060C349D7 /* Pods-Kamaemon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PQ5YK4F2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -337,26 +452,30 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon;
+				PRODUCT_BUNDLE_IDENTIFIER = "mad2-p02-assignment-team1-kamaemon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		A04445872791BF3600689F32 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23178E38098C53CF8B432ADE /* Pods-Kamaemon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PQ5YK4F2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -365,16 +484,17 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon;
+				PRODUCT_BUNDLE_IDENTIFIER = "mad2-p02-assignment-team1-kamaemon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

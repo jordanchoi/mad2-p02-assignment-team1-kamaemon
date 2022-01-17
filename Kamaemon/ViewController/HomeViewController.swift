@@ -17,7 +17,7 @@ class HomeViewController : UIViewController{
         // Do any additional setup after loading the view.
         let userInfo = Auth.auth().currentUser
         let email = userInfo?.email
-        user.text = email
+        user.text = "Hello, " + "Balqis" + " 👋"
         
         print("Email: \(email)")
 
