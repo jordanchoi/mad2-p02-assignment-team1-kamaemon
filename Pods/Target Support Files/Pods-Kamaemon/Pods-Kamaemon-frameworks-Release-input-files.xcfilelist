@@ -1,3 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-Kamaemon/Pods-Kamaemon-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/CircleBar/CircleBar.framework
+${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework
+${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework
 ${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework

@@ -12,6 +12,7 @@ import Firebase
 class HomeViewController : UIViewController{
     
     @IBOutlet weak var user: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.\
@@ -30,7 +31,7 @@ class HomeViewController : UIViewController{
           // Get user value
           let value = snapshot.value as? NSDictionary
             let displayName = value?["Name"] as? String ?? "Error"
-            self.user.text = "Hello, " + displayName + " 👋"
+            self.user.text = "Hello, " + displayName +  "👋"
           //let user = User(username: username)
 
           // ...
