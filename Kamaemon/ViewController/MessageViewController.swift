@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
-import SwiftProtobuf
 
 class MessageViewController : UITableViewController{
     // Data model: These strings will be the data for the table view cells
     let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
-    let messages : [Message] = []
+    var messages : [Message] = []
     var chosenuser : User?{
         didSet{
             navigationItem.title = chosenuser?.n
@@ -72,8 +71,8 @@ class MessageViewController : UITableViewController{
             for i in value!.keys{
                 print(value![i]!["Messageto"] as! String)
                 let m = Message(Messageto: value![i]!["MessageTo"] as! String, Messagefrom: value![i]!["MessageFrom"] as! String, m: value![i]!["Message"] as! String)
-                if (m.MessageTo == chosenuser!.UID  && m.MessageFrom == Auth.auth().currentUser!.uid || m.MessageTo = Auth.auth().currentUser!.uid && m.MessageFrom == chosenuser!.UID){
-                    messages.append(m)
+                if (m.MessageTo == self.chosenuser!.UID  && m.MessageFrom == Auth.auth().currentUser!.uid || m.MessageTo == Auth.auth().currentUser!.uid && m.MessageFrom == self.chosenuser!.UID){
+                    self.messages.append(m)
                 }
             }
             DispatchQueue.global(qos: .background).async {
@@ -87,14 +86,32 @@ class MessageViewController : UITableViewController{
         }){ error in
             print(error.localizedDescription)
           }
+    }
         
         
     
     func upcomingMessages(){
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference().child("Messages")
         
+        ref.observe(.childAdded) { (snapshot) in
+            print("updated from database")
+            let value = snapshot.value as? [String: AnyObject]
+            //let u = User(userUID: value!["userUID"] as! String, userCategory: value!["userCategory"] as! String, name: value!["Name"] as! String)
+            let m = Message(Messageto: value!["MessageTo"] as! String, Messagefrom: value!["MessageFrom"] as! String, m: value!["Message"] as! String)
         
+            self.messages.append(m)
+            
+            DispatchQueue.global(qos: .background).async {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        } withCancel: { error in
+            
+        }
+
         
     }
 
-}
 }
