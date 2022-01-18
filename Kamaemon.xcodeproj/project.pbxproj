@@ -14,6 +14,7 @@
 		0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */; };
 		0EEE59472796D594009CCD01 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEE59462796D594009CCD01 /* VolunteerListViewController.swift */; };
 		0EF804592796E68A000AA92B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EF804582796E68A000AA92B /* Assets.xcassets */; };
+		0EF8045B2797331C000AA92B /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8045A2797331C000AA92B /* event.swift */; };
 		81F424985B89074A9F94B832 /* Pods_Kamaemon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD99FE19959729AAE78B5D0 /* Pods_Kamaemon.framework */; };
 		A04445722791BF3300689F32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04445712791BF3300689F32 /* AppDelegate.swift */; };
 		A04445742791BF3300689F32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04445732791BF3300689F32 /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 		0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0EEE59462796D594009CCD01 /* VolunteerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		0EF804582796E68A000AA92B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0EF8045A2797331C000AA92B /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
 		579AAC415C47EC9B5D8776FF /* Pods-Kamaemon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.debug.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.debug.xcconfig"; sourceTree = "<group>"; };
 		A044456E2791BF3300689F32 /* Kamaemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kamaemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A04445712791BF3300689F32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				E6AE62612795530F00B41E63 /* user.swift */,
+				0EF8045A2797331C000AA92B /* event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF8045B2797331C000AA92B /* event.swift in Sources */,
 				E6AE62622795530F00B41E63 /* user.swift in Sources */,
 				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
 				A04445762791BF3300689F32 /* ViewController.swift in Sources */,

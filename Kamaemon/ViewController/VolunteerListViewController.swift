@@ -10,13 +10,10 @@ import Foundation
 import UIKit
 
 class VolunteerListViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
+    let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
     
     var testList : [String] = []
-    var data = [
-            ["🍎 Apple",        "🍐 Pear",      "🍓 Strawberry",    "🥑 Avocado",
-             "🍌 Banana",       "🍇 Grape",     "🍈 Melon",         "🍊 Orange",
-             "🍑 Peach",        "🥝 Kiwi"]
-        ]
+    var volunteerList : [[Event]] = []
     
     let refreshControl = UIRefreshControl()
     var currentTableView:Int!
@@ -31,8 +28,8 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
        // Code to refresh table view
         var ref: DatabaseReference!
                 ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-                ref.child("test").observeSingleEvent(of: .childAdded, with: { snapshot in
-                    ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in
+                ref.observeSingleEvent(of: .childAdded, with: { snapshot in
+                    ref.child("openEvents").observeSingleEvent(of: .value, with: { snapshot in
                       // Get updated user value
                         let value = snapshot.value as? NSDictionary
                         let updatedArr:[String] = value!.allValues.compactMap({ String(describing: $0) })
@@ -40,7 +37,6 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
                         // If not updated, update
                         if(updatedArr != self.testList){
                             self.testList = updatedArr
-                            self.data[1] = self.testList
                         }
                     }) { error in
                       print(error.localizedDescription)
@@ -57,46 +53,28 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         currentTableView = 0
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
-        
-        // DB
-        var ref: DatabaseReference!
-        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-        
-        ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            print("----View did load----")
-            print(value)
-            print("----View did load----")
-            print(value?.allValues)
-            print("----View did load----")
-                
-            for i in value!.allValues{
-                let string = i as? String ?? "Error"
-                self.testList.append(string)
-            }
-            self.data.append(self.testList)
-        })
-        { error in
-                print(error.localizedDescription)
-        }
-        self.tableView.reloadData();
+        volunteerList = appDelegate.volunteerList
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "labelCell")
-        cell?.textLabel?.text = data[currentTableView][indexPath.row]
-        cell?.detailTextLabel?.text = data[currentTableView][indexPath.row]
+        let event = volunteerList[currentTableView][indexPath.row]
+        cell?.textLabel?.text = event.UserID
+        cell?.detailTextLabel?.text = event.Desc
         return cell!
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data[currentTableView].count
+        print("current: "
+              + String(volunteerList[currentTableView].count))
+        return volunteerList[currentTableView].count
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    
     
 }
