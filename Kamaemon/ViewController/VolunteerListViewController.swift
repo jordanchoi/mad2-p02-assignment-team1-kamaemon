@@ -27,27 +27,21 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     @objc func refresh(_ sender: AnyObject) {
+        print(testList.count)
        // Code to refresh table view
         var ref: DatabaseReference!
                 ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
                 ref.child("test").observeSingleEvent(of: .childAdded, with: { snapshot in
                     ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in
-                      // Get user value
+                      // Get updated user value
                         let value = snapshot.value as? NSDictionary
-                        print("----View will appear----")
-                        print(value)
-                        print("----View will appear----")
-                        print(value?.allValues)
-                        print("----View will appear----")
-                        for i in value!.allValues{
-                            for k in self.testList{
-                                let string = i as? String ?? "Error"
-                                if (i as! String != k){
-                                    self.testList.append(string)
-                                }
-                            }
+                        let updatedArr:[String] = value!.allValues.compactMap({ String(describing: $0) })
+                        
+                        // If not updated, update
+                        if(updatedArr != self.testList){
+                            self.testList = updatedArr
+                            self.data[1] = self.testList
                         }
-        
                     }) { error in
                       print(error.localizedDescription)
                     }
@@ -55,34 +49,35 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
                   print(error.localizedDescription)
                 }
         print("refreshed")
-        let newIndexPaths = (0..<testList.count).map { i in
-            return IndexPath(row: i, section: 0)
-        }
         tableView.reloadData()
-        self.tableView.insertRows(at: newIndexPaths , with: .top)
         refreshControl.endRefreshing()
     }
     
     override func viewDidLoad() {
+        currentTableView = 0
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
-        currentTableView = 0
-        data.append(testList)
+        
+        // DB
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        
         ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in
-        // Get user value
-        let value = snapshot.value as? NSDictionary
-        print("----View did load----")
-        print(value)
-        print("----View did load----")
-        print(value?.allValues)
-        print("----View did load----")
-        for i in value!.allValues{
-            let string = i as? String ?? "Error"
-            self.testList.append(string)
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            print("----View did load----")
+            print(value)
+            print("----View did load----")
+            print(value?.allValues)
+            print("----View did load----")
+                
+            for i in value!.allValues{
+                let string = i as? String ?? "Error"
+                self.testList.append(string)
             }
-        }) { error in
+            self.data.append(self.testList)
+        })
+        { error in
                 print(error.localizedDescription)
         }
         self.tableView.reloadData();
@@ -97,6 +92,9 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data[currentTableView].count
     }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
