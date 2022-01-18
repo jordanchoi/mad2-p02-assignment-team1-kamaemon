@@ -13,7 +13,8 @@ class User {
     var Category:String = ""
     var n:String = ""
     
-    
+    init() {
+    }
     init(userUID:String, userCategory:String, name:String){
         self.UID = userUID
         self.Category = userCategory

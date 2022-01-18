@@ -28,7 +28,7 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     
     @objc func refresh(_ sender: AnyObject) {
        // Code to refresh table view
-        var ref: DatabaseReference!
+                var ref: DatabaseReference!
                 ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
                 ref.child("test").observeSingleEvent(of: .childAdded, with: { snapshot in
                     ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in

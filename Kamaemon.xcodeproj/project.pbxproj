@@ -28,6 +28,7 @@
 		E66E64CC27930989002BBE7E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64CB27930989002BBE7E /* FirebaseAnalytics */; };
 		E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66E64CD279335C4002BBE7E /* HomeViewController.swift */; };
 		E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EBC2797082400E7DACC /* MessageViewController.swift */; };
+		E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */; };
 		E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */; };
 		E6AE62622795530F00B41E63 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE62612795530F00B41E63 /* user.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E66E64CD279335C4002BBE7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E6A97EBC2797082400E7DACC /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
 		E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPageViewController.swift; sourceTree = "<group>"; };
 		E6AE62612795530F00B41E63 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 				E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */,
 				0EEE59462796D594009CCD01 /* VolunteerListViewController.swift */,
 				E6A97EBC2797082400E7DACC /* MessageViewController.swift */,
+				E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6AE62622795530F00B41E63 /* user.swift in Sources */,
+				E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */,
 				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
 				A04445762791BF3300689F32 /* ViewController.swift in Sources */,
 				0EB49D242794578200C00848 /* UITextField.swift in Sources */,
