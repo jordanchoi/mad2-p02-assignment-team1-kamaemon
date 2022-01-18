@@ -7,67 +7,70 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseAuth
 
-class MessageViewController : UIViewController, UITableViewDelegate, UITableViewDataSource{
+class MessageViewController : UITableViewController{
     // Data model: These strings will be the data for the table view cells
-       let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
-       
-       // cell reuse id (cells that scroll out of view can be reused)
-       let cellReuseIdentifier = "cell"
-       
-       // don't forget to hook this up from the storyboard
-       @IBOutlet var tableView: UITableView!
-       
-       override func viewDidLoad() {
-           super.viewDidLoad()
-           
-           // Register the table view cell class and its reuse id
-           self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-           
-           // (optional) include this line if you want to remove the extra empty cell divider lines
-           // self.tableView.tableFooterView = UIView()
+    let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
+    var chosenuser : User?{
+        didSet{
+            navigationItem.title = chosenuser?.n
+        }
+    }
 
-           // This view controller itself will provide the delegate methods and row data for the table view.
-           tableView.delegate = self
-           tableView.dataSource = self
-       }
-       
-       // number of rows in table view
-       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return self.animals.count
-       }
-       
-       // create a cell for each table view row
-       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "message")
            
-           // create a new cell if needed or reuse an old one
-           let cell:UITableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell?)!
            
-           // set the text from the data model
-           cell.textLabel?.text = self.animals[indexPath.row]
-           
-           return cell
-       }
-       
-//       // method to run when table view cell is tapped
-//       func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//           print("You tapped cell number \(indexPath.row).")
-//       }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        
+        return self.animals.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath)
+        
+        let userhelp = animals[indexPath.row]
+        
+        cell.textLabel!.text = "\(String(userhelp))"
+        //cell.detailTextLabel!.text = "\(String(userhelp.UID))"
+        
+        return cell
+    }
+    
+    func sendMessage(){
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        let message = Message(Messageto: String(chosenuser!.UID), Messagefrom: Auth.auth().currentUser!.uid, m: "supposedly from text field")
+        //ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "userCategory" : u.Category, "Name" : u.n])
+        ref.child("Messages").childByAutoId().setValue(["Messageto" : message.MessageTo, "MessageFrom" : message.MessageFrom, "Message" : message.Message])
+    
+        
+    }
     
     
-    @IBOutlet weak var chat: UITableView!
     
-    
-    @IBOutlet weak var message: UITextField!
-    
-    
-    
-    @IBAction func sendMessage(_ sender: Any) {
+    func loadMessages(){
         
         
         
     }
     
     
-    
+    func upcomingMessages(){
+        
+        
+        
+    }
+
 }

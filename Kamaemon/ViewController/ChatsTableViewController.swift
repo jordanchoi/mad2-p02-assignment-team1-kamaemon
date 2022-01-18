@@ -39,6 +39,12 @@ class ChatsTableViewController : UITableViewController{
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let messageView = MessageViewController()
+        messageView.chosenuser = helpList[indexPath.row]
+        navigationController?.pushViewController(messageView, animated: true)
+    }
+    
     func gethelp(){
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference().child("users")
@@ -117,7 +123,7 @@ class ChatsTableViewController : UITableViewController{
             let value = snapshot.value as? [String: AnyObject]
             let u = User(userUID: value!["userUID"] as! String, userCategory: value!["userCategory"] as! String, name: value!["Name"] as! String)
             var  count = 1
-            print(value!["Name"])
+            //print(value!["Name"])
             print(value!.count)
             //self.helpList.append(u)
             for k in self.helpList{
@@ -153,37 +159,6 @@ class ChatsTableViewController : UITableViewController{
             print(error)
         }
 
-    
-//        ref.observeSingleEvent(of: .childAdded, with: { snapshot in
-//          // Get user value
-//            let value = snapshot.value as? [String: AnyObject]
-//            print("updated from database")
-//            print(value!.keys)
-//            print(value)
-////            for i in value!.keys{
-////                print(value![i]!["userUID"] as! String)
-////                let u = User(userUID: value![i]!["userUID"] as! String, userCategory: value![i]!["userCategory"] as! String, name: value![i]!["Name"] as! String)
-////                self.helpList.append(u)
-////            }
-//
-//
-//
-//
-//            DispatchQueue.global(qos: .background).async {
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-////            print(value!["Name"])
-////            print(value!["YWGGd41WyxYhl40TVHQvoMpc3FA3"]!["Name"])
-////            print(value?.keys)
-//            //print(value?.values[0] as! String)
-//
-//
-//
-//        }) { error in
-//          print(error.localizedDescription)
-//        }
 }
 
 }
