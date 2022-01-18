@@ -127,5 +127,101 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     }
 }
     
-    
-    
+//    
+//import Foundation
+//import UIKit
+//import Firebase
+//import FirebaseAuth
+//
+//class MyListTableViewController : UITableViewController{
+//    var testList : [String] = []
+//    var count = 0
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        //self.navigationController?.setNavigationBarHidden(false, animated: true)
+//        
+//        
+//        var ref: DatabaseReference!
+//        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+//        ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in
+//          // Get user value
+//            let value = snapshot.value as? NSDictionary
+//            print("----View did load----")
+//            print(value)
+//            print("----View did load----")
+//            print(value?.allValues)
+//            print("----View did load----")
+//            for i in value!.allValues{
+//                let string = i as? String ?? "Error"
+//                self.testList.append(string)
+//                self.count = self.testList.count
+//            }
+//        }) { error in
+//          print(error.localizedDescription)
+//        }
+//        self.tableView.reloadData();
+//    }
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        var ref: DatabaseReference!
+//        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+//        ref.child("test").observeSingleEvent(of: .childAdded, with: { snapshot in
+//            ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in
+//              // Get user value
+//                let value = snapshot.value as? NSDictionary
+//                print("----View will appear----")
+//                print(value)
+//                print("----View will appear----")
+//                print(value?.allValues)
+//                print("----View will appear----")
+//                for i in value!.allValues{
+//                    for k in self.testList{
+//                        let string = i as? String ?? "Error"
+//                        if (i as! String != k){
+//                            self.testList.append(string)
+//                        }
+//                    }
+//                }
+//            
+//            }) { error in
+//              print(error.localizedDescription)
+//            }
+//        }) { error in
+//          print(error.localizedDescription)
+//        }
+//        self.tableView.reloadData();
+//    }
+//    
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+////        var transactList:[Transaction] = []
+////        transactList = usercontroller.RetrieveAllTransactionsbyUser(user: AppDelegate.user!)
+//        
+//        return self.count
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = self.tableView.dequeueReusableCell(withIdentifier: "session", for: indexPath)
+////        var transactList:[Transaction] = []
+////        transactList = usercontroller.RetrieveAllTransactionsbyUser(user: AppDelegate.user!)
+////
+////        let transact = transactList[indexPath.row]
+//        
+//        cell.textLabel!.text = "\(testList[indexPath.row])"
+//        cell.detailTextLabel!.text = "\(testList[indexPath.row])"
+//        
+//        return cell
+//    }
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//}
+//
+//    
