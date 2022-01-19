@@ -11,8 +11,6 @@ import Firebase
 import IQKeyboardManager
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var openEventList : [Event] = []
-    var joinedEventList : [Event] = []
     var volunteerList : [[Event]] = [[],[]]
     var selectedEvent:Event?
     var window: UIWindow?
@@ -80,6 +78,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    public func PopulateList() {
+        var openEventList : [Event] = []
+        var joinedEventList : [Event] = []
+        
+        // DB
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        
+        
+        ref.child("openEvents").observeSingleEvent(of: .value , with: { snapshot in
+            for event in snapshot.children{
+                let events = snapshot.childSnapshot(forPath: (event as AnyObject).key)
+                for eventDetails in events.children{
+                    let details = events.childSnapshot(forPath: (eventDetails as AnyObject).key)
+                    if(details.key == "volunteerID"){
+                        // Populate list of volunteer activities that are open
+                        if(details.value as! String == ""){
+                            print("getting data...")
+                            let event = (events.value! as AnyObject)
+                            let id = event["eventID"]!!
+                            let desc = event["eventDesc"]!!
+                            let hrs = event["eventHrs"]!!
+                            let loc = event["eventLocation"]!!
+                            let user = event["userID"]!!
+                            let volunteer = event["volunteerID"]!!
+                            openEventList.append(
+                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String)
+                            )
+                        }
+                        
+                        // Populate list of volunteer activities that user have selected and have not done
+                        if(details.value as! String == Auth.auth().currentUser!.uid){
+                            print("getting data...")
+                            let event = (events.value! as AnyObject)
+                            let id = event["eventID"]!!
+                            let desc = event["eventDesc"]!!
+                            let hrs = event["eventHrs"]!!
+                            let loc = event["eventLocation"]!!
+                            let user = event["userID"]!!
+                            let volunteer = event["volunteerID"]!!
+                            joinedEventList.append(
+                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String)
+                            )
+                        }
+                    }
+                    self.volunteerList[1] = joinedEventList
+                    self.volunteerList[0] = openEventList
+                }
+            }
+        })
+        {
+            error in
+                print(error.localizedDescription)
         }
     }
 

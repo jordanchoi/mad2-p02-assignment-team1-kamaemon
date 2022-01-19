@@ -10,8 +10,9 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class MessageViewController : UITableViewController{
+class MessageViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     // Data model: These strings will be the data for the table view cells
+    @IBOutlet weak var tableView: UITableView!
     let animals: [String] = ["Horse", "Cow", "Camel", "Sheep", "Goat"]
     var messages : [Message] = []
     var chosenuser : User?{
@@ -22,23 +23,22 @@ class MessageViewController : UITableViewController{
 
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "message")
            
            
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         return self.animals.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath)
         
         let userhelp = animals[indexPath.row]

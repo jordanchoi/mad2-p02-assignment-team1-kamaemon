@@ -67,60 +67,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
                  self.present(home, animated: true, completion: nil)
              }
         }
-        PopulateList()
+        appDelegate.PopulateList()
     }
-    public func PopulateList() {
-        // DB
-        var ref: DatabaseReference!
-        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-        
-        
-        ref.child("openEvents").observeSingleEvent(of: .value , with: { snapshot in
-            for event in snapshot.children{
-                let events = snapshot.childSnapshot(forPath: (event as AnyObject).key)
-                for eventDetails in events.children{
-                    let details = events.childSnapshot(forPath: (eventDetails as AnyObject).key)
-                    if(details.key == "volunteerID"){
-                        // Populate list of volunteer activities that are open
-                        if(details.value as! String == ""){
-                            print("getting data...")
-                            let event = (events.value! as AnyObject)
-                            let id = event["eventID"]!!
-                            let desc = event["eventDesc"]!!
-                            let hrs = event["eventHrs"]!!
-                            let loc = event["eventLocation"]!!
-                            let user = event["userID"]!!
-                            let volunteer = event["volunteerID"]!!
-                            self.appDelegate.openEventList.append(
-                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String)
-                            )
-                        }
-                        
-                        // Populate list of volunteer activities that user have selected and have not done
-                        if(details.value as! String == Auth.auth().currentUser!.uid){
-                            print("getting data...")
-                            let event = (events.value! as AnyObject)
-                            let id = event["eventID"]!!
-                            let desc = event["eventDesc"]!!
-                            let hrs = event["eventHrs"]!!
-                            let loc = event["eventLocation"]!!
-                            let user = event["userID"]!!
-                            let volunteer = event["volunteerID"]!!
-                            self.appDelegate.joinedEventList.append(
-                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String)
-                            )
-                        }
-                    }
-                    self.appDelegate.volunteerList[1] = self.appDelegate.joinedEventList
-                    self.appDelegate.volunteerList[0] = self.appDelegate.openEventList
-                }
-            }
-        })
-        {
-            error in
-                print(error.localizedDescription)
-        }
-    }
+    
     // Background press
     @objc func handleTap() {
         EmailAddress.resignFirstResponder()

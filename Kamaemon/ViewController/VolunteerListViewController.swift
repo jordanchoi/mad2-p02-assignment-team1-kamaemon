@@ -57,6 +57,15 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         tableView.reloadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+//        segmented.selectedSegmentIndex = 0;
+        currentTableView = 0
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        volunteerList = appDelegate.volunteerList
+        self.tableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "labelCell")
         let event = volunteerList[currentTableView][indexPath.row]

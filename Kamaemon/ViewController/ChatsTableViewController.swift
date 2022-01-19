@@ -42,7 +42,7 @@ class ChatsTableViewController : UITableViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let messageView = MessageViewController()
         messageView.chosenuser = helpList[indexPath.row]
-        navigationController?.pushViewController(messageView, animated: true)
+//        navigationController?.pushViewController(messageView, animated: true)
     }
     
     func gethelp(){
