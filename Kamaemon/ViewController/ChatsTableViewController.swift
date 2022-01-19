@@ -40,9 +40,15 @@ class ChatsTableViewController : UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let messageView = MessageViewController()
-        messageView.chosenuser = helpList[indexPath.row]
-//        navigationController?.pushViewController(messageView, animated: true)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.selectedUser = helpList[indexPath.row]
+   
+//        if let vc = presentingViewController as? MessageView {
+//                  //before dismissing the Form ViewController, pass the data inside the closure
+//                    dismiss(animated: true, completion: {
+//                        vc.chosenuser = self.helpList[indexPath.row]
+//                    })
+//                }
     }
     
     func gethelp(){

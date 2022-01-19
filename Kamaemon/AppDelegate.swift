@@ -13,6 +13,7 @@ import IQKeyboardManager
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var volunteerList : [[Event]] = [[],[]]
     var selectedEvent:Event?
+    var selectedUser:User?
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
