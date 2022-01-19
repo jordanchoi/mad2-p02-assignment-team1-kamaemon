@@ -71,6 +71,10 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         return volunteerList[currentTableView].count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        appDelegate.selectedEvent = volunteerList[currentTableView][indexPath.row]
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

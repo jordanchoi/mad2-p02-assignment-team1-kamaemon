@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var openEventList : [Event] = []
     var joinedEventList : [Event] = []
     var volunteerList : [[Event]] = [[],[]]
+    var selectedEvent:Event?
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
