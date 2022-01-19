@@ -13,11 +13,13 @@ import Firebase
 class ChatsTableViewController : UITableViewController{
     
     var helpList : [User] = []
+    var lastMessage : [Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        gethelp()
+        //gethelp()
         newUser()
+        getLatestMessage()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,10 +33,28 @@ class ChatsTableViewController : UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "user", for: indexPath)
         
+        var pMessage : [Message] = []
+        
+        
         let userhelp = helpList[indexPath.row]
         
+        for i in lastMessage{
+            if (i.MessageFrom == userhelp.UID){
+                pMessage.append(i)
+            }
+        }
+        
+        
+        var last = ""
+        
+        if (!pMessage.isEmpty){
+            last = pMessage[pMessage.endIndex-1].Message
+        }
+        
+        
+        
         cell.textLabel!.text = "\(String(userhelp.n))"
-        cell.detailTextLabel!.text = "\(String(userhelp.UID))"
+        cell.detailTextLabel!.text = "Last Message: \(last)"
         
         return cell
     }
@@ -128,34 +148,16 @@ class ChatsTableViewController : UITableViewController{
             print("updated from database")
             let value = snapshot.value as? [String: AnyObject]
             let u = User(userUID: value!["userUID"] as! String, userCategory: value!["userCategory"] as! String, name: value!["Name"] as! String)
-            var  count = 1
             //print(value!["Name"])
             print(value!.count)
-            //self.helpList.append(u)
-            for k in self.helpList{
-                
-                
-                print(count)
-                if(k.UID != value!["userUID"] as! String && count == self.helpList.count){
-                    self.helpList.append(u)
-                    print(self.helpList)
-                }
-                count = count + 1
-                
-                
-//                if(count == self.helpList.count){
-//                    self.helpList.append(u)
-//                }
-                
-                
+            if (u.UID == Auth.auth().currentUser?.uid){
+                print("==")
             }
-//            for k in self.helpList{
-//                if (value!["userUID"] as! String != k.UID){
-//                    self.helpList.append(u)
-//                }
-//                count = count + 1
-//            }
+            else{
+                self.helpList.append(u)
+            }
             
+
             DispatchQueue.global(qos: .background).async {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -165,6 +167,33 @@ class ChatsTableViewController : UITableViewController{
             print(error)
         }
 
+        
+        
+       
 }
+    func getLatestMessage(){
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference().child("Messages")
+        
+        ref.observe(.childAdded) { (snapshot) in
+            print("updated from database")
+            let value = snapshot.value as? [String: AnyObject]
+            //let u = User(userUID: value!["userUID"] as! String, userCategory: value!["userCategory"] as! String, name: value!["Name"] as! String)
+            let m = Message(Messageto: value!["MessageTo"] as! String, Messagefrom: value!["MessageFrom"] as! String, m: value!["Message"] as! String)
+        
+            self.lastMessage.append(m)
+            
+            DispatchQueue.global(qos: .background).async {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        } withCancel: { error in
+            
+        }
+        
+        
+        
+    }
 
 }
