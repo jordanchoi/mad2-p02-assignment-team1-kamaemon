@@ -23,6 +23,7 @@
 		A04445792791BF3300689F32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A04445772791BF3300689F32 /* Main.storyboard */; };
 		A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */; };
 		A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A044457F2791BF3600689F32 /* LaunchScreen.storyboard */; };
+		A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */; };
 		E66E64C3279308B2002BBE7E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C2279308B2002BBE7E /* FirebaseAuth */; };
 		E66E64C5279308B2002BBE7E /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C4279308B2002BBE7E /* FirebaseAuthCombine-Community */; };
 		E66E64C7279308B2002BBE7E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C6279308B2002BBE7E /* FirebaseDatabase */; };
@@ -55,6 +56,7 @@
 		A044457B2791BF3300689F32 /* Kamaemon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kamaemon.xcdatamodel; sourceTree = "<group>"; };
 		A04445802791BF3600689F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A04445822791BF3600689F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
 		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E66E64CD279335C4002BBE7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E6A97EBC2797082400E7DACC /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				E6A97EBC2797082400E7DACC /* MessageViewController.swift */,
 				E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */,
 				0EF8045C279763AB000AA92B /* VolunteerDetailViewController.swift */,
+				A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				A04445722791BF3300689F32 /* AppDelegate.swift in Sources */,
 				E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */,
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
+				A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */,
 				0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */,
 				A04445742791BF3300689F32 /* SceneDelegate.swift in Sources */,
 				E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */,
@@ -477,22 +481,24 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PQ5YK4F2;
+				DEVELOPMENT_TEAM = CZ768BK8BN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is required to capture images used for the application, such as NRIC, Selfie for identity verification.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon;
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -509,22 +515,24 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PQ5YK4F2;
+				DEVELOPMENT_TEAM = CZ768BK8BN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is required to capture images used for the application, such as NRIC, Selfie for identity verification.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon;
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

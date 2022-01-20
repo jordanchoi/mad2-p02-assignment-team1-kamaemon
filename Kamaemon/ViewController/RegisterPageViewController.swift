@@ -16,6 +16,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     @IBOutlet weak var Name: UITextField!
     @IBOutlet weak var EmailAddress: UITextField!
     @IBOutlet weak var Password: UITextField!
+    @IBOutlet weak var cfmPassword: UITextField!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var vwDropdown: UIView!
     @IBOutlet weak var errorLbl: UILabel!
@@ -29,7 +30,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         // Initialising user category dropdown
         lblTitle.text = "Select User Category"
         dropDown.anchorView = vwDropdown
-        dropDown.dataSource = ["Volunteer", "General"]
+        dropDown.dataSource = ["Volunteer", "Public User"]
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
         dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
         dropDown.direction = .bottom
@@ -45,11 +46,13 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         Name.setLeftPaddingPoints(10)
         EmailAddress.setLeftPaddingPoints(10)
         Password.setLeftPaddingPoints(10)
+        cfmPassword.setLeftPaddingPoints(10)
         
         // Dismiss keyboard on return
         EmailAddress.delegate = self
         Password.delegate = self
         Name.delegate = self
+        cfmPassword.delegate = self
         
         // Dismiss keyboard on click background
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
