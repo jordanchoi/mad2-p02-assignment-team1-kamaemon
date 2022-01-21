@@ -8,4 +8,5 @@ pod 'lottie-ios'
 pod 'CircleBar'
 pod 'DropDown'
 pod 'IQKeyboardManager'
+pod 'ProjectOxfordFace'
 end

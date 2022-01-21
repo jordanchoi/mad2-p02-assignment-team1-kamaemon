@@ -48,6 +48,11 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
         picker.sourceType = .camera
         picker.delegate = self
         picker.allowsEditing = true
+        if (forNric) {
+            picker.cameraDevice = .rear
+        } else {
+            picker.cameraDevice = .front
+        }
         present(picker, animated: true)
     }
     
