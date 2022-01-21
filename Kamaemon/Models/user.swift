@@ -11,6 +11,7 @@ import Foundation
 class User {
     var UID:String = ""
     var Category:String = ""
+    //var PhoneN
     var n:String = ""
     
     init() {
