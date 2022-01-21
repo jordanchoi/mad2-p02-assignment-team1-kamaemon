@@ -39,6 +39,8 @@
 		E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */; };
 		E6AE62622795530F00B41E63 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE62612795530F00B41E63 /* user.swift */; };
 		E6BC1BFD279A88BB0049908B /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */; };
+		E6BC1C00279AA2670049908B /* userDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC1BFF279AA2670049908B /* userDAL.swift */; };
+		E6BC1C02279AAFBD0049908B /* SelectionQualificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPageViewController.swift; sourceTree = "<group>"; };
 		E6AE62612795530F00B41E63 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
+		E6BC1BFF279AA2670049908B /* userDAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userDAL.swift; sourceTree = "<group>"; };
+		E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionQualificationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 				0EF8045C279763AB000AA92B /* VolunteerDetailViewController.swift */,
 				A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */,
 				E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */,
+				E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 		A04445702791BF3300689F32 /* Kamaemon */ = {
 			isa = PBXGroup;
 			children = (
+				E6BC1BFE279AA24B0049908B /* Firebase DAL */,
 				0EB884862794B61600F5D971 /* Screens */,
 				0EB49D272794766D00C00848 /* Models */,
 				0EE11CD527941E150068234D /* Assets */,
@@ -195,6 +201,14 @@
 				E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */,
 			);
 			path = Kamaemon;
+			sourceTree = "<group>";
+		};
+		E6BC1BFE279AA24B0049908B /* Firebase DAL */ = {
+			isa = PBXGroup;
+			children = (
+				E6BC1BFF279AA2670049908B /* userDAL.swift */,
+			);
+			path = "Firebase DAL";
 			sourceTree = "<group>";
 		};
 		F30F6FB407DCFE09E6818F57 /* Pods */ = {
@@ -349,7 +363,9 @@
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
 				A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */,
 				0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */,
+				E6BC1C00279AA2670049908B /* userDAL.swift in Sources */,
 				E6BC1BFD279A88BB0049908B /* ProfilePageViewController.swift in Sources */,
+				E6BC1C02279AAFBD0049908B /* SelectionQualificationViewController.swift in Sources */,
 				A04445742791BF3300689F32 /* SceneDelegate.swift in Sources */,
 				E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */,
 				0EEE59472796D594009CCD01 /* VolunteerListViewController.swift in Sources */,

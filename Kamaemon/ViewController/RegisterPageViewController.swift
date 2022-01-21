@@ -121,10 +121,10 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
             else  {
                 print("success")
                 print(authResult?.user.uid)
-                let u = User(userUID: (authResult?.user.uid)!, userCategory: self.cat, name: self.Name.text!)
+                let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
                 var ref: DatabaseReference!
                 ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-                ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "userCategory" : u.Category, "Name" : u.n])
+                ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "userCategory" : u.UserType, "Name" : u.n])
             }
         }
     }

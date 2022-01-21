@@ -10,17 +10,34 @@ import Foundation
 
 class User {
     var UID:String = ""
-    var Category:String = ""
+    var UserType:String = ""
+    var PhoneNumber:String = ""
+    var BirthDate:Date = Date()
+    var Gender:String = ""
     var n:String = ""
+    var profilepicurl:String = ""
+    var isNewUser:Int = 0
     
     init() {
     }
-    init(userUID:String, userCategory:String, name:String){
+    init(userUID:String, userType:String, name:String){
         self.UID = userUID
-        self.Category = userCategory
+        self.UserType = userType
         self.n = name
     }
     
-    
+    init(userUID:String, userType:String, name:String, gender:String, phonenumber:String, birthdate:Date, pfpurl:String, isnewuser:Int){
+        
+        self.UID = userUID
+        self.UserType = userType
+        self.n = name
+        self.Gender = gender
+        self.PhoneNumber = phonenumber
+        self.BirthDate = birthdate
+        self.profilepicurl = pfpurl
+        self.isNewUser = isnewuser
+
+        
+    }
     
 }
