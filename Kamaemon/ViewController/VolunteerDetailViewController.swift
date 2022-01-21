@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class VolunteerDetailViewController: UIViewController{
     let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
@@ -43,7 +44,8 @@ class VolunteerDetailViewController: UIViewController{
                      "volunteerID": ""] as [String : Any] as [String : Any]
         let childUpdates = ["/openEvents/\(key)": event]
         ref.updateChildValues(childUpdates)
-        appDelegate.PopulateList()
+        //appDelegate.PopulateList()
+        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         _ = navigationController?.popViewController(animated: true)
     }
     
@@ -62,7 +64,8 @@ class VolunteerDetailViewController: UIViewController{
                      "volunteerID":Auth.auth().currentUser!.uid ] as [String : Any] as [String : Any]
         let childUpdates = ["/openEvents/\(key)": event]
         ref.updateChildValues(childUpdates)
-        appDelegate.PopulateList()
+        //appDelegate.PopulateList()
+        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         _ = navigationController?.popViewController(animated: true)
     }
 }

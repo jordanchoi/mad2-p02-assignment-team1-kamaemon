@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseAuth
 import IQKeyboardManager
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -82,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    public func PopulateList() {
+    public func PopulateList(UID:String) {
         var openEventList : [Event] = []
         var joinedEventList : [Event] = []
         
@@ -111,9 +112,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String)
                             )
                         }
-                        
+                        //print(Auth.auth().currentUser!.uid)
                         // Populate list of volunteer activities that user have selected and have not done
-                        if(details.value as! String == Auth.auth().currentUser!.uid){
+                        if(details.value as! String == UID){
                             print("getting data...")
                             let event = (events.value! as AnyObject)
                             let id = event["eventID"]!!

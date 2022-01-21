@@ -61,13 +61,16 @@ class ViewController: UIViewController, UITextFieldDelegate{
                }
              } else {
                  print("User signs in successfully")
+                 self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
                  let storyboard = UIStoryboard(name: "Main", bundle: nil)
                  let home = storyboard.instantiateViewController(withIdentifier: "home") as! UIViewController
                  home.modalPresentationStyle = .fullScreen
                  self.present(home, animated: true, completion: nil)
              }
         }
-        appDelegate.PopulateList()
+        
+        
+//        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
     }
     
     // Background press
