@@ -80,7 +80,7 @@ class ChatsTableViewController : UITableViewController{
             let value = snapshot.value as? [String: AnyObject]
             for i in value!.keys{
                 print(value![i]!["userUID"] as! String)
-                let u = User(userUID: value![i]!["userUID"] as! String, userCategory: value![i]!["userCategory"] as! String, name: value![i]!["Name"] as! String)
+                let u = User(userUID: value![i]!["userUID"] as! String, userType: value![i]!["userCategory"] as! String, name: value![i]!["Name"] as! String)
                 self.helpList.append(u)
             }
             DispatchQueue.global(qos: .background).async {
@@ -147,7 +147,7 @@ class ChatsTableViewController : UITableViewController{
         ref.observe(.childAdded) { (snapshot) in
             print("updated from database")
             let value = snapshot.value as? [String: AnyObject]
-            let u = User(userUID: value!["userUID"] as! String, userCategory: value!["userCategory"] as! String, name: value!["Name"] as! String)
+            let u = User(userUID: value!["userUID"] as! String, userType: value!["userCategory"] as! String, name: value!["Name"] as! String)
             //print(value!["Name"])
             print(value!.count)
             if (u.UID == Auth.auth().currentUser?.uid){

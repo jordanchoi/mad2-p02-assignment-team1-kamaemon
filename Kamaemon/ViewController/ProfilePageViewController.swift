@@ -77,7 +77,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
             print(UserCat)
             self.user.UID = UID
             self.user.n = Name
-            self.user.Category = UserCat
+            self.user.UserType = UserCat
         }) { error in
           print(error.localizedDescription)
         }
