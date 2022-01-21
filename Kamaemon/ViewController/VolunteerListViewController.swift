@@ -69,22 +69,48 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: EventTableViewCell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let event = volunteerList[currentTableView][indexPath.row]
         cell.desc.text = event.Desc
         cell.location.text = event.Location
-        cell.hours.text = String(event.Hours)
+        cell.hours.text = String(event.Hours) + " hours"
         cell.date.text = dateFormatter.string(from: event.EventDate)
         cell.name.text = event.Name
         cell.userName.text = event.UserID
-        cell.img.image = UIImage(named: "company")
+        
+        if(event.Category == "Health"){
+            cell.img.image = UIImage(named: "health")
+        }
+        else if(event.Category == "Technology"){
+            cell.img.image = UIImage(named: "tech")
+        }
+        else if(event.Category == "Company"){
+            cell.img.image = UIImage(named: "company")
+        }
+        else if(event.Category == "Errands"){
+            cell.img.image = UIImage(named: "errands")
+        }
         return cell
     }
+    
+    // Set the spacing between sections
+     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 10
+    }
+    // Make the background color show through
+      func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let headerView = UIView()
+    headerView.backgroundColor = UIColor.clear
+
+    return headerView
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("current: "
               + String(volunteerList[currentTableView].count))
         return volunteerList[currentTableView].count
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         appDelegate.selectedEvent = volunteerList[currentTableView][indexPath.row]
