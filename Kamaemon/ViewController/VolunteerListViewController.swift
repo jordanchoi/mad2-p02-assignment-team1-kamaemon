@@ -11,7 +11,6 @@ import UIKit
 
 class VolunteerListViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
-    
     var testList : [String] = []
     var volunteerList : [[Event]] = []
     
@@ -50,6 +49,7 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     override func viewDidLoad() {
+        self.tableView.register(UINib(nibName: "EventTableViewCell", bundle: .main), forCellReuseIdentifier: "eventCell")
         currentTableView = 0
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
@@ -67,13 +67,19 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "labelCell")
+        let cell: EventTableViewCell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         let event = volunteerList[currentTableView][indexPath.row]
-        cell?.textLabel?.text = event.UserID
-        cell?.detailTextLabel?.text = event.Desc
-        return cell!
+        cell.desc.text = event.Desc
+        cell.location.text = event.Location
+        cell.hours.text = String(event.Hours)
+        cell.date.text = dateFormatter.string(from: event.EventDate)
+        cell.name.text = event.Name
+        cell.userName.text = event.UserID
+        cell.img.image = UIImage(named: "company")
+        return cell
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("current: "
               + String(volunteerList[currentTableView].count))

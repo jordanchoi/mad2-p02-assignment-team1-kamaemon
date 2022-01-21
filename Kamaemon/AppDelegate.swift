@@ -108,8 +108,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let loc = event["eventLocation"]!!
                             let user = event["userID"]!!
                             let volunteer = event["volunteerID"]!!
+                            let name = event["eventName"]!!
+                            let status = event["eventStatus"]!!
+                            let category = event["eventCat"]!!
+                            let date = event["eventDate"]!!
+                        
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                            print(dateFormatter.date(from: date as! String)! as Date)
                             openEventList.append(
-                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String)
+                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                     )
                             )
                         }
                         //print(Auth.auth().currentUser!.uid)
@@ -123,8 +132,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let loc = event["eventLocation"]!!
                             let user = event["userID"]!!
                             let volunteer = event["volunteerID"]!!
+                            let name = event["eventName"]!!
+                            let status = event["eventStatus"]!!
+                            let category = event["eventCat"]!!
+                            let date = event["eventDate"]!!
+                            
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
                             joinedEventList.append(
-                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String)
+                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                     )
                             )
                         }
                     }

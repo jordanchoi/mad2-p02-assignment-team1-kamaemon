@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E071FD9279ABB9C00B2BF1A /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E071FD7279ABB9C00B2BF1A /* EventTableViewCell.swift */; };
+		0E071FDA279ABB9C00B2BF1A /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */; };
 		0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */; };
 		0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E947A1B2794030D00A2D7B9 /* UIView.swift */; };
 		0EA03F5F27959B6700E8BDA9 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -42,6 +44,8 @@
 /* Begin PBXFileReference section */
 		02AEE7259F9800C41B090B1F /* Pods-Kamaemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.release.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.release.xcconfig"; sourceTree = "<group>"; };
 		0BD99FE19959729AAE78B5D0 /* Pods_Kamaemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kamaemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E071FD7279ABB9C00B2BF1A /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventTableViewCell.swift; path = Event/EventTableViewCell.swift; sourceTree = "<group>"; };
+		0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EventTableViewCell.xib; path = Event/EventTableViewCell.xib; sourceTree = "<group>"; };
 		0E947A1B2794030D00A2D7B9 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0EB49D232794578200C00848 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E071FD2279AB84300B2BF1A /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				0E071FD7279ABB9C00B2BF1A /* EventTableViewCell.swift */,
+				0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		0E947A19279402AE00A2D7B9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +139,7 @@
 		0EB884862794B61600F5D971 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				0E071FD2279AB84300B2BF1A /* CustomCell */,
 				A044457F2791BF3600689F32 /* LaunchScreen.storyboard */,
 				A04445772791BF3300689F32 /* Main.storyboard */,
 			);
@@ -268,6 +282,7 @@
 				0EA03F5F27959B6700E8BDA9 /* (null) in Resources */,
 				0EF804592796E68A000AA92B /* Assets.xcassets in Resources */,
 				A04445792791BF3300689F32 /* Main.storyboard in Resources */,
+				0E071FDA279ABB9C00B2BF1A /* EventTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +343,7 @@
 				A04445762791BF3300689F32 /* ViewController.swift in Sources */,
 				0EB49D242794578200C00848 /* UITextField.swift in Sources */,
 				0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */,
+				0E071FD9279ABB9C00B2BF1A /* EventTableViewCell.swift in Sources */,
 				A04445722791BF3300689F32 /* AppDelegate.swift in Sources */,
 				E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */,
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
@@ -488,7 +504,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CZ768BK8BN;
+				DEVELOPMENT_TEAM = B3PQ5YK4F2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
@@ -522,7 +538,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CZ768BK8BN;
+				DEVELOPMENT_TEAM = B3PQ5YK4F2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
