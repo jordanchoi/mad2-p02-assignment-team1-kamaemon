@@ -24,6 +24,7 @@
 		A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */; };
 		A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A044457F2791BF3600689F32 /* LaunchScreen.storyboard */; };
 		A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */; };
+		A0B9A030279A7EF300F8E7BD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A0B9A02F279A7EF300F8E7BD /* FirebaseStorage */; };
 		E66E64C3279308B2002BBE7E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C2279308B2002BBE7E /* FirebaseAuth */; };
 		E66E64C5279308B2002BBE7E /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C4279308B2002BBE7E /* FirebaseAuthCombine-Community */; };
 		E66E64C7279308B2002BBE7E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C6279308B2002BBE7E /* FirebaseDatabase */; };
@@ -75,6 +76,7 @@
 				E66E64C3279308B2002BBE7E /* FirebaseAuth in Frameworks */,
 				E66E64C9279308B2002BBE7E /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				E66E64CC27930989002BBE7E /* FirebaseAnalytics in Frameworks */,
+				A0B9A030279A7EF300F8E7BD /* FirebaseStorage in Frameworks */,
 				E66E64C5279308B2002BBE7E /* FirebaseAuthCombine-Community in Frameworks */,
 				81F424985B89074A9F94B832 /* Pods_Kamaemon.framework in Frameworks */,
 			);
@@ -211,6 +213,7 @@
 				E66E64C6279308B2002BBE7E /* FirebaseDatabase */,
 				E66E64C8279308B2002BBE7E /* FirebaseDatabaseSwift-Beta */,
 				E66E64CB27930989002BBE7E /* FirebaseAnalytics */,
+				A0B9A02F279A7EF300F8E7BD /* FirebaseStorage */,
 			);
 			productName = Kamaemon;
 			productReference = A044456E2791BF3300689F32 /* Kamaemon.app */;
@@ -575,6 +578,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A0B9A02F279A7EF300F8E7BD /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E66E64C1279308B2002BBE7E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		E66E64C2279308B2002BBE7E /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E66E64C1279308B2002BBE7E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
