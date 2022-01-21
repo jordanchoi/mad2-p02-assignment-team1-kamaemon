@@ -11,8 +11,11 @@ import Foundation
 class User {
     var UID:String = ""
     var Category:String = ""
-    //var PhoneN
+    var PhoneNumber:String = ""
+    var BirthDate:Date = Date()
+    var Gender:String = ""
     var n:String = ""
+    var profilepicurl:String = ""
     
     init() {
     }

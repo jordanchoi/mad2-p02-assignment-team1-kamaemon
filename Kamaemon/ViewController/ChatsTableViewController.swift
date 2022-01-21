@@ -39,7 +39,7 @@ class ChatsTableViewController : UITableViewController{
         let userhelp = helpList[indexPath.row]
         
         for i in lastMessage{
-            if (i.MessageFrom == userhelp.UID){
+            if (i.MessageFrom == userhelp.UID && i.MessageTo == Auth.auth().currentUser!.uid){
                 pMessage.append(i)
             }
         }
