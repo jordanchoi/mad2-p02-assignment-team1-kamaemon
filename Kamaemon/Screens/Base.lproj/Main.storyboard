@@ -1217,80 +1217,10 @@
                     <view key="view" contentMode="scaleToFill" id="rGH-zP-beT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gFx-t0-Ubn">
-                                <rect key="frame" x="20" y="118" width="374" height="632"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="hehe" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="message" id="Yri-Wa-rdh">
-                                        <rect key="frame" x="0.0" y="44.5" width="374" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="hehe1" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yri-Wa-rdh" id="Bc9-hu-lP7">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="dJa-6o-1M8" id="xI5-jg-mr3"/>
-                                    <outlet property="delegate" destination="dJa-6o-1M8" id="7n4-a0-QgZ"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQo-Nl-0d5">
-                                <rect key="frame" x="326" y="770" width="68" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="68" id="2UU-vK-Ahk"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="sendMessage:" destination="dJa-6o-1M8" eventType="touchUpInside" id="BzW-hh-2vh"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJ7-kf-5EP">
-                                <rect key="frame" x="29" y="780" width="289" height="34"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="pxW-rQ-sO6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="2" height="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="b5z-bd-2ZE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="gFx-t0-Ubn" firstAttribute="leading" secondItem="rGH-zP-beT" secondAttribute="leadingMargin" id="4tr-WI-RPM"/>
-                            <constraint firstItem="lQo-Nl-0d5" firstAttribute="leading" secondItem="aJ7-kf-5EP" secondAttribute="trailing" constant="8" id="5yP-Cy-3Ek"/>
-                            <constraint firstItem="aJ7-kf-5EP" firstAttribute="leading" secondItem="b5z-bd-2ZE" secondAttribute="leading" constant="29" id="NUV-fY-mUp"/>
-                            <constraint firstItem="gFx-t0-Ubn" firstAttribute="top" secondItem="b5z-bd-2ZE" secondAttribute="top" constant="30" id="Phw-Ks-hoy"/>
-                            <constraint firstItem="gFx-t0-Ubn" firstAttribute="trailing" secondItem="rGH-zP-beT" secondAttribute="trailingMargin" id="bG4-r6-wsW"/>
-                            <constraint firstItem="aJ7-kf-5EP" firstAttribute="top" secondItem="gFx-t0-Ubn" secondAttribute="bottom" constant="30" id="bax-jx-8rB"/>
-                            <constraint firstItem="lQo-Nl-0d5" firstAttribute="top" secondItem="gFx-t0-Ubn" secondAttribute="bottom" constant="20" id="d9m-Es-odc"/>
-                            <constraint firstItem="b5z-bd-2ZE" firstAttribute="bottom" secondItem="aJ7-kf-5EP" secondAttribute="bottom" constant="48" id="dZf-9S-TaG"/>
-                            <constraint firstItem="b5z-bd-2ZE" firstAttribute="bottom" secondItem="lQo-Nl-0d5" secondAttribute="bottom" constant="42" id="fsf-Rz-5Xe"/>
-                            <constraint firstItem="gFx-t0-Ubn" firstAttribute="trailing" secondItem="lQo-Nl-0d5" secondAttribute="trailing" id="pID-K6-Hn9"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="User" id="dlb-Cz-yph"/>
-                    <connections>
-                        <outlet property="messageText" destination="aJ7-kf-5EP" id="OND-bE-j1b"/>
-                        <outlet property="tableView" destination="gFx-t0-Ubn" id="trZ-85-zNV"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qez-Db-H5Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1576,7 +1506,6 @@
         <image name="identityverify" width="7730" height="7730"/>
         <image name="list.bullet.rectangle.portrait.fill" catalog="system" width="115" height="128"/>
         <image name="map.fill" catalog="system" width="128" height="110"/>
-        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="profile-1" width="1763" height="1763"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>

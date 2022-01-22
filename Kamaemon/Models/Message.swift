@@ -18,7 +18,4 @@ class Message {
         self.MessageFrom = Messagefrom
         self.Message = m
     }
-    
-    
-    
 }

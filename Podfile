@@ -9,4 +9,5 @@ pod 'CircleBar'
 pod 'DropDown'
 pod 'IQKeyboardManager'
 pod 'ProjectOxfordFace'
+pod 'MessageKit'
 end
