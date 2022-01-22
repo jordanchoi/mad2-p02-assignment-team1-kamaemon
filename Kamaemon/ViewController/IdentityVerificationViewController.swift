@@ -225,6 +225,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                                 }
                                                     let urlStr = url.absoluteString
                                                     print("Download URL: \(urlStr)")
+                                                    ref.child("VolunteersVerification").child(uid).setValue(["NRIC" : urlStr, "Selfie" : ""])
                                                     self.nricurl = urlStr
                                                     UserDefaults.standard.set(urlStr, forKey: "url")
                                 })
@@ -242,6 +243,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                                     return
                                 }
                                                     let urlStr = url.absoluteString
+                                                    ref.child("VolunteersVerification").child(uid).child("Selfie").setValue(urlStr)
                                                     self.selfieurl = urlStr
                                                     print("Download URL: \(urlStr)")
                                                     UserDefaults.standard.set(urlStr, forKey: "url")
@@ -249,7 +251,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             })
                             
                             //put images in database
-                            ref.child("VolunteersVerification").child(uid).setValue(["NRIC" : self.nricurl, "Selfie" : self.selfieurl])
+                            //ref.child("VolunteersVerification").child(uid).setValue(["NRIC" : self.nricurl, "Selfie" : self.selfieurl])
                             
 //                            Auth.auth().signIn(withEmail: appDelegate.verifyEmail!, password: appDelegate.verifyPassword!) { (authResult, error) in
 //                                if let error = error as? NSError {
