@@ -19,7 +19,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var qualificationTable: UITableView!
     
-    var Qualifications : [String] = ["First Aid", "CPR"]
+    var Qualifications : [String] = ["First Aid", "CPR", "Social Skills", "Technical Skills"]
     var user = User()
     override func viewDidLoad() {
         super.viewDidLoad()
