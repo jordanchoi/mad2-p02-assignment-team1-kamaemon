@@ -27,7 +27,8 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
     
     var faceFromIdentity:MPOFace!
     var faceFromSelfie:MPOFace!
-    var test:[MPOFace] = []
+    var identityFaceStr:String = "DEFAULT"
+    var identitySelfieStr:String = "DEFAULT"
     
     // Flag to use the same delegate function for capturing images
     var forNric:Bool = true
@@ -95,11 +96,16 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                 valid = false;
                 return
             }
-            if (faces!.count) > 1 || faces == nil {
+            if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
                 valid = false;
                 return
             }
+            print(faces!.count)
+            print(faces!)
+            print(faces![0].faceId)
             self.faceFromIdentity = faces![0]
+            self.identityFaceStr = faces![0].faceId
+            print(self.faceFromIdentity!.faceId!)
         })
         
         faceClient!.detect(with: selfieData, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: [], completionBlock: { (faces, error) in
@@ -109,13 +115,17 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                 valid = false;
                 return
             }
-            if (faces!.count) > 1 || faces == nil {
+            if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
                 valid = false;
                 return
             }
+            print(faces!.count)
+            print(faces!)
+            print(faces![0].faceId)
             self.faceFromSelfie = faces![0]
+            self.identitySelfieStr = faces![0].faceId
+            print(self.faceFromSelfie!.faceId!)
         })
-        
         return valid
     }
     
@@ -124,6 +134,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
         if (nricBytes != nil && selfieBytes != nil) {                   // if image was captured
             if (detectImageValidity(nricData: nricBytes!, selfieData: selfieBytes!))
             {
+                print("Face STR: \(self.identityFaceStr), Selfie STR: \(self.identitySelfieStr)")
 //                faceClient!.verify(withFirstFaceId: faceFromIdentity.faceId, faceId2: faceFromSelfie.faceId, completionBlock: { (result, error) in
 //                    if (error != nil) {
 //                        print(error!)
