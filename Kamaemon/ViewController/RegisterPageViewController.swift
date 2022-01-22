@@ -164,13 +164,15 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                     var ref: DatabaseReference!
                     ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
                     ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(describing: newUser.BirthDate), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+                    
+                    ref.child("volunteers").child((authResult?.user.uid)!).setValue(["Hours" : "0", "Qualifications" : ""])
+                    
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     newUser.UID = (authResult?.user.uid)!
                     appDelegate.verifyUser = newUser
                     appDelegate.verifyEmail =  self.EmailAddress.text!
                     appDelegate.verifyPassword = self.Password.text!
                     self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
-                    
                     
                 }
             }
@@ -200,7 +202,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                 }
             }
         }
-        }
+    }
         
 }
     
