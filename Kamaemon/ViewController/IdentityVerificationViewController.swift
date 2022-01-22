@@ -88,6 +88,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
     @IBAction func confirmReg(_ sender: Any) {
         // detect image validity, verify images and upload images to FirebaseStorage
         if (nricBytes != nil && selfieBytes != nil) {                   // if image was captured
+//            self.performSegue(withIdentifier: "faceBiometricLoad", sender: nil)
             // NRIC Image Detection
             self.faceClient!.detect(with: self.nricBytes!, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: [], completionBlock: { (faces, error) in
                 if error != nil {
@@ -106,6 +107,12 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                         return
                     }
                     if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
+                        self.errorMsgLbl.text = "There was no face detected in one or more images you have uploaded. Please try again"
+                        self.errorMsgLbl.isHidden = false
+                        self.uploadBtn.isEnabled = true
+                        self.selfieBtn.isEnabled = true
+                        self.selfieUploadStatus.isHidden = true
+                        self.nricUploadStatus.isHidden = true
                         return
                     }
         
@@ -163,16 +170,21 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             self.performSegue(withIdentifier:"toVolunteerHomeSegue", sender: nil)
                         }
                         else {                  // not identical
-                            self.errorMsgLbl.text = "The captured image does not match the image in the identity card."
+                            self.errorMsgLbl.text = "The captured image does not match the image in the identity card. Please try again."
                             self.errorMsgLbl.isHidden = false
+                            self.uploadBtn.isEnabled = true
+                            self.selfieBtn.isEnabled = true
+                            self.selfieUploadStatus.isHidden = true
+                            self.nricUploadStatus.isHidden = true
                         }
                     })
                 })
             })
         }
         else {
-            self.errorMsgLbl.text = "You have to submit both your NRIC and a photo of yourself."
+            self.errorMsgLbl.text = "You have to submit both your NRIC and a photo of yourself. Please try again."
             self.errorMsgLbl.isHidden = false
+            
         }
     }
     
