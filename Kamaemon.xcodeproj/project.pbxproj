@@ -13,7 +13,7 @@
 		0E7BA331279B62C9009F8D87 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7BA330279B62C9009F8D87 /* LocationDelegate.swift */; };
 		0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */; };
 		0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E947A1B2794030D00A2D7B9 /* UIView.swift */; };
-		0EA03F5F27959B6700E8BDA9 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		0EA03F5F27959B6700E8BDA9 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		0EB49D242794578200C00848 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB49D232794578200C00848 /* UITextField.swift */; };
 		0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */; };
 		0EEE59472796D594009CCD01 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEE59462796D594009CCD01 /* VolunteerListViewController.swift */; };
@@ -307,7 +307,7 @@
 			files = (
 				0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */,
 				A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */,
-				0EA03F5F27959B6700E8BDA9 /* BuildFile in Resources */,
+				0EA03F5F27959B6700E8BDA9 /* (null) in Resources */,
 				0EF804592796E68A000AA92B /* Assets.xcassets in Resources */,
 				A04445792791BF3300689F32 /* Main.storyboard in Resources */,
 				A0AF6851279BE06800E5AACF /* 4432-face-scanning.json in Resources */,
@@ -536,7 +536,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PQ5YK4F2;
+				DEVELOPMENT_TEAM = CZ768BK8BN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
@@ -555,7 +555,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon;
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -572,7 +572,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PQ5YK4F2;
+				DEVELOPMENT_TEAM = CZ768BK8BN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
@@ -591,7 +591,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon;
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
