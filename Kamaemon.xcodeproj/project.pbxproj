@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E071FD9279ABB9C00B2BF1A /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E071FD7279ABB9C00B2BF1A /* EventTableViewCell.swift */; };
 		0E071FDA279ABB9C00B2BF1A /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */; };
+		0E7BA331279B62C9009F8D87 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7BA330279B62C9009F8D87 /* LocationDelegate.swift */; };
 		0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */; };
 		0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E947A1B2794030D00A2D7B9 /* UIView.swift */; };
 		0EA03F5F27959B6700E8BDA9 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -49,6 +50,7 @@
 		0BD99FE19959729AAE78B5D0 /* Pods_Kamaemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kamaemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E071FD7279ABB9C00B2BF1A /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventTableViewCell.swift; path = Event/EventTableViewCell.swift; sourceTree = "<group>"; };
 		0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EventTableViewCell.xib; path = Event/EventTableViewCell.xib; sourceTree = "<group>"; };
+		0E7BA330279B62C9009F8D87 /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		0E947A1B2794030D00A2D7B9 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0EB49D232794578200C00848 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				0E947A1A279402C800A2D7B9 /* Extensions */,
 				0E947A19279402AE00A2D7B9 /* ViewController */,
 				A04445712791BF3300689F32 /* AppDelegate.swift */,
+				0E7BA330279B62C9009F8D87 /* LocationDelegate.swift */,
 				A04445732791BF3300689F32 /* SceneDelegate.swift */,
 				A04445822791BF3600689F32 /* Info.plist */,
 				A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */,
@@ -370,6 +373,7 @@
 				0EB49D242794578200C00848 /* UITextField.swift in Sources */,
 				0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */,
 				0E071FD9279ABB9C00B2BF1A /* EventTableViewCell.swift in Sources */,
+				0E7BA331279B62C9009F8D87 /* LocationDelegate.swift in Sources */,
 				A04445722791BF3300689F32 /* AppDelegate.swift in Sources */,
 				E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */,
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
@@ -537,6 +541,8 @@
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is required to capture images used for the application, such as NRIC, Selfie for identity verification.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app uses your location information to show on the map.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses your location information to show on the map.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -571,6 +577,8 @@
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is required to capture images used for the application, such as NRIC, Selfie for identity verification.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app uses your location information to show on the map.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses your location information to show on the map.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

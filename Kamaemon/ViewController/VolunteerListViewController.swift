@@ -77,6 +77,7 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         cell.date.text = dateFormatter.string(from: event.EventDate)
         cell.name.text = event.Name
         cell.userName.text = event.UserID
+        cell.selectionStyle = .none
         
         if(event.Category == "Health"){
             cell.img.image = UIImage(named: "health")
@@ -93,18 +94,6 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         return cell
     }
     
-    // Set the spacing between sections
-     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 10
-    }
-    // Make the background color show through
-      func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let headerView = UIView()
-    headerView.backgroundColor = UIColor.clear
-
-    return headerView
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("current: "
               + String(volunteerList[currentTableView].count))
@@ -114,6 +103,18 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         appDelegate.selectedEvent = volunteerList[currentTableView][indexPath.row]
+        if(currentTableView == 0){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let accept = storyboard.instantiateViewController(withIdentifier: "Accept")
+            accept.modalPresentationStyle = .popover
+            self.present(accept, animated: true, completion: nil)
+        }
+        else if(currentTableView == 1){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let cancel = storyboard.instantiateViewController(withIdentifier: "Cancel")
+            cancel.modalPresentationStyle = .popover
+            self.present(cancel, animated: true, completion: nil)
+        }
     }
     
     override func didReceiveMemoryWarning() {
