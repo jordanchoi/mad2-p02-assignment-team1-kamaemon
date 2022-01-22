@@ -165,8 +165,8 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             return
                         }
                         if (result!.isIdentical) {                      // returns boolean based on confidence determined
-                            let uid:String = "tofix"
-//                            guard let userID = Auth.auth().currentUser?.uid else { return }
+//                            let uid:String = "tofix"
+                            guard let uid = Auth.auth().currentUser?.uid else { return }
                             
                             // Path to save image to
                             let nricRef = self.storage.child("images/nric/\(uid)_nric.png")
