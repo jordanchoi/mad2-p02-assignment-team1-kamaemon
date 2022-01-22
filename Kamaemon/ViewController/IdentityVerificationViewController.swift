@@ -11,8 +11,11 @@ import SwiftUI
 import FirebaseStorage
 import FirebaseAuth
 import ProjectOxfordFace
+import Lottie
 
 class IdentityVerificationViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    // Lottie Animation
+    let animationView = AnimationView()
     
     // View Outlets
     @IBOutlet weak var testImgView: UIImageView!    // to remove for testing purpose only
@@ -59,6 +62,17 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             for:.touchUpInside)
     }
     
+    private func setUpAnimation() {
+        animationView.animation = Animation.named("4432-face-scanning")
+        animationView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        animationView.center = self.view.center
+        animationView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        animationView.isOpaque = false
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.play()
+        view.addSubview(animationView)
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }
@@ -77,6 +91,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
             break
         case 2:
             picker.cameraDevice = .front;
+            picker.cameraFlashMode = .off
             break
         default:
             print("Other buttons clicked..")
@@ -88,14 +103,28 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
     @IBAction func confirmReg(_ sender: Any) {
         // detect image validity, verify images and upload images to FirebaseStorage
         if (nricBytes != nil && selfieBytes != nil) {                   // if image was captured
-//            self.performSegue(withIdentifier: "faceBiometricLoad", sender: nil)
+            setUpAnimation()
             // NRIC Image Detection
             self.faceClient!.detect(with: self.nricBytes!, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: [], completionBlock: { (faces, error) in
                 if error != nil {
                     print(error! as NSError)
+                    self.errorMsgLbl.text = "An error occurred"
+                    self.errorMsgLbl.isHidden = false
+                    self.uploadBtn.isEnabled = true
+                    self.selfieBtn.isEnabled = true
+                    self.selfieUploadStatus.isHidden = true
+                    self.nricUploadStatus.isHidden = true
+                    self.animationView.removeFromSuperview()
                     return
                 }
                 if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
+                    self.errorMsgLbl.text = "There was no face detected in one or more images you have uploaded. Please try again"
+                    self.errorMsgLbl.isHidden = false
+                    self.uploadBtn.isEnabled = true
+                    self.selfieBtn.isEnabled = true
+                    self.selfieUploadStatus.isHidden = true
+                    self.nricUploadStatus.isHidden = true
+                    self.animationView.removeFromSuperview()
                     return
                 }
                 let faceFromIdentity = faces![0]
@@ -104,6 +133,13 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                 self.faceClient!.detect(with: self.selfieBytes!, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: [], completionBlock: { (faces, error) in
                     if error != nil {
                         print(error! as NSError)
+                        self.errorMsgLbl.text = "An error occurred"
+                        self.errorMsgLbl.isHidden = false
+                        self.uploadBtn.isEnabled = true
+                        self.selfieBtn.isEnabled = true
+                        self.selfieUploadStatus.isHidden = true
+                        self.nricUploadStatus.isHidden = true
+                        self.animationView.removeFromSuperview()
                         return
                     }
                     if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
@@ -113,6 +149,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                         self.selfieBtn.isEnabled = true
                         self.selfieUploadStatus.isHidden = true
                         self.nricUploadStatus.isHidden = true
+                        self.animationView.removeFromSuperview()
                         return
                     }
         
@@ -124,6 +161,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                         print(result!.confidence)
                         if (error != nil) {
                             print(error! as NSError)
+                            self.animationView.removeFromSuperview()
                             return
                         }
                         if (result!.isIdentical) {                      // returns boolean based on confidence determined
@@ -167,6 +205,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                                                     UserDefaults.standard.set(urlStr, forKey: "url")
                                 })
                             })
+                            self.animationView.removeFromSuperview()
                             self.performSegue(withIdentifier:"toVolunteerHomeSegue", sender: nil)
                         }
                         else {                  // not identical
@@ -176,6 +215,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             self.selfieBtn.isEnabled = true
                             self.selfieUploadStatus.isHidden = true
                             self.nricUploadStatus.isHidden = true
+                            self.animationView.removeFromSuperview()
                         }
                     })
                 })
@@ -184,7 +224,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
         else {
             self.errorMsgLbl.text = "You have to submit both your NRIC and a photo of yourself. Please try again."
             self.errorMsgLbl.isHidden = false
-            
+            self.animationView.removeFromSuperview()
         }
     }
     
