@@ -10,6 +10,7 @@
 		0BC103616496BCA044343E8D /* Pods_Kamaemon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F18180FD6A62702D62363BC /* Pods_Kamaemon.framework */; };
 		0E071FD9279ABB9C00B2BF1A /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E071FD7279ABB9C00B2BF1A /* EventTableViewCell.swift */; };
 		0E071FDA279ABB9C00B2BF1A /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */; };
+		0E73ECBE279C9206009B8363 /* EditVolunteerAccViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */; };
 		0E7BA331279B62C9009F8D87 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7BA330279B62C9009F8D87 /* LocationDelegate.swift */; };
 		0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */; };
 		0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E947A1B2794030D00A2D7B9 /* UIView.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		0E071FD7279ABB9C00B2BF1A /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventTableViewCell.swift; path = Event/EventTableViewCell.swift; sourceTree = "<group>"; };
 		0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EventTableViewCell.xib; path = Event/EventTableViewCell.xib; sourceTree = "<group>"; };
+		0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVolunteerAccViewController.swift; sourceTree = "<group>"; };
 		0E7BA330279B62C9009F8D87 /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		0E947A1B2794030D00A2D7B9 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0EB49D232794578200C00848 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */,
 				E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */,
 				E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */,
+				0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */,
 				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
 				0EF8045D279763AB000AA92B /* VolunteerDetailViewController.swift in Sources */,
+				0E73ECBE279C9206009B8363 /* EditVolunteerAccViewController.swift in Sources */,
 				A04445762791BF3300689F32 /* ViewController.swift in Sources */,
 				0EB49D242794578200C00848 /* UITextField.swift in Sources */,
 				0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */,
