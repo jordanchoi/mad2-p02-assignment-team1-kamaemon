@@ -23,12 +23,6 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
     
     // Instantiate Azure Face API
     let faceClient = MPOFaceServiceClient(subscriptionKey: "25d248b997af4fc4b79d2939263dab03")
-//    let faceClient:MPOFaceServiceClient = MPOFaceServiceClient.init(endpointAndSubscriptionKey: "https://mad2kamaemon.cognitiveservices.azure.com/face/v1.0/detect", key: "25d248b997af4fc4b79d2939263dab03")
-    
-    var faceFromIdentity:MPOFace!
-    var faceFromSelfie:MPOFace!
-    var identityFaceStr:String = "DEFAULT"
-    var identitySelfieStr:String = "DEFAULT"
     
     // Flag to use the same delegate function for capturing images
     var forNric:Bool = true
@@ -87,108 +81,90 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
         present(picker, animated: true)
     }
     
-    func detectImageValidity(nricData:Data, selfieData:Data)->Bool {
-        var valid:Bool = true;
-        
-        faceClient!.detect(with: nricData, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: [], completionBlock: { (faces, error) in
-            if error != nil {
-                print(error)
-                valid = false;
-                return
-            }
-            if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
-                valid = false;
-                return
-            }
-            print(faces!.count)
-            print(faces!)
-            print(faces![0].faceId)
-            self.faceFromIdentity = faces![0]
-            self.identityFaceStr = faces![0].faceId
-            print(self.faceFromIdentity!.faceId!)
-        })
-        
-        faceClient!.detect(with: selfieData, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: [], completionBlock: { (faces, error) in
-            print(faces!.count)
-            if error != nil {
-                print(error)
-                valid = false;
-                return
-            }
-            if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
-                valid = false;
-                return
-            }
-            print(faces!.count)
-            print(faces!)
-            print(faces![0].faceId)
-            self.faceFromSelfie = faces![0]
-            self.identitySelfieStr = faces![0].faceId
-            print(self.faceFromSelfie!.faceId!)
-        })
-        return valid
-    }
-    
     @IBAction func confirmReg(_ sender: Any) {
-        // upload images to FirebaseStorage
+        // detect image validity, verify images and upload images to FirebaseStorage
         if (nricBytes != nil && selfieBytes != nil) {                   // if image was captured
-            if (detectImageValidity(nricData: nricBytes!, selfieData: selfieBytes!))
-            {
-                print("Face STR: \(self.identityFaceStr), Selfie STR: \(self.identitySelfieStr)")
-//                faceClient!.verify(withFirstFaceId: faceFromIdentity.faceId, faceId2: faceFromSelfie.faceId, completionBlock: { (result, error) in
-//                    if (error != nil) {
-//                        print(error!)
-//                        return
-//                    }
-////                    print(result)
-//                    if (result!.isIdentical) {
-//                        let name = "Jordan" // for testing to remove
-//
-//                        // Path to save image to
-//                        let nricRef = self.storage.child("images/nric/\(name)_nric.png")
-//                        let selfieRef = self.storage.child("images/selfie/\(name)_selfie.png")
-//
-//                        // nric image upload
-//                        nricRef.putData(self.nricBytes!, metadata: nil, completion: {_, error in
-//                            guard error == nil else {
-//                                print("Upload Failed - NRIC")
-//                                return
-//                            }
-//                            // url of image
-//                            nricRef.downloadURL(completion: {url, error in
-//                                                guard let url = url, error == nil else {
-//                                return
-//                            }
-//                                                let urlStr = url.absoluteString
-//                                                print("Download URL: \(urlStr)")
-//                                                UserDefaults.standard.set(urlStr, forKey: "url")
-//                            })
-//                        })
-//
-//                        // selfie image upload
-//                        selfieRef.putData(self.selfieBytes!, metadata: nil, completion: {_, error in
-//                            guard error == nil else {
-//                                print("Upload Failed - Selfie")
-//                                return
-//                            }
-//                            // url of image
-//                            selfieRef.downloadURL(completion: {url, error in
-//                                                guard let url = url, error == nil else {
-//                                return
-//                            }
-//                                                let urlStr = url.absoluteString
-//                                                print("Download URL: \(urlStr)")
-//                                                UserDefaults.standard.set(urlStr, forKey: "url")
-//                            })
-//                        })
-//                    }
-//                    else {
-//
-//                    }
-//                })
-            }
-        }
+            // NRIC Image Detection
+            self.faceClient!.detect(with: self.nricBytes!, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: [], completionBlock: { (faces, error) in
+                if error != nil {
+                    print(error! as NSError)
+                    return
+                }
+                if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
+                    return
+                }
+                let faceFromIdentity = faces![0]
+                
+                // Selfie Image Detection
+                self.faceClient!.detect(with: self.selfieBytes!, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: [], completionBlock: { (faces, error) in
+                    if error != nil {
+                        print(error! as NSError)
+                        return
+                    }
+                    if (faces!.count) > 1 || faces == nil || faces!.count < 1 {
+                        return
+                    }
         
+                    let faceFromSelfie = faces![0]
+                    
+                    // Both Images are detected and validated, to verify and compare using Face API
+                    self.faceClient!.verify(withFirstFaceId: faceFromIdentity.faceId, faceId2: faceFromSelfie.faceId, completionBlock: { (result, error) in
+                        print(result!.isIdentical)
+                        print(result!.confidence)
+                        if (error != nil) {
+                            print(error! as NSError)
+                            return
+                        }
+                        if (result!.isIdentical) {                      // returns boolean based on confidence determined
+                            let name = "Jordan" // for testing to remove
+                            
+                            // Path to save image to
+                            let nricRef = self.storage.child("images/nric/\(name)_nric.png")
+                            let selfieRef = self.storage.child("images/selfie/\(name)_selfie.png")
+    
+                            // nric image upload
+                            nricRef.putData(self.nricBytes!, metadata: nil, completion: {_, error in
+                                guard error == nil else {
+                                    print("Upload Failed - NRIC")
+                                    return
+                                }
+                                // url of image
+                                nricRef.downloadURL(completion: {url, error in
+                                                    guard let url = url, error == nil else {
+                                    return
+                                }
+                                                    let urlStr = url.absoluteString
+                                                    print("Download URL: \(urlStr)")
+                                                    UserDefaults.standard.set(urlStr, forKey: "url")
+                                })
+                            })
+    
+                            // selfie image upload
+                            selfieRef.putData(self.selfieBytes!, metadata: nil, completion: {_, error in
+                                guard error == nil else {
+                                    print("Upload Failed - Selfie")
+                                    return
+                                }
+                                // url of image
+                                selfieRef.downloadURL(completion: {url, error in
+                                                    guard let url = url, error == nil else {
+                                    return
+                                }
+                                                    let urlStr = url.absoluteString
+                                                    print("Download URL: \(urlStr)")
+                                                    UserDefaults.standard.set(urlStr, forKey: "url")
+                                })
+                            })
+                        }
+                        else {                  // not identical
+                            
+                            //codes here
+                        }
+                    })
+                })
+            })
+            print("succeeded?")
+        }
     }
     
     // Delegate func to capture image with camera - on cancel, dismiss camera
