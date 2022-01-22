@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 import FirebaseStorage
+import FirebaseAuth
 import ProjectOxfordFace
 
 class IdentityVerificationViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -17,6 +18,9 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
     @IBOutlet weak var testImgView: UIImageView!    // to remove for testing purpose only
     @IBOutlet weak var uploadBtn: UIButton!
     @IBOutlet weak var selfieBtn: UIButton!
+    @IBOutlet weak var nricUploadStatus: UIImageView!
+    @IBOutlet weak var selfieUploadStatus: UIImageView!
+    @IBOutlet weak var errorMsgLbl: UILabel!
     
     // Firebase Storage
     private let storage = Storage.storage().reference()
@@ -116,11 +120,12 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             return
                         }
                         if (result!.isIdentical) {                      // returns boolean based on confidence determined
-                            let name = "Jordan" // for testing to remove
+                            let uid:String = "tofix"
+//                            guard let userID = Auth.auth().currentUser?.uid else { return }
                             
                             // Path to save image to
-                            let nricRef = self.storage.child("images/nric/\(name)_nric.png")
-                            let selfieRef = self.storage.child("images/selfie/\(name)_selfie.png")
+                            let nricRef = self.storage.child("images/nric/\(uid)_nric.png")
+                            let selfieRef = self.storage.child("images/selfie/\(uid)_selfie.png")
     
                             // nric image upload
                             nricRef.putData(self.nricBytes!, metadata: nil, completion: {_, error in
@@ -155,15 +160,19 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                                                     UserDefaults.standard.set(urlStr, forKey: "url")
                                 })
                             })
+                            self.performSegue(withIdentifier:"toVolunteerHomeSegue", sender: nil)
                         }
                         else {                  // not identical
-                            
-                            //codes here
+                            self.errorMsgLbl.text = "The captured image does not match the image in the identity card."
+                            self.errorMsgLbl.isHidden = false
                         }
                     })
                 })
             })
-            print("succeeded?")
+        }
+        else {
+            self.errorMsgLbl.text = "You have to submit both your NRIC and a photo of yourself."
+            self.errorMsgLbl.isHidden = false
         }
     }
     
@@ -186,6 +195,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
             nricBytes = image.pngData()
             testImgView.image = nric; // for testing to remove
             uploadBtn.isEnabled = false
+            nricUploadStatus.isHidden = false
         }
         else {
             selfie = image
@@ -193,7 +203,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
             forNric = true;
             testImgView.image = selfie // for testing to remove
             selfieBtn.isEnabled = false
+            selfieUploadStatus.isHidden = false
         }
     }
 }
-
