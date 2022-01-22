@@ -17,6 +17,7 @@ class User {
     var n:String = ""
     var profilepicurl:String = ""
     var isNewUser:Int = 0
+    //add NRIC and selfie under a different path
     
     init() {
     }

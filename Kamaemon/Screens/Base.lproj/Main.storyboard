@@ -939,7 +939,6 @@
         <!--Item-->
         <scene sceneID="W9n-nD-mPL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="acR-FB-hzw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="qEL-pd-WBa" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="eJn-A1-Y66"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tma-c7-9Id">
@@ -950,6 +949,7 @@
                         <segue destination="Y78-Qb-zNa" kind="relationship" relationship="rootViewController" id="hOd-El-IIj"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="acR-FB-hzw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1677" y="947"/>
         </scene>

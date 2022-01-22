@@ -9,13 +9,21 @@ import Foundation
 import UIKit
 import SwiftUI
 import FirebaseStorage
+import Firebase
 import FirebaseAuth
 import ProjectOxfordFace
 import Lottie
 
 class IdentityVerificationViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    //url of images
+    var nricurl : String = ""
+    var selfieurl : String = ""
+    
+    
+    
     // Lottie Animation
     let animationView = AnimationView()
+    
     
     // View Outlets
     @IBOutlet weak var testImgView: UIImageView!    // to remove for testing purpose only
@@ -166,12 +174,44 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                         }
                         if (result!.isIdentical) {                      // returns boolean based on confidence determined
 //                            let uid:String = "tofix"
-                            guard let uid = Auth.auth().currentUser?.uid else { return }
+                            
+                            //create volunteer user here
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            //print(appDelegate.verifyEmail!)
+                            //print(appDelegate.verifyPassword!)
+                            var ref: DatabaseReference!
+                            ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+//                            Auth.auth().createUser(withEmail: appDelegate.verifyEmail!, password: appDelegate.verifyPassword!) { (authResult, error) in
+//                                    print("success")
+//                                    print(authResult?.user.uid)
+//                                    appDelegate.verifyUser?.UID = (authResult?.user.uid)!
+//                                    var newUser : User = appDelegate.verifyUser!
+//                                    ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : newUser.BirthDate, "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+//
+//
+//                            }
+//                            Auth.auth().signIn(withEmail: appDelegate.verifyEmail!, password: appDelegate.verifyPassword!) { (authResult, error) in
+//                                if let error = error as? NSError {
+//                                    print(error)
+//                                }
+//                                else{
+//                                    var newUser : User = appDelegate.verifyUser!
+//                                    ref.child("users").child(Auth.auth().currentUser!.uid).setValue(["userUID" :(Auth.auth().currentUser!.uid), "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : newUser.BirthDate, "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+//                                }
+//                            }
+                        
+         
+                            // code is until here for create colunteer
+                            //get uid from verify user
+                            guard let uid = appDelegate.verifyUser?.UID else { return }
+                            //guard let uid = Auth.auth().currentUser?.uid else { return }
                             
                             // Path to save image to
                             let nricRef = self.storage.child("images/nric/\(uid)_nric.png")
                             let selfieRef = self.storage.child("images/selfie/\(uid)_selfie.png")
     
+                            
+                    
                             // nric image upload
                             nricRef.putData(self.nricBytes!, metadata: nil, completion: {_, error in
                                 guard error == nil else {
@@ -185,6 +225,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                                 }
                                                     let urlStr = url.absoluteString
                                                     print("Download URL: \(urlStr)")
+                                                    self.nricurl = urlStr
                                                     UserDefaults.standard.set(urlStr, forKey: "url")
                                 })
                             })
@@ -201,12 +242,33 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                                     return
                                 }
                                                     let urlStr = url.absoluteString
+                                                    self.selfieurl = urlStr
                                                     print("Download URL: \(urlStr)")
                                                     UserDefaults.standard.set(urlStr, forKey: "url")
                                 })
                             })
+                            
+                            //put images in database
+                            ref.child("VolunteersVerification").child(uid).setValue(["NRIC" : self.nricurl, "Selfie" : self.selfieurl])
+                            
+//                            Auth.auth().signIn(withEmail: appDelegate.verifyEmail!, password: appDelegate.verifyPassword!) { (authResult, error) in
+//                                if let error = error as? NSError {
+//                                    print(error)
+//                                }
+//                                else{
+//                                    self.animationView.removeFromSuperview()
+//                                    self.performSegue(withIdentifier:"toVolunteerHomeSegue", sender: nil)
+//                                }
+//                            }
+                            
+                            
                             self.animationView.removeFromSuperview()
-                            self.performSegue(withIdentifier:"toVolunteerHomeSegue", sender: nil)
+                            //direct user to login page
+                            let controller = self.storyboard?.instantiateViewController(identifier: "ViewController") as! UIViewController
+                                        controller.modalPresentationStyle = .fullScreen
+                                        controller.modalTransitionStyle = .flipHorizontal
+                            self.present(controller, animated: true, completion: nil)
+                            //self.performSegue(withIdentifier:"toVolunteerHomeSegue", sender: nil)
                         }
                         else {                  // not identical
                             self.errorMsgLbl.text = "The captured image does not match the image in the identity card. Please try again."
