@@ -20,9 +20,20 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var vwDropdown: UIView!
     @IBOutlet weak var errorLbl: UILabel!
+    
+    @IBOutlet weak var genderdropdown: UIView!
+    
+    @IBOutlet weak var genderlabel: UILabel!
+    
+    @IBOutlet weak var birthdate: UIDatePicker!
+    
+    @IBOutlet weak var phonenumber: UITextField!
+    
     let dropDown = DropDown()
+    let genderDropDown = DropDown()
     
     var cat:String = ""
+    var gender:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +52,23 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
             lblTitle.textColor = UIColor.black
             cat = dropDown.dataSource[index]
         }
+        
+        // gender dropdown
+        
+        //gender dropdown
+        genderlabel.text = "Gender"
+        genderDropDown.anchorView = genderdropdown
+        genderDropDown.dataSource = ["M", "F"]
+        genderDropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        genderDropDown.direction = .bottom
+        
+        // Real time change when user selects data
+        genderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.genderlabel.text = genderDropDown.dataSource[index]
+            genderlabel.textColor = UIColor.black
+            gender = genderDropDown.dataSource[index]
+        }
+        
         
         // Paddings
         Name.setLeftPaddingPoints(10)
@@ -63,6 +91,13 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     @IBAction func showOptions(_ sender: Any) {
         dropDown.show()
     }
+    
+    
+    @IBAction func showGender(_ sender: Any) {
+        genderDropDown.show()
+    }
+    
+    
     
     // Background press
     @objc func handleTap() {
@@ -125,12 +160,12 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                 var ref: DatabaseReference!
                 ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
                 ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "userCategory" : u.UserType, "Name" : u.n])
+                
+                // Added by Jordan for segue to identity verification (volunteers)
+                if (self.lblTitle.text == "Volunteer") {
+                    self .performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
+                }
             }
-        }
-        
-        // Added by Jordan for segue to identity verification (volunteers)
-        if (lblTitle.text == "Volunteer") {
-            self .performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
         }
     }
 }
