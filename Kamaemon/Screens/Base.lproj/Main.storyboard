@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0Xf-l4-TZl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0Xf-l4-TZl">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ll5-fA-8jo">
-                                <rect key="frame" x="33" y="804" width="155.5" height="26"/>
+                                <rect key="frame" x="33" y="804" width="115.5" height="26"/>
                                 <color key="pageIndicatorTintColor" systemColor="systemGray6Color"/>
                                 <color key="currentPageIndicatorTintColor" name="Green_Main"/>
                             </pageControl>
@@ -376,7 +376,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="createAccount:" destination="SJw-ir-cNR" eventType="touchUpInside" id="N7f-gP-xYQ"/>
-                                    <segue destination="Iir-Wd-FFc" kind="presentation" identifier="toIdentityVerificationSegue" modalTransitionStyle="coverVertical" id="hF3-Ne-tjh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDY-Cd-S1S">
@@ -511,6 +510,7 @@
                         <outlet property="lblTitle" destination="Njr-Ag-rLj" id="hSD-d5-beq"/>
                         <outlet property="phonenumber" destination="LJ1-He-6rv" id="o6E-bV-vhX"/>
                         <outlet property="vwDropdown" destination="a3n-lX-nnd" id="rxl-Zr-Eod"/>
+                        <segue destination="Iir-Wd-FFc" kind="presentation" id="pMy-Wi-ZRy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EGX-3J-Dx4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -686,7 +686,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTM-Ez-WLR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="1550"/>
+            <point key="canvasLocation" x="45" y="1546"/>
         </scene>
         <!--Item-->
         <scene sceneID="ZD0-vK-rmO">
@@ -868,7 +868,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PjB-Vp-UAL">
-                                        <rect key="frame" x="311" y="16" width="45" height="31"/>
+                                        <rect key="frame" x="311" y="16" width="47" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="map.fill" catalog="system"/>
                                         <connections>
@@ -1601,7 +1601,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2e-My-22U">
-                                        <rect key="frame" x="321" y="15" width="45" height="31"/>
+                                        <rect key="frame" x="319" y="15" width="47" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="map.fill" catalog="system"/>
                                         <connections>
