@@ -10,8 +10,9 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
-class ChatsTableViewController : UITableViewController{
+class ChatsTableViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
+    @IBOutlet weak var tableView: UITableView!
     var helpList : [User] = []
     var lastMessage : [Message] = []
     
@@ -22,15 +23,25 @@ class ChatsTableViewController : UITableViewController{
         getLatestMessage()
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         return self.helpList.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "user", for: indexPath)
         
         var pMessage : [Message] = []
@@ -59,7 +70,7 @@ class ChatsTableViewController : UITableViewController{
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.selectedUser = helpList[indexPath.row]
    
@@ -70,7 +81,6 @@ class ChatsTableViewController : UITableViewController{
 //                    })
 //                }
     }
-    
     func gethelp(){
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference().child("users")
