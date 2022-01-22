@@ -624,9 +624,6 @@
                         <outlet property="testImgView" destination="nw8-oD-mab" id="EvM-tw-2sq"/>
                         <outlet property="uploadBtn" destination="AhG-CF-o06" id="1Kj-zv-3aG"/>
                         <segue destination="ROz-Ii-VJC" kind="presentation" identifier="toVolunteerHomeSegue" modalPresentationStyle="fullScreen" id="AgY-iY-JBB"/>
-                        <segue destination="Btd-cW-auD" kind="popoverPresentation" identifier="faceBiometricLoad" popoverAnchorView="CN9-Av-aCN" id="D3H-IV-CWJ">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTM-Ez-WLR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1451,50 +1448,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ia3-am-Dwj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2754" y="1686"/>
-        </scene>
-        <!--Face Biometric Loading View Controller-->
-        <scene sceneID="w0y-yp-EVd">
-            <objects>
-                <viewController id="Btd-cW-auD" customClass="FaceBiometricLoadingViewController" customModule="Kamaemon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PIG-ac-jed">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Performing Identity Verification.." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PtU-b2-Zd9">
-                                <rect key="frame" x="40" y="519" width="334" height="25.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="0.3238549309" green="0.6407645247" blue="0.72077548629999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3B-jt-fZa" customClass="AnimationView" customModule="Lottie">
-                                <rect key="frame" x="100" y="255" width="214" height="214"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="p3B-jt-fZa" secondAttribute="height" multiplier="1:1" id="pir-XW-OfX"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="faceBiometricLoad"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="fL8-6U-tSY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="p3B-jt-fZa" firstAttribute="leading" secondItem="fL8-6U-tSY" secondAttribute="leading" constant="100" id="Gta-8U-QHa"/>
-                            <constraint firstItem="p3B-jt-fZa" firstAttribute="top" secondItem="fL8-6U-tSY" secondAttribute="top" constant="255" id="SCK-ql-6t7"/>
-                            <constraint firstItem="fL8-6U-tSY" firstAttribute="trailing" secondItem="PtU-b2-Zd9" secondAttribute="trailing" constant="40" id="UZm-jn-bQt"/>
-                            <constraint firstItem="PtU-b2-Zd9" firstAttribute="leading" secondItem="fL8-6U-tSY" secondAttribute="leading" constant="40" id="gwP-po-GTz"/>
-                            <constraint firstItem="PtU-b2-Zd9" firstAttribute="top" secondItem="p3B-jt-fZa" secondAttribute="bottom" constant="50" id="lzL-l0-bBV"/>
-                            <constraint firstItem="fL8-6U-tSY" firstAttribute="trailing" secondItem="p3B-jt-fZa" secondAttribute="trailing" constant="100" id="wtj-pg-K2H"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="animationView" destination="p3B-jt-fZa" id="LHt-hR-u1D"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="15G-Gb-lk3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="901" y="1479"/>
         </scene>
     </scenes>
     <designables>

@@ -26,7 +26,6 @@
 		A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */; };
 		A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A044457F2791BF3600689F32 /* LaunchScreen.storyboard */; };
 		A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */; };
-		A0AF684E279BC65A00E5AACF /* FaceBiometricLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AF684D279BC65A00E5AACF /* FaceBiometricLoadingViewController.swift */; };
 		A0AF6851279BE06800E5AACF /* 4432-face-scanning.json in Resources */ = {isa = PBXBuildFile; fileRef = A0AF6850279BE06800E5AACF /* 4432-face-scanning.json */; };
 		A0B9A030279A7EF300F8E7BD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A0B9A02F279A7EF300F8E7BD /* FirebaseStorage */; };
 		E66E64C3279308B2002BBE7E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C2279308B2002BBE7E /* FirebaseAuth */; };
@@ -67,7 +66,6 @@
 		A04445802791BF3600689F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A04445822791BF3600689F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
-		A0AF684D279BC65A00E5AACF /* FaceBiometricLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceBiometricLoadingViewController.swift; sourceTree = "<group>"; };
 		A0AF6850279BE06800E5AACF /* 4432-face-scanning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "4432-face-scanning.json"; sourceTree = "<group>"; };
 		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E66E64CD279335C4002BBE7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */,
 				E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */,
 				E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */,
-				A0AF684D279BC65A00E5AACF /* FaceBiometricLoadingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -377,7 +374,6 @@
 				E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */,
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
 				A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */,
-				A0AF684E279BC65A00E5AACF /* FaceBiometricLoadingViewController.swift in Sources */,
 				0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */,
 				E6BC1C00279AA2670049908B /* userDAL.swift in Sources */,
 				E6BC1BFD279A88BB0049908B /* ProfilePageViewController.swift in Sources */,
