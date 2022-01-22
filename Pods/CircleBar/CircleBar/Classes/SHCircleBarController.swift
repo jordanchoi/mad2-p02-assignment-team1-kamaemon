@@ -56,16 +56,16 @@ class SHCircleBarController: UITabBarController {
         self.view.addSubview(circleView)
         let tabWidth = self.view.bounds.width / CGFloat(self.tabBar.items?.count ?? 4)
         
-        circleView.frame = CGRect(x: tabWidth / 2 - 30, y: self.tabBar.frame.origin.y - 50, width: 60, height: 60)
+        circleView.frame = CGRect(x: tabWidth / 2 - 30, y: self.tabBar.frame.origin.y - 40, width: 60, height: 60)
         circleImageView.frame = self.circleView.bounds
     }
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        circleImageView.image = image(with: self.tabBar.selectedItem?.image ?? self.tabBar.items?.first?.image, scaledTo: CGSize(width: 35, height: 35))
+        circleImageView.image = image(with: self.tabBar.selectedItem?.image ?? self.tabBar.items?.first?.image, scaledTo: CGSize(width: 30, height: 30))
         
     }
     
-    private var _barHeight: CGFloat = 77
+    private var _barHeight: CGFloat = 74
     open var barHeight: CGFloat {
         get {
             if #available(iOS 11.0, *) {

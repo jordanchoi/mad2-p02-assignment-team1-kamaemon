@@ -1525,11 +1525,6 @@
             <point key="canvasLocation" x="3750.7246376811595" y="324.77678571428572"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="cSc-wu-kpY">
-            <size key="intrinsicContentSize" width="-1" height="83"/>
-        </designable>
-    </designables>
     <resources>
         <image name="arrow.right.circle.fill" catalog="system" width="128" height="121"/>
         <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
