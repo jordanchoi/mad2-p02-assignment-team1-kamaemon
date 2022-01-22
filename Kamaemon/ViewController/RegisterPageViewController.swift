@@ -144,63 +144,63 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     }
     
     @IBAction func createAccount(_ sender: Any) {
-//        do {
-//            try Auth.auth().signOut()
-//        } catch let error {
-//            print("(error)")
-//        }
-        let newUser = User(userUID: "", userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
-        if (self.lblTitle.text == "Volunteer"){
-            Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
-                if let error = error as? NSError {
-                    print(error)
-                    self.errorLbl.text = "Something went wrong. Please try again."
+        
+        
+            let newUser = User(userUID: "", userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
+            if (self.lblTitle.text == "Volunteer"){
+                Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
+                    if let error = error as? NSError {
+                        print(error)
+                        self.errorLbl.text = "Something went wrong. Please try again."
+                    }
+                    else  {
+                        print("success")
+                        print(authResult?.user.uid)
+                        //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
+                        //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
+                        var ref: DatabaseReference!
+                        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+                        ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(describing: newUser.BirthDate), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+                        
+                        ref.child("volunteers").child((authResult?.user.uid)!).setValue(["Hours" : "0", "Qualifications" : ""])
+                        
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        newUser.UID = (authResult?.user.uid)!
+                        appDelegate.verifyUser = newUser
+                        appDelegate.verifyEmail =  self.EmailAddress.text!
+                        appDelegate.verifyPassword = self.Password.text!
+                        self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
+                        
+                    }
                 }
-                else  {
-                    print("success")
-                    print(authResult?.user.uid)
-                    //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
-                    //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
-                    var ref: DatabaseReference!
-                    ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-                    ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(describing: newUser.BirthDate), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    newUser.UID = (authResult?.user.uid)!
-                    appDelegate.verifyUser = newUser
-                    appDelegate.verifyEmail =  self.EmailAddress.text!
-                    appDelegate.verifyPassword = self.Password.text!
-                    self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
-                    
-                    
+    //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    //            appDelegate.verifyUser = newUser
+    //            appDelegate.verifyEmail =  EmailAddress.text!
+    //            appDelegate.verifyPassword = Password.text!
+    //            self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
+                
+            }
+            else{
+                Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
+                    if let error = error as? NSError {
+                        print(error)
+                        self.errorLbl.text = "Something went wrong. Please try again."
+                    }
+                    else  {
+                        print("success")
+                        print(authResult?.user.uid)
+                        //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
+                        //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
+                        var ref: DatabaseReference!
+                        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+                        ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :newUser.UID, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(describing: newUser.BirthDate), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+                        
+                        
+                    }
                 }
             }
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            appDelegate.verifyUser = newUser
-//            appDelegate.verifyEmail =  EmailAddress.text!
-//            appDelegate.verifyPassword = Password.text!
-//            self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
-            
-        }
-        else{
-            Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
-                if let error = error as? NSError {
-                    print(error)
-                    self.errorLbl.text = "Something went wrong. Please try again."
-                }
-                else  {
-                    print("success")
-                    print(authResult?.user.uid)
-                    //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
-                    //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
-                    var ref: DatabaseReference!
-                    ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-                    ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :newUser.UID, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(describing: newUser.BirthDate), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
-                    
-                    
-                }
-            }
-        }
-        }
+        
+    }
         
 }
     

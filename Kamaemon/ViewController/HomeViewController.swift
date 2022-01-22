@@ -12,6 +12,9 @@ import Firebase
 class HomeViewController : UIViewController{
     
     @IBOutlet weak var user: UILabel!
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
