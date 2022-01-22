@@ -127,6 +127,11 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                 ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "userCategory" : u.UserType, "Name" : u.n])
             }
         }
+        
+        // Added by Jordan for segue to identity verification (volunteers)
+        if (lblTitle.text == "Volunteer") {
+            self .performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
+        }
     }
 }
     

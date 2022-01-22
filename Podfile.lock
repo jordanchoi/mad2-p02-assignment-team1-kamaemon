@@ -3,12 +3,14 @@ PODS:
   - DropDown (2.3.13)
   - IQKeyboardManager (6.5.9)
   - lottie-ios (3.3.0)
+  - ProjectOxfordFace (1.4.1)
 
 DEPENDENCIES:
   - CircleBar
   - DropDown
   - IQKeyboardManager
   - lottie-ios
+  - ProjectOxfordFace
 
 SPEC REPOS:
   trunk:
@@ -16,13 +18,15 @@ SPEC REPOS:
     - DropDown
     - IQKeyboardManager
     - lottie-ios
+    - ProjectOxfordFace
 
 SPEC CHECKSUMS:
   CircleBar: 8e17d2090e6e319b518010535a3145fb8fd68c22
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   IQKeyboardManager: 241cc94ccabc9deb8f8bd7d12f00d73288d13ecc
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
+  ProjectOxfordFace: fa7d7adbc9a11203be61a6a80511101b5dbf6ce4
 
-PODFILE CHECKSUM: 07b69ca66f3cb904ceaa1b04539e7fe4bb4743ff
+PODFILE CHECKSUM: 4a3ba9ffe3dd8bfe0fca2ece7d3d480eb30216aa
 
 COCOAPODS: 1.11.2
