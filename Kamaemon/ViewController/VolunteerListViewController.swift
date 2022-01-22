@@ -93,10 +93,6 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         }
         return cell
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        return String(volunteerList[currentTableView].count) + " items"
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("current: "

@@ -18,40 +18,45 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
     var volunteerList : [[Event]] = []
     var event: Event?
+    var coord1:CLLocationCoordinate2D!
+    var coord2:CLLocationCoordinate2D!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var desc: UILabel!
     
+    @IBOutlet weak var goToMap: UIButton!
     @IBOutlet weak var descCancel: UILabel!
-    @IBOutlet weak var locationCancel: UILabel!
+    @IBOutlet weak var timeCancel: UILabel!
     @IBOutlet weak var nameCancel: UILabel!
+    @IBAction func viewFullMap(_ sender: Any) {
+          self.getDirections(loc1: coord1, loc2: coord2)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.goToMap.setTitle("", for: .normal)
         event = appDelegate.selectedEvent!
         locationManager.delegate = locationDelegate
         locationDelegate.locationCallBack = { location in
             self.latestLocation = location
-//            self.centerMapOnLocation(location: location)
             
             /**Current Location**/
             let annotation = MKPointAnnotation()
             let annotation2 = MKPointAnnotation()
-            var  coord1 = location.coordinate
-            var coord2:CLLocationCoordinate2D?
+            self.coord1 = location.coordinate
             annotation.coordinate = location.coordinate
             annotation.title = "I'm Here"
             
             /**Ngee Ann**/
             let geoCoder = CLGeocoder()
             geoCoder.geocodeAddressString("535 Clementi Road Singapore 599489", completionHandler: {p,e in
-                coord2 = (p![0].location)!.coordinate
+                self.coord2 = (p![0].location)!.coordinate
                 annotation2.coordinate = (p![0].location)!.coordinate
                 annotation2.title = "Ngee Ann Polytechnic"
                 annotation2.subtitle = "School of ICT"
-//                self.getDirections(loc1: coord1, loc2: coord2)
-                let sourcePlaceMark = MKPlacemark(coordinate: coord1)
-                let destPlaceMark = MKPlacemark(coordinate: coord2!)
+                let sourcePlaceMark = MKPlacemark(coordinate: self.coord1)
+                let destPlaceMark = MKPlacemark(coordinate: self.coord2!)
                 let directionRequest = MKDirections.Request()
                 directionRequest.source = MKMapItem(placemark: sourcePlaceMark)
                 directionRequest.destination = MKMapItem(placemark: destPlaceMark)
@@ -75,21 +80,18 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             self.map.addAnnotation(annotation)
             self.map.addAnnotation(annotation2)
         }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         if(nameCancel != nil){
             nameCancel.text = event?.UserID
-            locationCancel.text = event?.Location
+            timeCancel.text = dateFormatter.string(from: event!.EventDate)
             descCancel.text = event?.Desc
         }
         else{
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            
             name.text = event?.UserID
             time.text = dateFormatter.string(from: event!.EventDate)
             desc.text = event?.Desc
         }
-        
-        
     }
     let locationDelegate = LocationDelegate()
     var latestLocation: CLLocation? = nil
