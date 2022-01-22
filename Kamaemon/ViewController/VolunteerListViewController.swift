@@ -23,26 +23,8 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     @objc func refresh(_ sender: AnyObject) {
-        print(testList.count)
        // Code to refresh table view
-                var ref: DatabaseReference!
-                ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-                ref.observeSingleEvent(of: .childAdded, with: { snapshot in
-                    ref.child("openEvents").observeSingleEvent(of: .value, with: { snapshot in
-                      // Get updated user value
-                        let value = snapshot.value as? NSDictionary
-                        let updatedArr:[String] = value!.allValues.compactMap({ String(describing: $0) })
-                        
-                        // If not updated, update
-                        if(updatedArr != self.testList){
-                            self.testList = updatedArr
-                        }
-                    }) { error in
-                      print(error.localizedDescription)
-                    }
-                }) { error in
-                  print(error.localizedDescription)
-                }
+        volunteerList = appDelegate.volunteerList
         print("refreshed")
         tableView.reloadData()
         refreshControl.endRefreshing()
@@ -65,7 +47,6 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         volunteerList = appDelegate.volunteerList
         self.tableView.reloadData()
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: EventTableViewCell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
         let dateFormatter = DateFormatter()

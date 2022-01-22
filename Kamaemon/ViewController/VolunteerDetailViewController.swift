@@ -14,6 +14,7 @@ import UIKit
 import MapKit
 class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var map: MKMapView!
+    let dateFormatter = DateFormatter()
     
     let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
     var volunteerList : [[Event]] = []
@@ -35,6 +36,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         self.goToMap.setTitle("", for: .normal)
         event = appDelegate.selectedEvent!
         locationManager.delegate = locationDelegate
@@ -80,8 +82,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             self.map.addAnnotation(annotation)
             self.map.addAnnotation(annotation2)
         }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         if(nameCancel != nil){
             nameCancel.text = event?.UserID
             timeCancel.text = dateFormatter.string(from: event!.EventDate)
@@ -132,12 +133,16 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         
         // Update volunteer ID of event to current user's ID
         guard let key = ref.child("openEvents").child(String(event!.ID)).key else { return }
-        let event = ["eventID": event?.ID,
-                     "eventDesc": event?.Desc,
-                     "eventHrs": event?.Hours,
-                     "eventLocation": event?.Location,
-                     "userID": event?.UserID,
-                     "volunteerID": ""] as [String : Any] as [String : Any]
+        let event = ["eventCat" : event?.Category,
+                     "eventDate" : dateFormatter.string(from:event!.EventDate ),
+                     "eventDesc" : event?.Desc,
+                     "eventHrs" : event?.Hours,
+                     "eventID" : event?.ID,
+                     "eventLocation" : event?.Location,
+                     "eventName" : event?.Name,
+                     "eventStatus" : "Cancelled",
+                     "userID" : event?.UserID,
+                     "volunteerID" : ""] as [String : Any] as [String : Any]
         let childUpdates = ["/openEvents/\(key)": event]
         ref.updateChildValues(childUpdates)
         //appDelegate.PopulateList()
@@ -152,12 +157,16 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         
         // Update volunteer ID of event to current user's ID
         guard let key = ref.child("openEvents").child(String(event!.ID)).key else { return }
-        let event = ["eventID": event?.ID,
-                     "eventDesc": event?.Desc,
-                     "eventHrs": event?.Hours,
-                     "eventLocation": event?.Location,
-                     "userID": event?.UserID,
-                     "volunteerID":Auth.auth().currentUser!.uid ] as [String : Any] as [String : Any]
+        let event = ["eventCat" : event?.Category,
+                     "eventDate" : dateFormatter.string(from:event!.EventDate ),
+                     "eventDesc" : event?.Desc,
+                     "eventHrs" : event?.Hours,
+                     "eventID" : event?.ID,
+                     "eventLocation" : event?.Location,
+                     "eventName" : event?.Name,
+                     "eventStatus" : "Accepted",
+                     "userID" : event?.UserID,
+                     "volunteerID" : Auth.auth().currentUser!.uid ] as [String : Any] as [String : Any]
         let childUpdates = ["/openEvents/\(key)": event]
         ref.updateChildValues(childUpdates)
         //appDelegate.PopulateList()

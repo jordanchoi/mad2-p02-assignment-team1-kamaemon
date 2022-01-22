@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let date = event["eventDate"]!!
                         
                             let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                             print(dateFormatter.date(from: date as! String)! as Date)
                             openEventList.append(
                                 Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
@@ -138,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let date = event["eventDate"]!!
                             
                             let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                             joinedEventList.append(
                                 Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
                                      )
