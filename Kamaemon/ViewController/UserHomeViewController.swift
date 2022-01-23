@@ -32,7 +32,7 @@ class UserHomeViewController : UIViewController{
             let u = User(userUID: value!["userUID"] as! String, userType: value!["UserType"] as! String, name: value!["Name"] as! String, gender: value!["Gender"] as! String, phonenumber: value!["PhoneNumber"] as! String, birthdate: formatter4.date(from: value!["DOB"] as! String) ?? Date(), pfpurl: value!["PFPURL"] as! String, isnewuser: value!["isNewUser"] as! Int)
             
             
-            self.name.text = "Hi" + u.n
+            self.name.text = "Hi " + u.n
         }
         
         
