@@ -41,7 +41,14 @@ class AddEventViewController : UIViewController{
         let event = Event(desc: des.text!, hours: Int(hours.text!)!, location: address.text!, uID: Auth.auth().currentUser!.uid, vID: "", name: name.text!, stat: "Open", cat: category.text!, date: date.date)
         //String(describing: date.date)
         
-        ref.child("openEvents").childByAutoId().setValue(["eventCat" : event.Category, "eventDate" : String(describing: event.EventDate), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+        if #available(iOS 15.0, *) {
+            let key = ref.childByAutoId().key
+            print(key)
+            ref.child("openEvents").child((key as String?)!).setValue([ "eventID" : (key as String?)!,  "eventCat" : event.Category, "eventDate" : event.EventDate.ISO8601Format(), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+        } else {
+            //let key = ref.childByAutoId().key
+            ref.child("openEvents").childByAutoId().setValue(["eventCat" : event.Category, "eventDate" : String(describing: event.EventDate), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+        }
         
         
         

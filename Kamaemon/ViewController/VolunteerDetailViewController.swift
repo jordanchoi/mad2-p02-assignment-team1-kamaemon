@@ -155,20 +155,22 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
-        // Update volunteer ID of event to current user's ID
-        guard let key = ref.child("openEvents").child(String(event!.ID)).key else { return }
-        let event = ["eventCat" : event?.Category,
-                     "eventDate" : dateFormatter.string(from:event!.EventDate ),
-                     "eventDesc" : event?.Desc,
-                     "eventHrs" : event?.Hours,
-                     "eventID" : event?.ID,
-                     "eventLocation" : event?.Location,
-                     "eventName" : event?.Name,
-                     "eventStatus" : "Accepted",
-                     "userID" : event?.UserID,
-                     "volunteerID" : Auth.auth().currentUser!.uid ] as [String : Any] as [String : Any]
-        let childUpdates = ["/openEvents/\(key)": event]
-        ref.updateChildValues(childUpdates)
+        ref.child("openEvents").child(String(event!.ID)).child("eventStatus").setValue("Accepted")
+        ref.child("openEvents").child(String(event!.ID)).child("volunteerID").setValue(Auth.auth().currentUser!.uid)
+//        // Update volunteer ID of event to current user's ID
+//        guard let key = ref.child("openEvents").child(String(event!.ID)).key else { return }
+//        let event = ["eventCat" : event?.Category,
+//                     "eventDate" : dateFormatter.string(from:event!.EventDate ),
+//                     "eventDesc" : event?.Desc,
+//                     "eventHrs" : event?.Hours,
+//                     "eventID" : event?.ID,
+//                     "eventLocation" : event?.Location,
+//                     "eventName" : event?.Name,
+//                     "eventStatus" : "Accepted",
+//                     "userID" : event?.UserID,
+//                     "volunteerID" : Auth.auth().currentUser!.uid ] as [String : Any] as [String : Any]
+//        let childUpdates = ["/openEvents/\(key)": event]
+//        ref.updateChildValues(childUpdates)
         //appDelegate.PopulateList()
         appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         _ = navigationController?.popViewController(animated: true)

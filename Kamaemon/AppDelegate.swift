@@ -116,11 +116,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let category = event["eventCat"]!!
                             let date = event["eventDate"]!!
                         
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            print(date)
+                            let dateFormatter = ISO8601DateFormatter()
+                            //dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            //dateFormatter.dateFormat = ISO8601DateFormatter()
                             print(dateFormatter.date(from: date as! String)! as Date)
                             openEventList.append(
-                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
                                      )
                             )
                         }
@@ -140,10 +142,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let category = event["eventCat"]!!
                             let date = event["eventDate"]!!
                             
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//                            let dateFormatter = DateFormatter()
+//                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            let dateFormatter = ISO8601DateFormatter()
                             joinedEventList.append(
-                                Event(id: id as! Int, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
                                      )
                             )
                         }

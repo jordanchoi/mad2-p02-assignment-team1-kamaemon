@@ -7,7 +7,7 @@
 
 import Foundation
 class Event {
-    var ID:Int = 0
+    var ID:String = ""
     var Desc:String = ""
     var Hours:Int = 0
     var Location:String = ""
@@ -20,7 +20,7 @@ class Event {
     
     init(){}
     
-    init(id:Int,desc:String,hours:Int,location:String,uID:String,vID:String,name:String,stat:String,cat:String, date:Date){
+    init(id:String,desc:String,hours:Int,location:String,uID:String,vID:String,name:String,stat:String,cat:String, date:Date){
         self.ID = id
         self.Desc = desc
         self.Hours = hours
