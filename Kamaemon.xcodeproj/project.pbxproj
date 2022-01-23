@@ -38,6 +38,7 @@
 		E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66E64CD279335C4002BBE7E /* HomeViewController.swift */; };
 		E69E7057279D0D310062C68D /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E7056279D0D310062C68D /* AddEventViewController.swift */; };
 		E69E7059279D18720062C68D /* UserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E7058279D18710062C68D /* UserHomeViewController.swift */; };
+		E69E705B279D39750062C68D /* UserEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E705A279D39750062C68D /* UserEventsTableViewController.swift */; };
 		E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EBC2797082400E7DACC /* MessageViewController.swift */; };
 		E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */; };
 		E6A97EC427973E4200E7DACC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EC327973E4200E7DACC /* Message.swift */; };
@@ -77,6 +78,7 @@
 		E66E64CD279335C4002BBE7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E69E7056279D0D310062C68D /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		E69E7058279D18710062C68D /* UserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeViewController.swift; sourceTree = "<group>"; };
+		E69E705A279D39750062C68D /* UserEventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEventsTableViewController.swift; sourceTree = "<group>"; };
 		E6A97EBC2797082400E7DACC /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
 		E6A97EC327973E4200E7DACC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */,
 				E69E7056279D0D310062C68D /* AddEventViewController.swift */,
 				E69E7058279D18710062C68D /* UserHomeViewController.swift */,
+				E69E705A279D39750062C68D /* UserEventsTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */,
 				0EEE59472796D594009CCD01 /* VolunteerListViewController.swift in Sources */,
 				E6A97EC427973E4200E7DACC /* Message.swift in Sources */,
+				E69E705B279D39750062C68D /* UserEventsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
