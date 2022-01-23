@@ -36,6 +36,8 @@
 		E66E64C9279308B2002BBE7E /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C8279308B2002BBE7E /* FirebaseDatabaseSwift-Beta */; };
 		E66E64CC27930989002BBE7E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64CB27930989002BBE7E /* FirebaseAnalytics */; };
 		E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66E64CD279335C4002BBE7E /* HomeViewController.swift */; };
+		E69E7057279D0D310062C68D /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E7056279D0D310062C68D /* AddEventViewController.swift */; };
+		E69E7059279D18720062C68D /* UserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E7058279D18710062C68D /* UserHomeViewController.swift */; };
 		E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EBC2797082400E7DACC /* MessageViewController.swift */; };
 		E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */; };
 		E6A97EC427973E4200E7DACC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EC327973E4200E7DACC /* Message.swift */; };
@@ -73,6 +75,8 @@
 		B6819080EF999DAD768FF109 /* Pods-Kamaemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.release.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.release.xcconfig"; sourceTree = "<group>"; };
 		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E66E64CD279335C4002BBE7E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E69E7056279D0D310062C68D /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
+		E69E7058279D18710062C68D /* UserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeViewController.swift; sourceTree = "<group>"; };
 		E6A97EBC2797082400E7DACC /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
 		E6A97EC327973E4200E7DACC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 				E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */,
 				E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */,
 				0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */,
+				E69E7056279D0D310062C68D /* AddEventViewController.swift */,
+				E69E7058279D18710062C68D /* UserHomeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -370,8 +376,10 @@
 				0EF8045B2797331C000AA92B /* event.swift in Sources */,
 				E6AE62622795530F00B41E63 /* user.swift in Sources */,
 				E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */,
+				E69E7059279D18720062C68D /* UserHomeViewController.swift in Sources */,
 				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
 				0EF8045D279763AB000AA92B /* VolunteerDetailViewController.swift in Sources */,
+				E69E7057279D0D310062C68D /* AddEventViewController.swift in Sources */,
 				0E73ECBE279C9206009B8363 /* EditVolunteerAccViewController.swift in Sources */,
 				A04445762791BF3300689F32 /* ViewController.swift in Sources */,
 				0EB49D242794578200C00848 /* UITextField.swift in Sources */,

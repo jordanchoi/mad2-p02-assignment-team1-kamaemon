@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class ViewController: UIViewController, UITextFieldDelegate{
     let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
-    
+    var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     @IBOutlet weak var EmailAddress: UITextField!
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var newUser: UILabel!
@@ -61,11 +61,36 @@ class ViewController: UIViewController, UITextFieldDelegate{
                }
              } else {
                  print("User signs in successfully")
-                 self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
-                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                 let home = storyboard.instantiateViewController(withIdentifier: "home") as! UIViewController
-                 home.modalPresentationStyle = .fullScreen
-                 self.present(home, animated: true, completion: nil)
+                 
+                 //get user and put it to user if user and home if volunteer
+                 self.ref.child("users").child((authResult?.user.uid)!).child("UserType").observeSingleEvent(of: .value) { snapshot in
+                     print((authResult?.user.uid)!)
+                     let value = snapshot.value as? String
+                     print(value)
+                     let usertype = value as! String
+                     
+                     if (usertype == "Volunteer"){
+                         self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
+                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                         let home = storyboard.instantiateViewController(withIdentifier: "home") as! UIViewController
+                         home.modalPresentationStyle = .fullScreen
+                         self.present(home, animated: true, completion: nil)
+                     }
+                     else{
+                         //idk if this code is needed for users
+                         //self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
+                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                         let home = storyboard.instantiateViewController(withIdentifier: "User") as! UIViewController
+                         home.modalPresentationStyle = .fullScreen
+                         self.present(home, animated: true, completion: nil)
+                     }
+                 }
+                 
+//                 self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
+//                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                 let home = storyboard.instantiateViewController(withIdentifier: "home") as! UIViewController
+//                 home.modalPresentationStyle = .fullScreen
+//                 self.present(home, animated: true, completion: nil)
              }
         }
         
