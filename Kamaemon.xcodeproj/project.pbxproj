@@ -116,24 +116,48 @@
 			path = CustomCell;
 			sourceTree = "<group>";
 		};
-		0E947A19279402AE00A2D7B9 /* ViewController */ = {
+		0E73ECBF279EF94E009B8363 /* Volunteer */ = {
 			isa = PBXGroup;
 			children = (
 				E66E64CD279335C4002BBE7E /* HomeViewController.swift */,
-				A04445752791BF3300689F32 /* ViewController.swift */,
-				0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */,
-				E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */,
 				0EEE59462796D594009CCD01 /* VolunteerListViewController.swift */,
 				E6A97EBC2797082400E7DACC /* MessageViewController.swift */,
 				E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */,
 				0EF8045C279763AB000AA92B /* VolunteerDetailViewController.swift */,
-				A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */,
 				E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */,
-				E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */,
 				0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */,
+				E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */,
+			);
+			path = Volunteer;
+			sourceTree = "<group>";
+		};
+		0E73ECC0279EF960009B8363 /* General User */ = {
+			isa = PBXGroup;
+			children = (
 				E69E7056279D0D310062C68D /* AddEventViewController.swift */,
 				E69E7058279D18710062C68D /* UserHomeViewController.swift */,
 				E69E705A279D39750062C68D /* UserEventsTableViewController.swift */,
+			);
+			path = "General User";
+			sourceTree = "<group>";
+		};
+		0E73ECC1279EF96C009B8363 /* Both */ = {
+			isa = PBXGroup;
+			children = (
+				0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */,
+				A04445752791BF3300689F32 /* ViewController.swift */,
+				E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */,
+				A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */,
+			);
+			path = Both;
+			sourceTree = "<group>";
+		};
+		0E947A19279402AE00A2D7B9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0E73ECC1279EF96C009B8363 /* Both */,
+				0E73ECC0279EF960009B8363 /* General User */,
+				0E73ECBF279EF94E009B8363 /* Volunteer */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
