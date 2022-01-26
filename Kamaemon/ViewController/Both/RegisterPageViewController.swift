@@ -20,13 +20,9 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var vwDropdown: UIView!
     @IBOutlet weak var errorLbl: UILabel!
-    
     @IBOutlet weak var genderdropdown: UIView!
-    
     @IBOutlet weak var genderlabel: UILabel!
-    
     @IBOutlet weak var birthdate: UIDatePicker!
-    
     @IBOutlet weak var phonenumber: UITextField!
     
     let dropDown = DropDown()
@@ -58,7 +54,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         //gender dropdown
         genderlabel.text = "Gender"
         genderDropDown.anchorView = genderdropdown
-        genderDropDown.dataSource = ["M", "F"]
+        genderDropDown.dataSource = ["Male", "Female"]
         genderDropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
         genderDropDown.direction = .bottom
         
