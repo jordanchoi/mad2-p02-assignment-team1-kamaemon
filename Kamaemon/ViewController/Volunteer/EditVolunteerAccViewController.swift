@@ -37,7 +37,7 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate{
         
         gender.text = "Gender"
         genderDropDown.anchorView = genderSelect
-        genderDropDown.dataSource = ["M", "F"]
+        genderDropDown.dataSource = ["Male", "Female"]
         genderDropDown.bottomOffset = CGPoint(x: 0, y:(genderDropDown.anchorView?.plainView.bounds.height)!)
         genderDropDown.direction = .bottom
         
@@ -50,14 +50,12 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate{
             self.gender.text = value?["Gender"] as? String ?? "Gender"
             self.date.date = value?["DOB"] as? Date ?? Date()
             self.mobileNum.text = value?["PhoneNumber"] as? String ?? "0"
-            self.mail.text = currentuser?.email
             //let Name = value?["Name"] as? String ?? "Error"
-        
-            
         }) { error in
           print(error.localizedDescription)
         }
         
+        self.mail.text = currentuser?.email
         
         pass.delegate = self
         mail.delegate = self
@@ -105,7 +103,25 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate{
     override func viewDidDisappear(_ animated: Bool) {
         
         //update values here
+        let currentuser = Auth.auth().currentUser
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        ref.child("users").child(currentuser!.uid).child("Name").setValue(self.name.text)
+        ref.child("users").child(currentuser!.uid).child("Gender").setValue(self.gender.text)
+        ref.child("users").child(currentuser!.uid).child("DOB").setValue(self.date.date)
+        ref.child("users").child(currentuser!.uid).child("PhoneNumber").setValue(self.mobileNum.text)
         
+        if(self.mail.text != currentuser?.email){
+            currentuser?.updateEmail(to: self.mail.text, completion: { Error? in
+                print(Error)
+            })
+        }
+        
+        if(!self.pass.text?.isEmpty){
+            currentuser?.updatePassword(to: self.pass.text, completion: { (error) in
+                print(error)
+            })
+        }
         //update email and password through authentication 
     }
 }
