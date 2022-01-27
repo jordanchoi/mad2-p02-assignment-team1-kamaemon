@@ -266,7 +266,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             
                             self.animationView.removeFromSuperview()
                             //direct user to login page
-                            let controller = self.storyboard?.instantiateViewController(identifier: "ViewController") as! UIViewController
+                            let controller = self.storyboard?.instantiateViewController(identifier: "home") as! UIViewController
                                         controller.modalPresentationStyle = .fullScreen
                                         controller.modalTransitionStyle = .flipHorizontal
                             self.present(controller, animated: true, completion: nil)
