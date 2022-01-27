@@ -19,6 +19,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var qualificationTable: UITableView!
     
+    @IBOutlet weak var hours: UILabel!
     var Qualifications : [String] = []
     var user = User()
     override func viewDidLoad() {
@@ -44,6 +45,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.qualificationsList = (da?["Qualifications"] as? [String])!
             self.Qualifications = (da?["Qualifications"] as? [String])!
+            self.hours.text = (da?["Hours"] as? String)!
             //SelectionQualificationViewController().Qualifications = 
             DispatchQueue.global(qos: .background).async {
                 DispatchQueue.main.async {
