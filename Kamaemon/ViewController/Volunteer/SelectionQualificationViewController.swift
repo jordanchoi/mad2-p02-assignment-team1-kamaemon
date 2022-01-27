@@ -14,6 +14,7 @@ class SelectionQualificationViewController : UITableViewController{
     
     var Qualifications : [String] = ["First Aid", "CPR", "Social Skills", "Technical Skills"]
     var selectedQualifications : [String] = ProfilePageViewController().Qualifications
+    //var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     //var selectedCells: [String] = self().selectedQualifications
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +22,9 @@ class SelectionQualificationViewController : UITableViewController{
         tableView.allowsMultipleSelectionDuringEditing = true
         tableView.setEditing(true, animated: false)
         //gethelp()
-        
-        print(selectedQualifications)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        selectedQualifications = appDelegate.qualificationsList
+        //print(selectedQualifications)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -74,6 +76,18 @@ class SelectionQualificationViewController : UITableViewController{
             selectedQualifications.remove(at: indx!)
             print(selectedQualifications)
         }
+    }
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        //update to firebase
+        //ref.child("volunteers").child(Auth.auth().currentUser?.uid!).child("Qualifications").setValue("f")
+        
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        
+        ref.child("volunteers").child(Auth.auth().currentUser!.uid).child("Qualifications").setValue(selectedQualifications)
+        
     }
     
 }

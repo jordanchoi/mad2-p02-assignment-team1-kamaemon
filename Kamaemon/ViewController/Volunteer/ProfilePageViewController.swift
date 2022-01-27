@@ -19,7 +19,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var qualificationTable: UITableView!
     
-    var Qualifications : [String] = ["First Aid", "CPR", "Social Skills", "Technical Skills"]
+    var Qualifications : [String] = []
     var user = User()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +31,25 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
         ref.child("users").child(currentuser!.uid).observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? NSDictionary
             let Name = value?["Name"] as? String ?? "Error"
-            let UserCat = value?["userCategory"] as? String ?? "Error"
+            let UserCat = value?["PhoneNumber"] as? String ?? "Error"
             self.username.text = Name
             self.usernumber.text = UserCat
         }) { error in
           print(error.localizedDescription)
+        }
+        
+        ref.child("volunteers").child(Auth.auth().currentUser!.uid).observe(.value) { data in
+            let da = data.value as? NSDictionary
+            print(da)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.qualificationsList = (da?["Qualifications"] as? [String])!
+            self.Qualifications = (da?["Qualifications"] as? [String])!
+            //SelectionQualificationViewController().Qualifications = 
+            DispatchQueue.global(qos: .background).async {
+                DispatchQueue.main.async {
+                    self.qualificationTable.reloadData()
+                }
+            }
         }
         
     }

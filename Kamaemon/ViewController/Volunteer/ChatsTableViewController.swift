@@ -157,6 +157,7 @@ class ChatsTableViewController : UIViewController, UITableViewDataSource, UITabl
         ref.observe(.childAdded) { (snapshot) in
             print("updated from database")
             let value = snapshot.value as? [String: AnyObject]
+            //error in line 161 because there is no users 
             let u = User(userUID: value!["userUID"] as! String, userType: value!["userCategory"] as! String, name: value!["Name"] as! String)
             //print(value!["Name"])
             print(value!.count)

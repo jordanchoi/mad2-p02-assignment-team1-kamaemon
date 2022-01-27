@@ -13,6 +13,7 @@ import IQKeyboardManager
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var volunteerList : [[Event]] = [[],[]]
+    var qualificationsList : [String] = []
     var selectedEvent:Event?
     var selectedUser:User?
     var verifyUser:User?
