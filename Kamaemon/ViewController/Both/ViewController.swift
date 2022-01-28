@@ -72,15 +72,14 @@ class ViewController: UIViewController, UITextFieldDelegate{
                      if (usertype == "Volunteer"){
                          self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
                          let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                         let home = storyboard.instantiateViewController(withIdentifier: "home") as! UIViewController
+                         let home = storyboard.instantiateViewController(withIdentifier: "home")
                          home.modalPresentationStyle = .fullScreen
                          self.present(home, animated: true, completion: nil)
                      }
                      else{
-                         //idk if this code is needed for users
                          //self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
-                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                         let home = storyboard.instantiateViewController(withIdentifier: "UserHome") as! UIViewController
+                         let storyboard = UIStoryboard(name: "User", bundle: nil)
+                         let home = storyboard.instantiateViewController(withIdentifier: "UserHome")
                          home.modalPresentationStyle = .fullScreen
                          self.present(home, animated: true, completion: nil)
                      }
