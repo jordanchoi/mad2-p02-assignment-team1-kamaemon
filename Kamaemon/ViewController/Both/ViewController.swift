@@ -80,7 +80,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
                          //idk if this code is needed for users
                          //self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
                          let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                         let home = storyboard.instantiateViewController(withIdentifier: "User") as! UIViewController
+                         let home = storyboard.instantiateViewController(withIdentifier: "UserHome") as! UIViewController
                          home.modalPresentationStyle = .fullScreen
                          self.present(home, animated: true, completion: nil)
                      }

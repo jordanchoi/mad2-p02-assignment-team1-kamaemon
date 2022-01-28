@@ -27,7 +27,9 @@
 		A04445792791BF3300689F32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A04445772791BF3300689F32 /* Main.storyboard */; };
 		A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A044457A2791BF3300689F32 /* Kamaemon.xcdatamodeld */; };
 		A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A044457F2791BF3600689F32 /* LaunchScreen.storyboard */; };
+		A07D290927A3A96A00D886E8 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07D290827A3A96A00D886E8 /* User.storyboard */; };
 		A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */; };
+		A08E153827A375B7008BC096 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08E153727A375B7008BC096 /* UserProfileTableViewController.swift */; };
 		A0AF6851279BE06800E5AACF /* 4432-face-scanning.json in Resources */ = {isa = PBXBuildFile; fileRef = A0AF6850279BE06800E5AACF /* 4432-face-scanning.json */; };
 		A0B9A030279A7EF300F8E7BD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A0B9A02F279A7EF300F8E7BD /* FirebaseStorage */; };
 		E66E64C3279308B2002BBE7E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C2279308B2002BBE7E /* FirebaseAuth */; };
@@ -70,7 +72,9 @@
 		A044457B2791BF3300689F32 /* Kamaemon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kamaemon.xcdatamodel; sourceTree = "<group>"; };
 		A04445802791BF3600689F32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A04445822791BF3600689F32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A07D290827A3A96A00D886E8 /* User.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
+		A08E153727A375B7008BC096 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		A0AF6850279BE06800E5AACF /* 4432-face-scanning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "4432-face-scanning.json"; sourceTree = "<group>"; };
 		A842F2E0879D96072A3C49E9 /* Pods-Kamaemon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.debug.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.debug.xcconfig"; sourceTree = "<group>"; };
 		B6819080EF999DAD768FF109 /* Pods-Kamaemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.release.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				E69E7056279D0D310062C68D /* AddEventViewController.swift */,
 				E69E7058279D18710062C68D /* UserHomeViewController.swift */,
 				E69E705A279D39750062C68D /* UserEventsTableViewController.swift */,
+				A08E153727A375B7008BC096 /* UserProfileTableViewController.swift */,
 			);
 			path = "General User";
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 				0E071FD2279AB84300B2BF1A /* CustomCell */,
 				A044457F2791BF3600689F32 /* LaunchScreen.storyboard */,
 				A04445772791BF3300689F32 /* Main.storyboard */,
+				A07D290827A3A96A00D886E8 /* User.storyboard */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -346,6 +352,7 @@
 				0EA03F5F27959B6700E8BDA9 /* (null) in Resources */,
 				0EF804592796E68A000AA92B /* Assets.xcassets in Resources */,
 				A04445792791BF3300689F32 /* Main.storyboard in Resources */,
+				A07D290927A3A96A00D886E8 /* User.storyboard in Resources */,
 				A0AF6851279BE06800E5AACF /* 4432-face-scanning.json in Resources */,
 				0E071FDA279ABB9C00B2BF1A /* EventTableViewCell.xib in Resources */,
 			);
@@ -403,6 +410,7 @@
 				0EF8045B2797331C000AA92B /* event.swift in Sources */,
 				E6AE62622795530F00B41E63 /* user.swift in Sources */,
 				E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */,
+				A08E153827A375B7008BC096 /* UserProfileTableViewController.swift in Sources */,
 				E69E7059279D18720062C68D /* UserHomeViewController.swift in Sources */,
 				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
 				0EF8045D279763AB000AA92B /* VolunteerDetailViewController.swift in Sources */,

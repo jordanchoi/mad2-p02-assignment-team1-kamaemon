@@ -176,10 +176,6 @@ class ChatsTableViewController : UIViewController, UITableViewDataSource, UITabl
         } withCancel: { error in
             print(error)
         }
-
-        
-        
-       
 }
     func getLatestMessage(){
         var ref: DatabaseReference!
