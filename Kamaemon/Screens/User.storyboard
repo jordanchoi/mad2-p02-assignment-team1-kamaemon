@@ -353,6 +353,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gIb-kg-qZ6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Make Requests" image="plus.circle.fill" catalog="system" id="eOa-Sg-w5F"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="hBc-d4-W3b"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="636-Om-rmw">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -645,6 +646,9 @@
                                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="baseBackgroundColor" name="Green_Main"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <segue destination="gIb-kg-qZ6" kind="show" id="fxM-g7-Vbm"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" name="Orange_Main"/>
@@ -822,6 +826,9 @@
             <point key="canvasLocation" x="1895.6521739130437" y="-2456.25"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fxM-g7-Vbm"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>

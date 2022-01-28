@@ -30,6 +30,8 @@
 		A07D290927A3A96A00D886E8 /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07D290827A3A96A00D886E8 /* User.storyboard */; };
 		A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */; };
 		A08E153827A375B7008BC096 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08E153727A375B7008BC096 /* UserProfileTableViewController.swift */; };
+		A09B0DCC27A3E2B5002F6D64 /* UserEventViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A09B0DCB27A3E2B5002F6D64 /* UserEventViewCell.xib */; };
+		A09B0DCE27A41048002F6D64 /* UserEventViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09B0DCD27A41048002F6D64 /* UserEventViewCell.swift */; };
 		A0AF6851279BE06800E5AACF /* 4432-face-scanning.json in Resources */ = {isa = PBXBuildFile; fileRef = A0AF6850279BE06800E5AACF /* 4432-face-scanning.json */; };
 		A0B9A030279A7EF300F8E7BD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A0B9A02F279A7EF300F8E7BD /* FirebaseStorage */; };
 		E66E64C3279308B2002BBE7E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C2279308B2002BBE7E /* FirebaseAuth */; };
@@ -75,6 +77,8 @@
 		A07D290827A3A96A00D886E8 /* User.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		A08B96782799DC260023C564 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
 		A08E153727A375B7008BC096 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
+		A09B0DCB27A3E2B5002F6D64 /* UserEventViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserEventViewCell.xib; path = Event/UserEventViewCell.xib; sourceTree = "<group>"; };
+		A09B0DCD27A41048002F6D64 /* UserEventViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserEventViewCell.swift; path = Event/UserEventViewCell.swift; sourceTree = "<group>"; };
 		A0AF6850279BE06800E5AACF /* 4432-face-scanning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "4432-face-scanning.json"; sourceTree = "<group>"; };
 		A842F2E0879D96072A3C49E9 /* Pods-Kamaemon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.debug.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.debug.xcconfig"; sourceTree = "<group>"; };
 		B6819080EF999DAD768FF109 /* Pods-Kamaemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.release.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			children = (
 				0E071FD7279ABB9C00B2BF1A /* EventTableViewCell.swift */,
 				0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */,
+				A09B0DCB27A3E2B5002F6D64 /* UserEventViewCell.xib */,
+				A09B0DCD27A41048002F6D64 /* UserEventViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -349,6 +355,7 @@
 			files = (
 				0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */,
 				A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */,
+				A09B0DCC27A3E2B5002F6D64 /* UserEventViewCell.xib in Resources */,
 				0EA03F5F27959B6700E8BDA9 /* (null) in Resources */,
 				0EF804592796E68A000AA92B /* Assets.xcassets in Resources */,
 				A04445792791BF3300689F32 /* Main.storyboard in Resources */,
@@ -413,6 +420,7 @@
 				A08E153827A375B7008BC096 /* UserProfileTableViewController.swift in Sources */,
 				E69E7059279D18720062C68D /* UserHomeViewController.swift in Sources */,
 				E66E64CE279335C5002BBE7E /* HomeViewController.swift in Sources */,
+				A09B0DCE27A41048002F6D64 /* UserEventViewCell.swift in Sources */,
 				0EF8045D279763AB000AA92B /* VolunteerDetailViewController.swift in Sources */,
 				E69E7057279D0D310062C68D /* AddEventViewController.swift in Sources */,
 				0E73ECBE279C9206009B8363 /* EditVolunteerAccViewController.swift in Sources */,

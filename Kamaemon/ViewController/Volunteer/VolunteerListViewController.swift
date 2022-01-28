@@ -101,7 +101,4 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    
-    
 }
