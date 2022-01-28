@@ -20,7 +20,7 @@ class UserEventsTableViewController : UITableViewController{
         
         var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     
-        ref.child("openEvents").observeSingleEvent(of: .value) { datasnapshot in
+        ref.child("Jobs").observeSingleEvent(of: .value) { datasnapshot in
             let value = datasnapshot.value as? [String: AnyObject]
             print(value)
             for i in value!.keys{

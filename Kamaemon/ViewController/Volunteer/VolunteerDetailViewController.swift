@@ -132,7 +132,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
         // Update volunteer ID of event to current user's ID
-        guard let key = ref.child("openEvents").child(String(event!.ID)).key else { return }
+        guard let key = ref.child("Jobs").child(String(event!.ID)).key else { return }
         let event = ["eventCat" : event?.Category,
                      "eventDate" : dateFormatter.string(from:event!.EventDate ),
                      "eventDesc" : event?.Desc,
@@ -155,8 +155,8 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
-        ref.child("openEvents").child(String(event!.ID)).child("eventStatus").setValue("Accepted")
-        ref.child("openEvents").child(String(event!.ID)).child("volunteerID").setValue(Auth.auth().currentUser!.uid)
+        ref.child("Jobs").child(String(event!.ID)).child("eventStatus").setValue("Accepted")
+        ref.child("Jobs").child(String(event!.ID)).child("volunteerID").setValue(Auth.auth().currentUser!.uid)
 //        // Update volunteer ID of event to current user's ID
 //        guard let key = ref.child("openEvents").child(String(event!.ID)).key else { return }
 //        let event = ["eventCat" : event?.Category,

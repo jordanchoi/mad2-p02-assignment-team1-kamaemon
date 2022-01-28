@@ -36,7 +36,7 @@ class AddEventViewController : UIViewController, UITextFieldDelegate{
     var hrs = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref.child("openEvents")
+        ref.child("Jobs")
         
         date.frame = .init(x: 45, y: 50, width: 325, height: date.bounds.size.height)
         catDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -108,10 +108,10 @@ class AddEventViewController : UIViewController, UITextFieldDelegate{
         if #available(iOS 15.0, *) {
             let key = ref.childByAutoId().key
             print(key)
-            ref.child("openEvents").child((key as String?)!).setValue([ "eventID" : (key as String?)!,  "eventCat" : event.Category, "eventDate" : event.EventDate.ISO8601Format(), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+            ref.child("Jobs").child((key as String?)!).setValue([ "eventID" : (key as String?)!,  "eventCat" : event.Category, "eventDate" : event.EventDate.ISO8601Format(), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
         } else {
             //let key = ref.childByAutoId().key
-            ref.child("openEvents").childByAutoId().setValue(["eventCat" : event.Category, "eventDate" : String(describing: event.EventDate), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+            ref.child("Jobs").childByAutoId().setValue(["eventCat" : event.Category, "eventDate" : String(describing: event.EventDate), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
         }
         
         

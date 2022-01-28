@@ -13,6 +13,7 @@ import IQKeyboardManager
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var volunteerList : [[Event]] = [[],[]]
+    var qualificationsList : [String] = []
     var selectedEvent:Event?
     var selectedUser:User?
     var verifyUser:User?
@@ -95,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
         
-        ref.child("openEvents").observeSingleEvent(of: .value , with: { snapshot in
+        ref.child("Jobs").observeSingleEvent(of: .value , with: { snapshot in
             for event in snapshot.children{
                 let events = snapshot.childSnapshot(forPath: (event as AnyObject).key)
                 for eventDetails in events.children{
