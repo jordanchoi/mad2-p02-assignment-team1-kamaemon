@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class Event {
     var ID:String = ""
     var Desc:String = ""

@@ -776,13 +776,16 @@
                                         <rect key="frame" x="20" y="466" width="374" height="368"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ecD-JU-LOX">
-                                                <rect key="frame" x="0.0" y="44.5" width="374" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="188" id="ecD-JU-LOX" customClass="UserEventViewCell" customModule="Kamaemon" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="44.5" width="374" height="188"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ecD-JU-LOX" id="iFM-eZ-9G2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="188"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
+                                                <accessibility key="accessibilityConfiguration" identifier="userEventCell">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -818,7 +821,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="g7B-S6-1GD"/>
                     <connections>
+                        <outlet property="eventTableView" destination="Jyn-gR-pAv" id="30f-zs-MVP"/>
                         <outlet property="name" destination="q0X-0g-chx" id="qIN-9x-rnj"/>
+                        <outlet property="totalNumCompletedEventsLbl" destination="q0x-Jp-55r" id="cUm-sj-DbF"/>
+                        <outlet property="totalNumEvents" destination="RUA-Am-ql4" id="37R-ZH-aal"/>
+                        <outlet property="totalNumUpcomingsLbl" destination="RUA-Am-ql4" id="1Ew-6K-JzY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2EH-h0-Ekt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
