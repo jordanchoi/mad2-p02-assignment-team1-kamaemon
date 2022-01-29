@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class UserHomeViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
+class UserHomeViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     // Storyboard views
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var totalNumUpcomingsLbl: UILabel!
@@ -26,6 +27,19 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let nib = UINib(nibName: "UserEventsTableViewCell", bundle: nil)
+        eventTableView.register(nib, forCellReuseIdentifier: "UserEventsTableViewCell")
+        eventTableView.reloadData()
+        eventTableView.delegate = self
+        eventTableView.dataSource = self
+        
+        var testEvent:Event = Event(id: "ABCDEF", desc: "THIS IS A TEST EVENT FOR TABLEVIEW", hours: 6, location: "NGEE ANN POLYTECHNIC", uID: "JCSY11", vID: "", name: "TEST EVENT", stat: "Open", cat: "Technology", date: Date())
+        userEventsList.append(testEvent)
+        userEventsList.append(testEvent)
+        userEventsList.append(testEvent)
+        testEvent.Status = "Canceled"
+        userEventsList.append(testEvent)
+
         // Retrieve current user information
         ref.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { DataSnapshot in
             let value = DataSnapshot.value as? [String: AnyObject]
@@ -62,47 +76,47 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                 self.totalNumUpcomingsLbl.text = String(self.userEventsList.count)
             }
             
-            self.eventTableView.register(UINib(nibName: "UserEventViewCell", bundle: .main), forCellReuseIdentifier: "userEventCell")
-            self.eventTableView.reloadData()
         }
     }
     
     // TableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UserEventViewCell = tableView.dequeueReusableCell(withIdentifier: "userEventCell") as! UserEventViewCell
+        let cell: UserEventsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UserEventsTableViewCell", for: indexPath) as! UserEventsTableViewCell
+        
+        cell.selectionStyle = .none
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        let event = self.userEventsList[indexPath.row]
+        let event = userEventsList[indexPath.row]
         
         // Cell items - Status
-        cell.statusLbl.text = event.Status
+        cell.eventStatusLbl.text = event.Status
         if (event.Status == "Open") {
-            cell.statusView.backgroundColor = .green
-            cell.statusHighlightView.backgroundColor = .green
+            cell.statusViewBar.backgroundColor = .green
+            cell.eventStatusHighlightView.backgroundColor = .green
         } else if (event.Status == "Accepted") {
-            cell.statusView.backgroundColor = .orange
-            cell.statusHighlightView.backgroundColor = .orange
+            cell.statusViewBar.backgroundColor = .orange
+            cell.eventStatusHighlightView.backgroundColor = .orange
         } else if (event.Status == "Canceled") {
-            cell.statusView.backgroundColor = .red
-            cell.statusHighlightView.backgroundColor = .red
+            cell.statusViewBar.backgroundColor = .red
+            cell.eventStatusHighlightView.backgroundColor = .red
         } else if (event.Status == "Ongoing") {
-            cell.statusView.backgroundColor = .blue
-            cell.statusHighlightView.backgroundColor = .blue
+            cell.statusViewBar.backgroundColor = .blue
+            cell.eventStatusHighlightView.backgroundColor = .blue
         } else {
-            cell.statusView.backgroundColor = .black
-            cell.statusHighlightView.backgroundColor = .black
+            cell.statusViewBar.backgroundColor = .black
+            cell.eventStatusHighlightView.backgroundColor = .black
         }
         
         // Cell items - Status
         cell.eventNameLbl.text = event.Name
-        cell.locationLbl.text = event.Location
-        cell.dateLbl.text = dateFormatter.string(from: event.EventDate)
-        cell.descLbl.text = event.Desc
+        cell.eventLocationLbl.text = event.Location
+        cell.eventDateLbl.text = dateFormatter.string(from: event.EventDate)
+        cell.eventDescLbl.text = event.Desc
         
         // NEED TO EDIT THIS TO FIND VOLUNTEER NAME ACCEPTED BY
-        cell.additionRemarksLbl.text = "ACCEPTED BY JORDAN CHOI"
+        cell.eventRemarksLbl.text = "ACCEPTED BY JORDAN CHOI"
 
         return cell
     }
