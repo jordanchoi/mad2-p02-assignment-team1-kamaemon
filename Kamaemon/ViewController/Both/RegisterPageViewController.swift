@@ -20,16 +20,13 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var vwDropdown: UIView!
     @IBOutlet weak var errorLbl: UILabel!
-    @IBOutlet weak var genderdropdown: UIView!
-    @IBOutlet weak var genderlabel: UILabel!
-    @IBOutlet weak var birthdate: UIDatePicker!
     @IBOutlet weak var phonenumber: UITextField!
     
     let dropDown = DropDown()
     let genderDropDown = DropDown()
     
     var cat:String = ""
-    var gender:String = ""
+//    var gender:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,28 +49,30 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         // gender dropdown
         
         //gender dropdown
-        genderlabel.text = "Gender"
-        genderDropDown.anchorView = genderdropdown
-        genderDropDown.dataSource = ["Male", "Female"]
-        genderDropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-        genderDropDown.direction = .bottom
+//        genderlabel.text = "Gender"
+//        genderDropDown.anchorView = genderdropdown
+//        genderDropDown.dataSource = ["Male", "Female"]
+//        genderDropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+//        genderDropDown.direction = .bottom
         
         // Real time change when user selects data
-        genderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.genderlabel.text = genderDropDown.dataSource[index]
-            genderlabel.textColor = UIColor.black
-            gender = genderDropDown.dataSource[index]
-        }
+//        genderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//            self.genderlabel.text = genderDropDown.dataSource[index]
+//            genderlabel.textColor = UIColor.black
+//            gender = genderDropDown.dataSource[index]
+//        }
         
         
         // Paddings
         Name.setLeftPaddingPoints(10)
         EmailAddress.setLeftPaddingPoints(10)
+        phonenumber.setLeftPaddingPoints(10)
         Password.setLeftPaddingPoints(10)
         cfmPassword.setLeftPaddingPoints(10)
         
         // Dismiss keyboard on return
         EmailAddress.delegate = self
+        phonenumber.delegate = self
         Password.delegate = self
         Name.delegate = self
         cfmPassword.delegate = self
@@ -142,7 +141,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     @IBAction func createAccount(_ sender: Any) {
         
         
-            let newUser = User(userUID: "", userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
+        let newUser = User(userUID: "", userType: self.cat, name: self.Name.text!, gender: "", phonenumber: self.phonenumber.text!, birthdate: Date(), pfpurl: "", isnewuser: 0)
             if (self.lblTitle.text == "Volunteer"){
                 Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
                     if let error = error as? NSError {
