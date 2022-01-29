@@ -87,13 +87,13 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         if(currentTableView == 0){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let accept = storyboard.instantiateViewController(withIdentifier: "Accept")
-            accept.modalPresentationStyle = .popover
+            accept.modalPresentationStyle = .fullScreen
             self.present(accept, animated: true, completion: nil)
         }
         else if(currentTableView == 1){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cancel = storyboard.instantiateViewController(withIdentifier: "Cancel")
-            cancel.modalPresentationStyle = .popover
+            cancel.modalPresentationStyle = .fullScreen
             self.present(cancel, animated: true, completion: nil)
         }
     }

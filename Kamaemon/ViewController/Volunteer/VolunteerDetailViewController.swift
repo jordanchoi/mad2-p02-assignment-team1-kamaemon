@@ -25,6 +25,9 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var desc: UILabel!
     
+    @IBOutlet weak var hours: UILabel!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var goToMap: UIButton!
     @IBOutlet weak var descCancel: UILabel!
     @IBOutlet weak var timeCancel: UILabel!
@@ -82,16 +85,30 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             self.map.addAnnotation(annotation)
             self.map.addAnnotation(annotation2)
         }
+        var uname = ""
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
         if(nameCancel != nil){
-            nameCancel.text = event?.UserID
+            nameCancel.text = event?.Name
             timeCancel.text = dateFormatter.string(from: event!.EventDate)
             descCancel.text = event?.Desc
+//            userName.text = event?.UserID
+//            location.text = event?.Location
+//            hours.text = event?.Hours as String!
         }
         else{
-            name.text = event?.UserID
+            ref.child("users").child(event!.UserID).observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? NSDictionary
+                uname = value?["Name"] as! String
+                self.userName.text = "By: " + uname
+            })
+            name.text = event?.Name
             time.text = dateFormatter.string(from: event!.EventDate)
             desc.text = event?.Desc
+            
+            location.text = event?.Location
+            hours.text = "\(event!.Hours) Hours"
         }
     }
     let locationDelegate = LocationDelegate()
@@ -145,7 +162,6 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
                      "volunteerID" : ""] as [String : Any] as [String : Any]
         let childUpdates = ["/openEvents/\(key)": event]
         ref.updateChildValues(childUpdates)
-        //appDelegate.PopulateList()
         appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         _ = navigationController?.popViewController(animated: true)
     }
@@ -157,21 +173,6 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         
         ref.child("Jobs").child(String(event!.ID)).child("eventStatus").setValue("Accepted")
         ref.child("Jobs").child(String(event!.ID)).child("volunteerID").setValue(Auth.auth().currentUser!.uid)
-//        // Update volunteer ID of event to current user's ID
-//        guard let key = ref.child("openEvents").child(String(event!.ID)).key else { return }
-//        let event = ["eventCat" : event?.Category,
-//                     "eventDate" : dateFormatter.string(from:event!.EventDate ),
-//                     "eventDesc" : event?.Desc,
-//                     "eventHrs" : event?.Hours,
-//                     "eventID" : event?.ID,
-//                     "eventLocation" : event?.Location,
-//                     "eventName" : event?.Name,
-//                     "eventStatus" : "Accepted",
-//                     "userID" : event?.UserID,
-//                     "volunteerID" : Auth.auth().currentUser!.uid ] as [String : Any] as [String : Any]
-//        let childUpdates = ["/openEvents/\(key)": event]
-//        ref.updateChildValues(childUpdates)
-        //appDelegate.PopulateList()
         appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         _ = navigationController?.popViewController(animated: true)
     }
