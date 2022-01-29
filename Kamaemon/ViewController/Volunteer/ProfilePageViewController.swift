@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
+import nanopb
 
 class ProfilePageViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
@@ -43,8 +44,19 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
             let da = data.value as? NSDictionary
             print(da)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.qualificationsList = (da?["Qualifications"] as? [String])!
-            self.Qualifications = (da?["Qualifications"] as? [String])!
+            let uQualification = da?["Qualifications"]
+            if uQualification is String{
+                appDelegate.qualificationsList = []
+            }
+            if uQualification is [String] {
+                let q = uQualification as! [String]
+                if (q[0] is NSNull) {
+                    ref.child("volunteers").child(Auth.auth().currentUser!.uid).child("Qualifications").child("0").removeValue()
+                }
+                appDelegate.qualificationsList = q
+            }
+           
+            self.Qualifications = appDelegate.qualificationsList
             self.hours.text = (da?["Hours"] as? String)!
             //SelectionQualificationViewController().Qualifications = 
             DispatchQueue.global(qos: .background).async {
