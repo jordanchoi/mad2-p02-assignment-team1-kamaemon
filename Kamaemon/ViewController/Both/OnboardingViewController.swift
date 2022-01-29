@@ -64,9 +64,9 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
                txt1.numberOfLines = 3
                txt1.text = titles[index]
 
-               let txt2 = UILabel.init(frame: CGRect(x:32,y:txt1.frame.maxY+10,width:scrollWidth-64,height:70))
+               let txt2 = UILabel.init(frame: CGRect(x:32,y:txt1.frame.maxY+10,width:scrollWidth-64,height:100))
                txt2.textAlignment = .center
-               txt2.numberOfLines = 4
+               txt2.numberOfLines = 7
                txt2.font = UIFont.systemFont(ofSize: 15.0)
                txt2.text = descs[index]
 
