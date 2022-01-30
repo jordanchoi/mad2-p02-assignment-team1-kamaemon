@@ -36,7 +36,12 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var hoursCancel: UILabel!
     @IBOutlet weak var locationCancel: UILabel!
     @IBAction func viewFullMap(_ sender: Any) {
-          self.getDirections(loc1: coord1, loc2: coord2)
+        if (coord2 == nil){
+            showAlert()
+        }
+        else{
+            self.getDirections(loc1: coord1, loc2: coord2)
+        }
     }
     
     @IBAction func back(_ sender: Any) {
@@ -45,9 +50,45 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        event = appDelegate.selectedEvent!
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let dateFormatter2 = ISO8601DateFormatter()
+//        dateFormatter.formatOptions =  [.withInternetDateTime, .withFractionalSeconds]
+        // DB
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        let userDB = ref.child("users").child(String(event!.UserID))
+        var id = ""
+        var selectedname = ""
+        var dob = Date()
+        var gender = ""
+        var pfpurl = ""
+        var phonenum = ""
+        var utype = ""
+        var isnewuser = 100
+        var user:User?
+        userDB.observeSingleEvent(of: .value, with: { snapshot in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            id = value!["userUID"] as! String
+            selectedname = value!["Name"] as! String
+            dob = (dateFormatter2.date(from: value!["DOB"] as! String) ?? Date()) as Date
+            gender = value!["Gender"] as! String
+            pfpurl = value!["PFPURL"] as! String
+            phonenum = value!["PhoneNumber"] as! String
+            utype = value!["UserType"] as! String
+            isnewuser = value!["isNewUser"] as! Int
+            
+            user  = User(userUID: id, userType: utype, name: selectedname, gender: gender, phonenumber: phonenum , birthdate: dob , pfpurl: pfpurl , isnewuser: isnewuser)
+            appDelegate.selectedUser = user
+          }) { error in
+            print(error.localizedDescription)
+          }
+        
+        
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         self.goToMap.setTitle("", for: .normal)
-        event = appDelegate.selectedEvent!
+        
         locationManager.delegate = locationDelegate
         locationDelegate.locationCallBack = { [self] location in
             self.latestLocation = location
@@ -63,14 +104,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             let geoCoder = CLGeocoder()
             geoCoder.geocodeAddressString(event!.Location, completionHandler: { [self]p,e in
                 guard e == nil else {
-                    // create the alert
-                    let alert = UIAlertController(title: "Cannot Find Location", message: "We are unable to find the location stated by the user.", preferredStyle: UIAlertController.Style.alert)
-
-                    // add the actions (buttons)
-                    alert.addAction(UIAlertAction(title: "Noted", style: UIAlertAction.Style.cancel, handler: nil))
-                    
-                    // show the alert
-                    self.present(alert, animated: true, completion: nil)
+                    showAlert()
                             return
                         }
                     self.coord2 = (p![0].location)!.coordinate
@@ -105,9 +139,6 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             self.map.addAnnotation(annotation2)
         }
         var uname = ""
-        var ref: DatabaseReference!
-        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-        
         if(nameCancel != nil){
             ref.child("users").child(event!.UserID).observeSingleEvent(of: .value, with: { snapshot in
                 let value = snapshot.value as? NSDictionary
@@ -210,6 +241,26 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         }))
         alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.cancel, handler: nil))
 
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func openChat(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let chat = storyboard.instantiateViewController(withIdentifier: "Chat")
+        let navController = UINavigationController(rootViewController: chat)
+        navController.modalPresentationStyle = .fullScreen
+        self.present(navController, animated: true, completion: nil)
+    }
+    
+    func showAlert(){
+        // create the alert
+        let alert = UIAlertController(title: "Cannot Find Location", message: "We are unable to find the location stated by the user.", preferredStyle: UIAlertController.Style.alert)
+
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Noted", style: UIAlertAction.Style.cancel, handler: nil))
+        
         // show the alert
         self.present(alert, animated: true, completion: nil)
     }
