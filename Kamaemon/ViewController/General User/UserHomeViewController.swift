@@ -89,7 +89,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                 var completed:Int = 0
                 
                 for e in self.userEventsList {
-                    if (e.Status == "Completed" || e.EventDate < Date()) {
+                    if ((e.Status == "Completed" || e.EventDate < Date()) && e.Status != "Canceled") {
                         completed += 1
                     } else if (e.EventDate >= Date() && e.Status == "Accepted") {
                         ongoing += 1
@@ -101,6 +101,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                 self.totalNumUpcomingsLbl.text = String(ongoing)
             }
             
+            // perform sorting? -- pushed to back if time permits
         }
     }
     
