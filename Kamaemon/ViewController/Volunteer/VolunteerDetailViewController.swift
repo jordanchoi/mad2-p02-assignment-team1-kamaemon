@@ -12,6 +12,7 @@ import FirebaseAuth
 import CoreLocation
 import UIKit
 import MapKit
+import nanopb
 class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var map: MKMapView!
     let dateFormatter = DateFormatter()
@@ -24,7 +25,6 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var desc: UILabel!
-    
     @IBOutlet weak var hours: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var userName: UILabel!
@@ -32,10 +32,16 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var descCancel: UILabel!
     @IBOutlet weak var timeCancel: UILabel!
     @IBOutlet weak var nameCancel: UILabel!
+    @IBOutlet weak var userNameCancel: UILabel!
+    @IBOutlet weak var hoursCancel: UILabel!
+    @IBOutlet weak var locationCancel: UILabel!
     @IBAction func viewFullMap(_ sender: Any) {
           self.getDirections(loc1: coord1, loc2: coord2)
     }
     
+    @IBAction func back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +49,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         self.goToMap.setTitle("", for: .normal)
         event = appDelegate.selectedEvent!
         locationManager.delegate = locationDelegate
-        locationDelegate.locationCallBack = { location in
+        locationDelegate.locationCallBack = { [self] location in
             self.latestLocation = location
             
             /**Current Location**/
@@ -55,33 +61,46 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             
             /**Ngee Ann**/
             let geoCoder = CLGeocoder()
-            geoCoder.geocodeAddressString("535 Clementi Road Singapore 599489", completionHandler: {p,e in
-                self.coord2 = (p![0].location)!.coordinate
-                annotation2.coordinate = (p![0].location)!.coordinate
-                annotation2.title = "Ngee Ann Polytechnic"
-                annotation2.subtitle = "School of ICT"
-                let sourcePlaceMark = MKPlacemark(coordinate: self.coord1)
-                let destPlaceMark = MKPlacemark(coordinate: self.coord2!)
-                let directionRequest = MKDirections.Request()
-                directionRequest.source = MKMapItem(placemark: sourcePlaceMark)
-                directionRequest.destination = MKMapItem(placemark: destPlaceMark)
-                directionRequest.transportType = .walking
+            geoCoder.geocodeAddressString(event!.Location, completionHandler: { [self]p,e in
+                guard e == nil else {
+                    // create the alert
+                    let alert = UIAlertController(title: "Cannot Find Location", message: "We are unable to find the location stated by the user.", preferredStyle: UIAlertController.Style.alert)
+
+                    // add the actions (buttons)
+                    alert.addAction(UIAlertAction(title: "Noted", style: UIAlertAction.Style.cancel, handler: nil))
                     
-                let directions = MKDirections(request: directionRequest)
-                directions.calculate { (response, error) in
-                    guard let directionResponse = response else {
-                        if let error = error{
-                            print("we have error getting directions")
+                    // show the alert
+                    self.present(alert, animated: true, completion: nil)
+                            return
                         }
-                        return
+                    self.coord2 = (p![0].location)!.coordinate
+                    annotation2.coordinate = (p![0].location)!.coordinate
+                    annotation2.title = event?.Location
+                    let sourcePlaceMark = MKPlacemark(coordinate: self.coord1)
+                    let destPlaceMark = MKPlacemark(coordinate: self.coord2!)
+                    let directionRequest = MKDirections.Request()
+                    directionRequest.source = MKMapItem(placemark: sourcePlaceMark)
+                    directionRequest.destination = MKMapItem(placemark: destPlaceMark)
+                    directionRequest.transportType = .walking
+                        
+                    let directions = MKDirections(request: directionRequest)
+                    directions.calculate { (response, error) in
+                        guard let directionResponse = response else {
+                            if let error = error{
+                                print("we have error getting directions")
+                            }
+                            return
+                        }
+                        let route = directionResponse.routes[0]
+                        self.map.addOverlay(route.polyline)
+                        let rect = route.polyline.boundingMapRect
+                        self.map.setRegion(MKCoordinateRegion(rect), animated: true)
                     }
-                    let route = directionResponse.routes[0]
-                    self.map.addOverlay(route.polyline)
-                    let rect = route.polyline.boundingMapRect
-                    self.map.setRegion(MKCoordinateRegion(rect), animated: true)
-                }
-                self.map.delegate = self
+                    self.map.delegate = self
+                
+                
             })
+        
             self.map.addAnnotation(annotation)
             self.map.addAnnotation(annotation2)
         }
@@ -90,12 +109,16 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
         if(nameCancel != nil){
+            ref.child("users").child(event!.UserID).observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? NSDictionary
+                uname = value?["Name"] as! String
+                self.userNameCancel.text = "By: " + uname
+            })
             nameCancel.text = event?.Name
             timeCancel.text = dateFormatter.string(from: event!.EventDate)
-            descCancel.text = event?.Desc
-//            userName.text = event?.UserID
-//            location.text = event?.Location
-//            hours.text = event?.Hours as String!
+            descCancel.text = " " + event!.Desc
+            locationCancel.text = event?.Location
+            hoursCancel.text = "\(event!.Hours) Hours"
         }
         else{
             ref.child("users").child(event!.UserID).observeSingleEvent(of: .value, with: { snapshot in
@@ -105,8 +128,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             })
             name.text = event?.Name
             time.text = dateFormatter.string(from: event!.EventDate)
-            desc.text = event?.Desc
-            
+            desc.text = " " + event!.Desc
             location.text = event?.Location
             hours.text = "\(event!.Hours) Hours"
         }
@@ -148,22 +170,25 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
-        // Update volunteer ID of event to current user's ID
-        guard let key = ref.child("Jobs").child(String(event!.ID)).key else { return }
-        let event = ["eventCat" : event?.Category,
-                     "eventDate" : dateFormatter.string(from:event!.EventDate ),
-                     "eventDesc" : event?.Desc,
-                     "eventHrs" : event?.Hours,
-                     "eventID" : event?.ID,
-                     "eventLocation" : event?.Location,
-                     "eventName" : event?.Name,
-                     "eventStatus" : "Cancelled",
-                     "userID" : event?.UserID,
-                     "volunteerID" : ""] as [String : Any] as [String : Any]
-        let childUpdates = ["/openEvents/\(key)": event]
-        ref.updateChildValues(childUpdates)
-        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
-        _ = navigationController?.popViewController(animated: true)
+        // Update status and volunteer ID of event to ""
+        
+        // create the alert
+        let alert = UIAlertController(title: "Cancel Event", message: "Are you sure you want to cancel going to this event?", preferredStyle: UIAlertController.Style.alert)
+
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Proceed Cancelling", style: UIAlertAction.Style.destructive, handler: { [self] action in
+            guard let key = ref.child("Jobs").child(String(event!.ID)).key else { return }
+            ref.child("Jobs").child(String(event!.ID)).child("eventStatus").setValue("Cancelled")
+            ref.child("Jobs").child(String(event!.ID)).child("volunteerID").setValue("")
+            appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
+            self.dismiss(animated: true, completion: nil)
+        }))
+
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        
+        
     }
     
     @IBAction func accept(_ sender: Any) {
@@ -171,9 +196,21 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
-        ref.child("Jobs").child(String(event!.ID)).child("eventStatus").setValue("Accepted")
-        ref.child("Jobs").child(String(event!.ID)).child("volunteerID").setValue(Auth.auth().currentUser!.uid)
-        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
-        _ = navigationController?.popViewController(animated: true)
+        // create the alert
+        let alert = UIAlertController(title: "Accept Event", message: "Are you sure you want to accept this event?", preferredStyle: UIAlertController.Style.alert)
+
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Yes, I am", style: UIAlertAction.Style.default, handler: { [self] action in
+            // Update status and volunteer ID of event to current user's ID
+            guard let key = ref.child("Jobs").child(String(event!.ID)).key else { return }
+            ref.child("Jobs").child(String(event!.ID)).child("eventStatus").setValue("Accepted")
+            ref.child("Jobs").child(String(event!.ID)).child("volunteerID").setValue(Auth.auth().currentUser!.uid)
+            appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
+            self.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.cancel, handler: nil))
+
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
 }

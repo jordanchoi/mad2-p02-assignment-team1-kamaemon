@@ -48,16 +48,24 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         self.tableView.reloadData()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // DB
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        
         let cell: EventTableViewCell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let event = volunteerList[currentTableView][indexPath.row]
-        cell.desc.text = event.Desc
+        cell.category.text = event.Category
         cell.location.text = event.Location
         cell.hours.text = String(event.Hours) + " hours"
         cell.date.text = dateFormatter.string(from: event.EventDate)
         cell.name.text = event.Name
-        cell.userName.text = event.UserID
+        ref.child("users").child(event.UserID).observeSingleEvent(of: .value, with: { snapshot in
+            let value = snapshot.value as? NSDictionary
+            let uname = value?["Name"] as! String
+            cell.userName.text = "By: " + uname
+        })
         cell.selectionStyle = .none
         
         if(event.Category == "Health"){
@@ -87,14 +95,14 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         if(currentTableView == 0){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let accept = storyboard.instantiateViewController(withIdentifier: "Accept")
-            accept.modalPresentationStyle = .fullScreen
-            self.present(accept, animated: true, completion: nil)
+            let navController = UINavigationController(rootViewController: accept)
+            self.present(navController, animated: true, completion: nil)
         }
         else if(currentTableView == 1){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cancel = storyboard.instantiateViewController(withIdentifier: "Cancel")
-            cancel.modalPresentationStyle = .fullScreen
-            self.present(cancel, animated: true, completion: nil)
+            let navController = UINavigationController(rootViewController: cancel)
+            self.present(navController, animated: true, completion: nil)
         }
     }
     
