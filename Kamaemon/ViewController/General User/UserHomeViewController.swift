@@ -19,6 +19,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var totalNumEvents: UILabel!
     @IBOutlet weak var eventTableView: UITableView!
     
+    //
     var userEventsList:[Event] = []
     // Database Reference for Firebase
     var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
@@ -27,18 +28,12 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load custom tableview cell
         let nib = UINib(nibName: "UserEventsTableViewCell", bundle: nil)
         eventTableView.register(nib, forCellReuseIdentifier: "UserEventsTableViewCell")
         eventTableView.reloadData()
         eventTableView.delegate = self
         eventTableView.dataSource = self
-        
-        var testEvent:Event = Event(id: "ABCDEF", desc: "THIS IS A TEST EVENT FOR TABLEVIEW", hours: 6, location: "NGEE ANN POLYTECHNIC", uID: "JCSY11", vID: "", name: "TEST EVENT", stat: "Open", cat: "Technology", date: Date())
-        userEventsList.append(testEvent)
-        userEventsList.append(testEvent)
-        userEventsList.append(testEvent)
-        var testEvent2:Event = Event(id: "FEDCSA", desc: "THIS IS A TEST EVENT FOR TABLEVIEW2", hours: 6, location: "NGEE ANN POLYTECHNIC", uID: "JCSY11", vID: "", name: "TEST EVENT", stat: "Canceled", cat: "Technology", date: Date())
-        userEventsList.append(testEvent2)
 
         // Retrieve current user information
         ref.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { DataSnapshot in
@@ -46,7 +41,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             
             print(value)
             let formatter4 = DateFormatter()
-            formatter4.dateFormat = "dd-mmm-yyyy"
+            formatter4.dateFormat = "d MMM yyyy"
             print(formatter4.date(from: value!["DOB"] as! String) ?? "Unknown date")
             print(value!["DOB"] as! String)
             self.user = User(userUID: value!["userUID"] as! String, userType: value!["UserType"] as! String, name: value!["Name"] as! String, gender: value!["Gender"] as! String, phonenumber: value!["PhoneNumber"] as! String, birthdate: formatter4.date(from: value!["DOB"] as! String) ?? Date(), pfpurl: value!["PFPURL"] as! String, isnewuser: value!["isNewUser"] as! Int)
@@ -56,12 +51,17 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         // Retrieve all events started by user
         let eventRef = ref.child("Jobs").queryOrdered(byChild: "userID").queryEqual(toValue: Auth.auth().currentUser?.uid as? String).observe(.value) { snapshot in
             print(Auth.auth().currentUser?.uid)
+            let formatter4Get = DateFormatter()
+            formatter4Get.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
             
             for jobs in snapshot.children.allObjects as! [DataSnapshot] {
                 let value = jobs.value as? [String: AnyObject]
                 print(value)
                 if (value != nil) {
-                    let job = Event(desc: value!["eventDesc"] as! String, hours: Int(value!["eventHrs"] as! Int32), location: value!["eventLocation"] as! String, uID: value!["userID"] as! String, vID: value!["volunteerID"] as! String, vName: "", name: value!["eventName"] as! String, stat: value!["eventStatus"] as! String, cat: value!["eventCat"] as! String, date: DateFormatter().date(from: value!["eventDate"] as! String) ?? Date())
+                    let dateStr = value!["eventDate"] as! String
+                    let eventDate:Date? = formatter4Get.date(from: dateStr)
+                    
+                    let job = Event(desc: value!["eventDesc"] as! String, hours: Int(value!["eventHrs"] as! Int32), location: value!["eventLocation"] as! String, uID: value!["userID"] as! String, vID: value!["volunteerID"] as! String, vName: "", name: value!["eventName"] as! String, stat: value!["eventStatus"] as! String, cat: value!["eventCat"] as! String, date: eventDate! ?? Date())
                     
                     var volunteerName:String = ""
                     if (value!["volunteerID"] as! String != "")
@@ -70,10 +70,6 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                         self.ref.child("users").child(value!["volunteerID"] as! String).observeSingleEvent(of: .value) { DataSnapshot in
                             let value = DataSnapshot.value as? [String: AnyObject]
                             print(value)
-                            let formatter4 = DateFormatter()
-                            formatter4.dateFormat = "dd-mmm-yyyy"
-                            print(formatter4.date(from: value!["DOB"] as! String) ?? "Unknown date")
-                            print(value!["DOB"] as! String)
                             if (value != nil)
                             {
                                 job.VolunteerName = value!["Name"] as! String
@@ -89,9 +85,20 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             if (self.userEventsList.count == 0) {
                 self.totalNumEvents.text = "0"
             } else {
+                var ongoing:Int = 0
+                var completed:Int = 0
+                
+                for e in self.userEventsList {
+                    if (e.Status == "Completed" || e.EventDate < Date()) {
+                        completed += 1
+                    } else if (e.EventDate >= Date() && e.Status == "Accepted") {
+                        ongoing += 1
+                    }
+                }
+                
                 self.totalNumEvents.text = String(self.userEventsList.count)
-                self.totalNumCompletedEventsLbl.text = String(self.userEventsList.count)
-                self.totalNumUpcomingsLbl.text = String(self.userEventsList.count)
+                self.totalNumCompletedEventsLbl.text = String(completed)
+                self.totalNumUpcomingsLbl.text = String(ongoing)
             }
             
         }
@@ -103,18 +110,16 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         
         cell.selectionStyle = .none
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
+        let formatter4Display = DateFormatter()
+        formatter4Display.dateFormat = "dd MMM yyyy HH:mm"
         let event = userEventsList[indexPath.row]
-        
-        cell.eventRemarksLbl.text = ""
-        
+    
         // Cell items - Status
         cell.eventStatusLbl.text = event.Status
         if (event.Status == "Open") {
             cell.statusViewBar.backgroundColor = .green
             cell.eventStatusLbl.backgroundColor = .green
+            cell.eventRemarksLbl.text = "Finding a volunteer.."
         } else if (event.Status == "Accepted") {
             cell.statusViewBar.backgroundColor = .orange
             cell.eventStatusLbl.backgroundColor = .orange
@@ -122,19 +127,28 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Canceled") {
             cell.statusViewBar.backgroundColor = .red
             cell.eventStatusLbl.backgroundColor = .red
+            cell.eventRemarksLbl.text = "You had canceled this request."
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
             cell.eventStatusLbl.backgroundColor = .blue
-        } else {
+            cell.eventRemarksLbl.text = "Your request is ongoing"
+        } else if (event.Status == "Completed") {
+            cell.statusViewBar.backgroundColor = .purple
+            cell.eventStatusLbl.backgroundColor = .purple
+            cell.eventRemarksLbl.text = "Your request has been completed by \(event.VolunteerName!)"
+        }
+        else {
             cell.statusViewBar.backgroundColor = .black
             cell.eventStatusLbl.backgroundColor = .black
             cell.eventStatusLbl.textColor = .white
+            cell.eventRemarksLbl.text = ""
+            
         }
         
         // Cell items - Status
         cell.eventNameLbl.text = event.Name
         cell.eventLocationLbl.text = event.Location
-        cell.eventDateLbl.text = dateFormatter.string(from: event.EventDate)
+        cell.eventDateLbl.text = formatter4Display.string(from: event.EventDate)
         cell.eventDescLbl.text = event.Desc
 
         return cell

@@ -814,7 +814,7 @@
                         <outlet property="eventTableView" destination="Jyn-gR-pAv" id="HWE-ms-hg9"/>
                         <outlet property="name" destination="q0X-0g-chx" id="qIN-9x-rnj"/>
                         <outlet property="totalNumCompletedEventsLbl" destination="q0x-Jp-55r" id="cUm-sj-DbF"/>
-                        <outlet property="totalNumEvents" destination="RUA-Am-ql4" id="37R-ZH-aal"/>
+                        <outlet property="totalNumEvents" destination="tWK-8n-iEs" id="rPQ-AF-dQK"/>
                         <outlet property="totalNumUpcomingsLbl" destination="RUA-Am-ql4" id="1Ew-6K-JzY"/>
                     </connections>
                 </viewController>
