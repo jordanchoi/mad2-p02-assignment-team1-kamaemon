@@ -28,6 +28,9 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // disable navigation bar
+        navigationController?.hidesBarsOnSwipe = true
+        
         // Load custom tableview cell
         let nib = UINib(nibName: "UserEventsTableViewCell", bundle: nil)
         eventTableView.register(nib, forCellReuseIdentifier: "UserEventsTableViewCell")
@@ -103,6 +106,12 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             
             // perform sorting? -- pushed to back if time permits
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        // disable navigation bar
+        navigationController?.hidesBarsOnSwipe = true
     }
     
     // TableView
@@ -185,4 +194,5 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
 }
