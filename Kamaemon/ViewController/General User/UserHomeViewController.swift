@@ -3,7 +3,7 @@
 //  Kamaemon
 //
 //  Created by Jun Hong on 23/1/22.
-//
+//  Resumed and Modified by Jordan on 24/1/22
 
 import Foundation
 import UIKit
@@ -37,8 +37,8 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         userEventsList.append(testEvent)
         userEventsList.append(testEvent)
         userEventsList.append(testEvent)
-        testEvent.Status = "Canceled"
-        userEventsList.append(testEvent)
+        var testEvent2:Event = Event(id: "FEDCSA", desc: "THIS IS A TEST EVENT FOR TABLEVIEW2", hours: 6, location: "NGEE ANN POLYTECHNIC", uID: "JCSY11", vID: "", name: "TEST EVENT", stat: "Canceled", cat: "Technology", date: Date())
+        userEventsList.append(testEvent2)
 
         // Retrieve current user information
         ref.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { DataSnapshot in
@@ -61,7 +61,25 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                 let value = jobs.value as? [String: AnyObject]
                 print(value)
                 if (value != nil) {
-                    let job = Event(id: value!["eventID"] as! String, desc: value!["eventDesc"] as! String, hours: Int(value!["eventHrs"] as! Int32), location: value!["eventLocation"] as! String, uID: value!["userID"] as! String, vID: "", name: value!["eventName"] as! String, stat: value!["eventStatus"] as! String, cat: value!["eventCat"] as! String, date: DateFormatter().date(from: value!["eventDate"] as! String) ?? Date())
+                    let job = Event(desc: value!["eventDesc"] as! String, hours: Int(value!["eventHrs"] as! Int32), location: value!["eventLocation"] as! String, uID: value!["userID"] as! String, vID: value!["volunteerID"] as! String, vName: "", name: value!["eventName"] as! String, stat: value!["eventStatus"] as! String, cat: value!["eventCat"] as! String, date: DateFormatter().date(from: value!["eventDate"] as! String) ?? Date())
+                    
+                    var volunteerName:String = ""
+                    if (value!["volunteerID"] as! String != "")
+                    {
+                        // Retrieve volunteer information
+                        self.ref.child("users").child(value!["volunteerID"] as! String).observeSingleEvent(of: .value) { DataSnapshot in
+                            let value = DataSnapshot.value as? [String: AnyObject]
+                            print(value)
+                            let formatter4 = DateFormatter()
+                            formatter4.dateFormat = "dd-mmm-yyyy"
+                            print(formatter4.date(from: value!["DOB"] as! String) ?? "Unknown date")
+                            print(value!["DOB"] as! String)
+                            if (value != nil)
+                            {
+                                job.VolunteerName = value!["Name"] as! String
+                            }
+                        }
+                    }
                     self.userEventsList.append(job)
                     self.eventTableView.reloadData()
                 }
@@ -90,23 +108,27 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         
         let event = userEventsList[indexPath.row]
         
+        cell.eventRemarksLbl.text = ""
+        
         // Cell items - Status
         cell.eventStatusLbl.text = event.Status
         if (event.Status == "Open") {
             cell.statusViewBar.backgroundColor = .green
-            cell.eventStatusHighlightView.backgroundColor = .green
+            cell.eventStatusLbl.backgroundColor = .green
         } else if (event.Status == "Accepted") {
             cell.statusViewBar.backgroundColor = .orange
-            cell.eventStatusHighlightView.backgroundColor = .orange
+            cell.eventStatusLbl.backgroundColor = .orange
+            cell.eventRemarksLbl.text = "Your request has been accepted by \(event.VolunteerName!)"
         } else if (event.Status == "Canceled") {
             cell.statusViewBar.backgroundColor = .red
-            cell.eventStatusHighlightView.backgroundColor = .red
+            cell.eventStatusLbl.backgroundColor = .red
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
-            cell.eventStatusHighlightView.backgroundColor = .blue
+            cell.eventStatusLbl.backgroundColor = .blue
         } else {
             cell.statusViewBar.backgroundColor = .black
-            cell.eventStatusHighlightView.backgroundColor = .black
+            cell.eventStatusLbl.backgroundColor = .black
+            cell.eventStatusLbl.textColor = .white
         }
         
         // Cell items - Status
@@ -114,9 +136,6 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         cell.eventLocationLbl.text = event.Location
         cell.eventDateLbl.text = dateFormatter.string(from: event.EventDate)
         cell.eventDescLbl.text = event.Desc
-        
-        // NEED TO EDIT THIS TO FIND VOLUNTEER NAME ACCEPTED BY
-        cell.eventRemarksLbl.text = "ACCEPTED BY JORDAN CHOI"
 
         return cell
     }
@@ -142,6 +161,10 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             self.present(cancel, animated: true, completion: nil)
         }
         */
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     override func didReceiveMemoryWarning() {
