@@ -35,6 +35,7 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         currentTableView = 0
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
+        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         volunteerList = appDelegate.volunteerList
         tableView.reloadData()
     }
@@ -44,6 +45,7 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         currentTableView = 0
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
+        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         volunteerList = appDelegate.volunteerList
         self.tableView.reloadData()
     }
