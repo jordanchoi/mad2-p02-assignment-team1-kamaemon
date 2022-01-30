@@ -14,6 +14,7 @@ class Event {
     var Location:String = ""
     var UserID:String = ""
     var VolunteerID:String = ""
+    var VolunteerName:String? = ""
     var Name:String = ""
     var Status:String = ""
     var Category:String = ""
@@ -40,6 +41,19 @@ class Event {
         self.Location = location
         self.UserID = uID
         self.VolunteerID = vID
+        self.Name = name
+        self.Status = stat
+        self.Category = cat
+        self.EventDate = date
+    }
+    // Jordan added constructor for retrieval of events from firebase
+    init(desc:String,hours:Int,location:String,uID:String,vID:String, vName:String, name:String,stat:String,cat:String, date:Date){
+        self.Desc = desc
+        self.Hours = hours
+        self.Location = location
+        self.UserID = uID
+        self.VolunteerID = vID
+        self.VolunteerName = vName
         self.Name = name
         self.Status = stat
         self.Category = cat

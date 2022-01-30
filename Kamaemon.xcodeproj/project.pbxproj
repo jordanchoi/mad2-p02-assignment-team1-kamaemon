@@ -19,7 +19,7 @@
 		0EB49D2D2794955D00C00848 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */; };
 		0EEE59472796D594009CCD01 /* VolunteerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEE59462796D594009CCD01 /* VolunteerListViewController.swift */; };
 		0EF804592796E68A000AA92B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EF804582796E68A000AA92B /* Assets.xcassets */; };
-		0EF8045B2797331C000AA92B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8045A2797331C000AA92B /* Event.swift */; };
+		0EF8045B2797331C000AA92B /* event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8045A2797331C000AA92B /* event.swift */; };
 		0EF8045D279763AB000AA92B /* VolunteerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF8045C279763AB000AA92B /* VolunteerDetailViewController.swift */; };
 		A04445722791BF3300689F32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04445712791BF3300689F32 /* AppDelegate.swift */; };
 		A04445742791BF3300689F32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04445732791BF3300689F32 /* SceneDelegate.swift */; };
@@ -63,7 +63,7 @@
 		0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0EEE59462796D594009CCD01 /* VolunteerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerListViewController.swift; sourceTree = "<group>"; };
 		0EF804582796E68A000AA92B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0EF8045A2797331C000AA92B /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		0EF8045A2797331C000AA92B /* event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event.swift; sourceTree = "<group>"; };
 		0EF8045C279763AB000AA92B /* VolunteerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerDetailViewController.swift; sourceTree = "<group>"; };
 		2F18180FD6A62702D62363BC /* Pods_Kamaemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kamaemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A044456E2791BF3300689F32 /* Kamaemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kamaemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,7 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				E6AE62612795530F00B41E63 /* user.swift */,
-				0EF8045A2797331C000AA92B /* Event.swift */,
+				0EF8045A2797331C000AA92B /* event.swift */,
 				E6A97EC327973E4200E7DACC /* Message.swift */,
 			);
 			path = Models;
@@ -414,7 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EF8045B2797331C000AA92B /* Event.swift in Sources */,
+				0EF8045B2797331C000AA92B /* event.swift in Sources */,
 				E6AE62622795530F00B41E63 /* user.swift in Sources */,
 				E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */,
 				A09B0DD527A5088E002F6D64 /* UserEventsTableViewCell.swift in Sources */,
