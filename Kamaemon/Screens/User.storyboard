@@ -837,8 +837,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icj-zy-4fU">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icj-zy-4fU">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PEC-Zk-VGI">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
@@ -966,6 +966,9 @@
                                                     <imageReference key="image" image="message.fill" catalog="system" symbolScale="large"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20" scale="default"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="msgVolunteerDidPressed:" destination="Exq-WE-5iW" eventType="touchUpInside" id="ksC-KX-5Ux"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9O-8i-Q2W">
                                                 <rect key="frame" x="358" y="356.5" width="35" height="38"/>
@@ -974,6 +977,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" image="phone.fill" catalog="system" title=" ">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="20"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="callVolunteerDidPressed:" destination="Exq-WE-5iW" eventType="touchUpInside" id="1hJ-Z2-mB5"/>
+                                                </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-1" translatesAutoresizingMaskIntoConstraints="NO" id="k8e-Dx-XcK">
                                                 <rect key="frame" x="22" y="397.5" width="74" height="71"/>
@@ -1009,6 +1015,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" title="Cancel Request">
                                                     <color key="baseBackgroundColor" systemColor="systemRedColor"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="eventActionDidPressed:" destination="Exq-WE-5iW" eventType="touchUpInside" id="jc1-LC-Isf"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills &amp; Qualifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9h-Ko-r7z">
                                                 <rect key="frame" x="30" y="489.5" width="152" height="18"/>
@@ -1017,13 +1026,19 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="M1H-gU-upt">
-                                                <rect key="frame" x="30" y="523.5" width="356" height="260"/>
+                                                <rect key="frame" x="30" y="523.5" width="356" height="347"/>
                                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="260" id="fri-u8-pM1"/>
+                                                    <constraint firstAttribute="height" constant="347" id="fri-u8-pM1"/>
                                                 </constraints>
                                                 <color key="sectionIndexBackgroundColor" systemColor="systemGray5Color"/>
                                             </tableView>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Your requests had not been accepted by any volunteers." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlS-3B-1ce">
+                                                <rect key="frame" x="30" y="385" width="356" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
@@ -1047,6 +1062,7 @@
                                             <constraint firstItem="7DN-S5-Cue" firstAttribute="centerY" secondItem="F4S-J8-QbZ" secondAttribute="centerY" constant="-0.25" id="JQf-Te-qbp"/>
                                             <constraint firstItem="C8f-Rf-Rt3" firstAttribute="leading" secondItem="F4S-J8-QbZ" secondAttribute="leading" id="Kd1-13-YEK"/>
                                             <constraint firstItem="mtv-xz-HAn" firstAttribute="centerY" secondItem="9xx-cK-lej" secondAttribute="centerY" constant="-1.25" id="L9M-Jg-Jmf"/>
+                                            <constraint firstItem="cvM-9f-Trp" firstAttribute="top" secondItem="xlS-3B-1ce" secondAttribute="bottom" constant="-20.5" id="NZH-OV-ebI"/>
                                             <constraint firstAttribute="trailing" secondItem="7DN-S5-Cue" secondAttribute="trailing" constant="28" id="Pcs-mV-PKN"/>
                                             <constraint firstAttribute="height" constant="891" id="Q8X-xq-8S8"/>
                                             <constraint firstItem="0jC-CQ-rUD" firstAttribute="centerY" secondItem="q4M-0u-keY" secondAttribute="centerY" constant="0.5" id="RSq-6R-ZDY"/>
@@ -1058,11 +1074,13 @@
                                             <constraint firstItem="J36-nr-wBX" firstAttribute="centerY" secondItem="8Hg-W0-eWj" secondAttribute="centerY" id="cmx-NR-tLr"/>
                                             <constraint firstItem="k8e-Dx-XcK" firstAttribute="top" secondItem="vtT-gH-lmE" secondAttribute="bottom" constant="12" id="dPF-Cc-Fbc"/>
                                             <constraint firstItem="l9O-8i-Q2W" firstAttribute="trailing" secondItem="0jC-CQ-rUD" secondAttribute="trailing" id="eMC-X8-AtI"/>
+                                            <constraint firstItem="xlS-3B-1ce" firstAttribute="trailing" secondItem="s4D-Va-UWG" secondAttribute="trailing" constant="-28" id="eQG-HW-NZE"/>
                                             <constraint firstItem="9xx-cK-lej" firstAttribute="top" secondItem="aK9-4W-g4d" secondAttribute="bottom" constant="4" id="ecO-HS-r8A"/>
                                             <constraint firstItem="vtT-gH-lmE" firstAttribute="firstBaseline" secondItem="l9O-8i-Q2W" secondAttribute="firstBaseline" id="fUS-fP-K0R"/>
                                             <constraint firstItem="8Hg-W0-eWj" firstAttribute="top" secondItem="9xx-cK-lej" secondAttribute="bottom" constant="1.5" id="faW-k2-sPs"/>
                                             <constraint firstItem="M1H-gU-upt" firstAttribute="top" secondItem="v9h-Ko-r7z" secondAttribute="bottom" constant="16" id="gYd-Cv-JYC"/>
                                             <constraint firstItem="k8e-Dx-XcK" firstAttribute="leading" secondItem="302-L4-pfg" secondAttribute="leading" constant="22" id="ie4-eF-BT1"/>
+                                            <constraint firstItem="xlS-3B-1ce" firstAttribute="leading" secondItem="s4D-Va-UWG" secondAttribute="leading" constant="30" id="jAv-kp-TaA"/>
                                             <constraint firstItem="Fej-6L-fy1" firstAttribute="centerX" secondItem="aK9-4W-g4d" secondAttribute="centerX" id="jli-i3-Yko"/>
                                             <constraint firstItem="lDn-He-Gka" firstAttribute="leading" secondItem="l80-bQ-7RB" secondAttribute="leading" id="lD0-MV-9GN"/>
                                             <constraint firstItem="v9h-Ko-r7z" firstAttribute="top" secondItem="k8e-Dx-XcK" secondAttribute="bottom" constant="21" id="m79-IG-qZu"/>
@@ -1080,6 +1098,7 @@
                                             <constraint firstItem="q4M-0u-keY" firstAttribute="leading" secondItem="302-L4-pfg" secondAttribute="leading" constant="30" id="tNL-84-rs6"/>
                                             <constraint firstItem="9xx-cK-lej" firstAttribute="leading" secondItem="mtv-xz-HAn" secondAttribute="trailing" constant="8" symbolic="YES" id="vAp-oC-D88"/>
                                             <constraint firstAttribute="trailing" secondItem="0jC-CQ-rUD" secondAttribute="trailing" constant="21" id="vdu-ek-UJo"/>
+                                            <constraint firstItem="xlS-3B-1ce" firstAttribute="top" secondItem="l80-bQ-7RB" secondAttribute="bottom" constant="53.5" id="xmS-wv-nWQ"/>
                                             <constraint firstItem="F4S-J8-QbZ" firstAttribute="leading" secondItem="q4M-0u-keY" secondAttribute="leading" id="y8u-7N-DrB"/>
                                             <constraint firstItem="lDn-He-Gka" firstAttribute="centerX" secondItem="l80-bQ-7RB" secondAttribute="centerX" id="ydd-V3-Sky"/>
                                             <constraint firstItem="C8f-Rf-Rt3" firstAttribute="top" secondItem="F4S-J8-QbZ" secondAttribute="bottom" constant="5.5" id="zCC-zp-2Qs"/>
@@ -1126,6 +1145,23 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="Ukw-JN-Uki"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="estDurationLbl" destination="8Hg-W0-eWj" id="ckg-wP-MuA"/>
+                        <outlet property="eventActionBtn" destination="l80-bQ-7RB" id="xCc-Ej-tX9"/>
+                        <outlet property="eventCatLbl" destination="0jC-CQ-rUD" id="8Bi-od-Qqb"/>
+                        <outlet property="eventDateLbl" destination="aK9-4W-g4d" id="dWf-3B-Nyc"/>
+                        <outlet property="eventDescLbl" destination="lDn-He-Gka" id="A3r-m7-X08"/>
+                        <outlet property="eventLocLbl" destination="7DN-S5-Cue" id="RSO-F4-Deq"/>
+                        <outlet property="eventLocationMKView" destination="PEC-Zk-VGI" id="ctv-Lw-okY"/>
+                        <outlet property="eventNameLbl" destination="q4M-0u-keY" id="czR-Qz-2tQ"/>
+                        <outlet property="eventStatusLbl" destination="9xx-cK-lej" id="ivy-1n-lYU"/>
+                        <outlet property="noVolunteersLbl" destination="xlS-3B-1ce" id="gFS-qk-dKp"/>
+                        <outlet property="volunteerGenderIV" destination="cvM-9f-Trp" id="ifv-HV-zoX"/>
+                        <outlet property="volunteerNameLbl" destination="Fej-6L-fy1" id="bio-9j-hNW"/>
+                        <outlet property="volunteerPFPIV" destination="k8e-Dx-XcK" id="Tbu-rB-nrV"/>
+                        <outlet property="volunteerSkillTableView" destination="M1H-gU-upt" id="7lG-Za-Ehp"/>
+                        <outlet property="volunteerSkillTitleLbl" destination="v9h-Ko-r7z" id="qXo-Uj-5AQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cg9-ek-j3k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -92,7 +92,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                 var completed:Int = 0
                 
                 for e in self.userEventsList {
-                    if ((e.Status == "Completed" || e.EventDate < Date()) && e.Status != "Canceled") {
+                    if ((e.Status == "Completed" || e.EventDate < Date()) && e.Status != "Cancelled") {
                         completed += 1
                     } else if (e.EventDate >= Date() && e.Status == "Accepted") {
                         ongoing += 1
@@ -134,10 +134,10 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             cell.statusViewBar.backgroundColor = .orange
             cell.eventStatusLbl.backgroundColor = .orange
             cell.eventRemarksLbl.text = "Your request has been accepted by \(event.VolunteerName!)"
-        } else if (event.Status == "Canceled") {
+        } else if (event.Status == "Cancelled") {
             cell.statusViewBar.backgroundColor = .red
             cell.eventStatusLbl.backgroundColor = .red
-            cell.eventRemarksLbl.text = "You had canceled this request."
+            cell.eventRemarksLbl.text = "You had cancelled this request."
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
             cell.eventStatusLbl.backgroundColor = .blue
