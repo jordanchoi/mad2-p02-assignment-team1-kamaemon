@@ -37,56 +37,65 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
     @IBOutlet weak var callBtn: UIButton!
     @IBOutlet weak var msgBtn: UIButton!
     
+    //
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var volunteerSkills:[String] = []
     let ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+    var eventObject:Event?
+    
+    // MapKit properties
+    let regionRadius:CLLocationDistance = 1000
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // disable navigation bar hide
+        // Navigation Bar Configuration - Disable Hide from source.
         navigationController?.hidesBarsOnSwipe = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        // Load custom TableViewCell for Volunteer Skills TableView
         let nib = UINib(nibName: "VolunteerSkillsTableViewCell", bundle: nil)
         volunteerSkillTableView.register(nib, forCellReuseIdentifier: "skillsCell")
         volunteerSkillTableView.delegate = self
         volunteerSkillTableView.dataSource = self
         volunteerSkillTableView.reloadData()
         
+        // Error handling - in case somehow user get to this scene without selecting an event.
         if (appDelegate.selectedEventDetails != nil) {
-            // Event Object
-            var eventObject:Event = appDelegate.selectedEventDetails!
+            // Event Object selected by User, passed through App Delegate
+            self.eventObject = appDelegate.selectedEventDetails!
             
+            // Date Format method to display date in desired format
             let formatter4Display = DateFormatter()
             formatter4Display.dateFormat = "dd MMM yyyy HH:mm"
             
-            // #TO SET MK
+            // Mapkit Configurations
+            getEventLocation()
             
             // Event Details
-            eventNameLbl.text = eventObject.Name
-            eventCatLbl.text = eventObject.Category
-            eventLocLbl.text = eventObject.Location
-            eventDateLbl.text = formatter4Display.string(from: eventObject.EventDate)
-            eventStatusLbl.text = eventObject.Status
-            estDurationLbl.text = "This request will take approximately \(eventObject.Hours) hours"
-            eventDescLbl.text = eventObject.Desc
+            eventNameLbl.text = eventObject!.Name
+            eventCatLbl.text = eventObject!.Category
+            eventLocLbl.text = eventObject!.Location
+            eventDateLbl.text = formatter4Display.string(from: eventObject!.EventDate)
+            eventStatusLbl.text = eventObject!.Status
+            estDurationLbl.text = "This request will take approximately \(eventObject!.Hours) hours"
+            eventDescLbl.text = eventObject!.Desc
             
-            if (eventObject.Status == "Ongoing") {
+            if (eventObject!.Status == "Ongoing") {
                 eventActionBtn.setTitle("End Request - Volunteer has completed.", for: .normal)
                 // color for the status
                 eventStatusBarView.backgroundColor = .blue
-            } else if (eventObject.Status == "Accepted" || eventObject.Status == "Open") {
+            } else if (eventObject!.Status == "Accepted" || eventObject!.Status == "Open") {
                 eventActionBtn.setTitle("Cancel Request", for: .normal)
-                if (eventObject.Status == "Accepted") {
+                if (eventObject!.Status == "Accepted") {
                     eventStatusBarView.backgroundColor = .orange
                 } else {
                     eventStatusBarView.backgroundColor = .green
                     hideVolunteerInformation()
                 }
                 
-            } else if (eventObject.Status == "Cancelled" || eventObject.Status == "Completed") {
+            } else if (eventObject!.Status == "Cancelled" || eventObject!.Status == "Completed") {
                 eventActionBtn.isEnabled = false
-                if (eventObject.Status == "Cancelled") {
+                if (eventObject!.Status == "Cancelled") {
                     eventStatusBarView.backgroundColor = .red
                     hideVolunteerInformation()
                 } else {
@@ -99,20 +108,20 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
             }
             
             
-            if (eventObject.volunteer != nil) {
+            if (eventObject!.volunteer != nil) {
                 // #to load dp from firebase
                 //volunteerPFPIV =
-                volunteerNameLbl.text = eventObject.volunteer.n
-                if (eventObject.volunteer.Gender == "Male") {
+                volunteerNameLbl.text = eventObject!.volunteer.n
+                if (eventObject!.volunteer.Gender == "Male") {
                     volunteerGenderIV.image = UIImage(named: "male")
-                } else if (eventObject.volunteer.Gender == "Female") {
+                } else if (eventObject!.volunteer.Gender == "Female") {
                     volunteerGenderIV.image = UIImage(named: "female")
                 } else {
                     volunteerGenderIV.isHidden = true
                 }
                 
                 // get skills
-                ref.child("volunteers").child(eventObject.volunteer.UID).observeSingleEvent(of: .value) { DataSnapshot in
+                ref.child("volunteers").child(eventObject!.volunteer.UID).observeSingleEvent(of: .value) { DataSnapshot in
                     let value = DataSnapshot.value as? [String: AnyObject]
                     
                     print(value)
@@ -149,6 +158,8 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
     }
     
     @IBAction func eventActionDidPressed(_ sender: Any) {
+        // Event Statuses - Ongoing, Accepted, Canceled, Completed, Open, Expired?
+        
     }
     @IBAction func msgVolunteerDidPressed(_ sender: Any) {
     }
@@ -184,4 +195,29 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    // MapKit Methods
+    // Focus on location
+    func focusLocationOnMap(location: CLLocation) {
+        let coordinateReg = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        eventLocationMKView.setRegion(coordinateReg, animated: true)
+    }
+    
+    func getEventLocation() {
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(eventObject!.Location, completionHandler: {p,e in
+            if (p != nil) {
+                let lat = String(format: "Lat: %3.12f", p![0].location!.coordinate.latitude)
+                let long = String(format: "Lat: %3.12f", p![0].location!.coordinate.longitude)
+                print("\(lat), \(long)")
+                let eventLocAnnotation = MKPointAnnotation()
+                eventLocAnnotation.coordinate = p![0].location!.coordinate
+                eventLocAnnotation.title = self.eventObject!.Location
+                self.eventLocationMKView.addAnnotation(eventLocAnnotation)
+                self.focusLocationOnMap(location: p![0].location!)
+            }
+        })
+    }
+    
+    
 }
