@@ -14,6 +14,7 @@ import IQKeyboardManager
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var volunteerList : [[Event]] = [[],[]]
     var qualificationsList : [String] = []
+    var doneEventList : [Event] = []
     var selectedEvent:Event?
     var selectedUser:User?
     var verifyUser:User?
@@ -91,6 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public func PopulateList(UID:String) {
         var openEventList : [Event] = []
         var joinedEventList : [Event] = []
+        var doneEventList : [Event] = []
         
         // DB
         var ref: DatabaseReference!
@@ -118,20 +120,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let category = event["eventCat"]!!
                             let date = event["eventDate"]!!
                         
-                            print(date)
                             let dateFormatter = ISO8601DateFormatter()
-                            //dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                            //dateFormatter.dateFormat = ISO8601DateFormatter()
-                            print(dateFormatter.date(from: date as! String)! as Date)
                             openEventList.append(
                                 Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
                                      )
                             )
                         }
-                        //print(Auth.auth().currentUser!.uid)
+                        
                         // Populate list of volunteer activities that user have selected and have not done
                         if(details.value as! String == UID){
-                            print("getting data...")
                             let event = (events.value! as AnyObject)
                             let id = event["eventID"]!!
                             let desc = event["eventDesc"]!!
@@ -143,18 +140,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let status = event["eventStatus"]!!
                             let category = event["eventCat"]!!
                             let date = event["eventDate"]!!
-                            
-//                            let dateFormatter = DateFormatter()
-//                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                             let dateFormatter = ISO8601DateFormatter()
-                            joinedEventList.append(
-                                Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
-                                     )
-                            )
+                            if(event["eventStatus"]!! as! String != "Completed"){
+                                joinedEventList.append(
+                                    Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                         )
+                                )
+                            }
+                            else{
+                                doneEventList.append(
+                                    Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                         )
+                                )
+                            }
+                            
                         }
                     }
                     self.volunteerList[1] = joinedEventList
                     self.volunteerList[0] = openEventList
+                    self.doneEventList = doneEventList
                 }
             }
         })
@@ -163,6 +167,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
         }
     }
-
 }
 
