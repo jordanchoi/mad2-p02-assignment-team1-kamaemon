@@ -47,7 +47,7 @@ class MessageViewController : MessagesViewController{
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-        messagesCollectionView.contentInset = UIEdgeInsets(top: 75, left: 0, bottom: 0, right: 0)
+        messagesCollectionView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: 0, right: 0)
         messagesCollectionView.scrollToLastItem()
     }
     

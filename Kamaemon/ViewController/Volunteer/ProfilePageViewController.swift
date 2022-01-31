@@ -25,49 +25,14 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
     var user = User()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let currentuser = Auth.auth().currentUser
-        self.qualificationTable.register(UITableViewCell.self, forCellReuseIdentifier: "qualification")
-        //getCurrentUser(UID: currentuser!.uid)
-        var ref: DatabaseReference!
-        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-        ref.child("users").child(currentuser!.uid).observeSingleEvent(of: .value, with: { snapshot in
-            let value = snapshot.value as? NSDictionary
-            let Name = value?["Name"] as? String ?? "Error"
-            let UserCat = value?["PhoneNumber"] as? String ?? "Error"
-            self.username.text = Name
-            self.usernumber.text = UserCat
-        }) { error in
-          print(error.localizedDescription)
-        }
-        
-        ref.child("volunteers").child(Auth.auth().currentUser!.uid).observe(.value) { data in
-            let da = data.value as? NSDictionary
-            print(da)
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let uQualification = da?["Qualifications"]
-            if uQualification is String{
-                appDelegate.qualificationsList = []
-            }
-            if uQualification is [String] {
-                let q = uQualification as! [String]
-                if (q[0] is NSNull) {
-                    ref.child("volunteers").child(Auth.auth().currentUser!.uid).child("Qualifications").child("0").removeValue()
-                }
-                appDelegate.qualificationsList = q
-            }
-           
-            self.Qualifications = appDelegate.qualificationsList
-            self.hours.text = (da?["Hours"] as? String)!
-            //SelectionQualificationViewController().Qualifications = 
-            DispatchQueue.global(qos: .background).async {
-                DispatchQueue.main.async {
-                    self.qualificationTable.reloadData()
-                }
-            }
-        }
+        getUserDets()
         
     }
   
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        getUserDets()
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -113,4 +78,54 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
         
     }
     
+    func getUserDets(){
+        let currentuser = Auth.auth().currentUser
+        self.qualificationTable.register(UITableViewCell.self, forCellReuseIdentifier: "qualification")
+        //getCurrentUser(UID: currentuser!.uid)
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        ref.child("users").child(currentuser!.uid).observeSingleEvent(of: .value, with: { snapshot in
+            let value = snapshot.value as? NSDictionary
+            let Name = value?["Name"] as? String ?? "Error"
+            let UserCat = value?["PhoneNumber"] as? String ?? "Error"
+            self.username.text = Name
+            self.usernumber.text = UserCat
+        }) { error in
+          print(error.localizedDescription)
+        }
+        
+        ref.child("volunteers").child(Auth.auth().currentUser!.uid).observe(.value) { data in
+            let da = data.value as? NSDictionary
+            print(da)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let uQualification = da?["Qualifications"]
+            if uQualification is String{
+                appDelegate.qualificationsList = []
+            }
+            if uQualification is [String] {
+                let q = uQualification as! [String]
+                if (q[0] is NSNull) {
+                    ref.child("volunteers").child(Auth.auth().currentUser!.uid).child("Qualifications").child("0").removeValue()
+                }
+                appDelegate.qualificationsList = q
+            }
+           
+            self.Qualifications = appDelegate.qualificationsList
+            self.hours.text = (da?["Hours"] as? String)!
+            //SelectionQualificationViewController().Qualifications =
+            DispatchQueue.global(qos: .background).async {
+                DispatchQueue.main.async {
+                    self.qualificationTable.reloadData()
+                }
+            }
+        }
+    }
+    @IBAction func logOut(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vp = storyboard.instantiateViewController(withIdentifier: "ViewController")
+        let navController = UINavigationController(rootViewController: vp)
+        navController.modalPresentationStyle = .fullScreen
+        navController.modalTransitionStyle = .crossDissolve
+        self.present(navController, animated: true, completion: nil)
+    }
 }
