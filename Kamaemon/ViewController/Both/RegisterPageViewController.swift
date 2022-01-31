@@ -193,7 +193,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                         var ref: DatabaseReference!
                         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
                         if #available(iOS 15.0, *) {
-                            ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :newUser.UID, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(newUser.BirthDate.ISO8601Format()), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+                            ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(newUser.BirthDate.ISO8601Format()), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
                         } else {
                             // Fallback on earlier versions
                         }
