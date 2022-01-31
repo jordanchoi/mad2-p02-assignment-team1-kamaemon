@@ -37,7 +37,6 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
            super.viewDidLoad()
            self.view.layoutIfNeeded()
            //to call viewDidLayoutSubviews() and get dynamic width and height of scrollview
-
            self.scrollView.delegate = self
            scrollView.isPagingEnabled = true
            scrollView.showsHorizontalScrollIndicator = false

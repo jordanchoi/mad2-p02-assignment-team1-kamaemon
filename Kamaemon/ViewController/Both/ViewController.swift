@@ -10,6 +10,7 @@ import Firebase
 import FirebaseAuth
 
 class ViewController: UIViewController, UITextFieldDelegate{
+    let prefs = SharedPrefsController()
     let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
     var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     @IBOutlet weak var EmailAddress: UITextField!
@@ -44,7 +45,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
 
     @IBAction func LogIn(_ sender: Any) {
-        Auth.auth().signIn(withEmail: EmailAddress!.text!, password: Password!.text!) { (authResult, error) in
+        Auth.auth().signIn(withEmail: EmailAddress!.text!, password: Password!.text!) { [self] (authResult, error) in
             if let error = error as? NSError {
                switch AuthErrorCode(rawValue: error.code) {
                case .wrongPassword:
@@ -61,7 +62,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
                }
              } else {
                  print("User signs in successfully")
-                 
+                 prefs.modifyLogin(isloggedIn: true, userID: Auth.auth().currentUser!.uid)
                  //get user and put it to user if user and home if volunteer
                  self.ref.child("users").child((authResult?.user.uid)!).child("UserType").observeSingleEvent(of: .value) { snapshot in
                      print((authResult?.user.uid)!)

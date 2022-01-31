@@ -31,7 +31,6 @@ class MessageViewController : MessagesViewController{
     var chosenuser : User?{
         didSet{
             navigationItem.title = chosenuser?.n
-            navigationItem.setLeftBarButton(UIBarButtonItem(title: "Back", style: .plain, target: nil, action: #selector(backTap(sender:))), animated: true)
         }
     }
 
@@ -88,7 +87,7 @@ class MessageViewController : MessagesViewController{
     }
     
     @objc func backTap(sender: UIBarButtonItem){
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

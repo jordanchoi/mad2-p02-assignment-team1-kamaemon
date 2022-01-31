@@ -44,12 +44,9 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         }
     }
     
-    @IBAction func back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Event Details"
         event = appDelegate.selectedEvent!
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let dateFormatter2 = ISO8601DateFormatter()
@@ -213,7 +210,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             ref.child("Jobs").child(String(event!.ID)).child("eventStatus").setValue("Cancelled")
             ref.child("Jobs").child(String(event!.ID)).child("volunteerID").setValue("")
             appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }))
 
         // show the alert
@@ -237,7 +234,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             ref.child("Jobs").child(String(event!.ID)).child("eventStatus").setValue("Accepted")
             ref.child("Jobs").child(String(event!.ID)).child("volunteerID").setValue(Auth.auth().currentUser!.uid)
             appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.cancel, handler: nil))
 
@@ -249,9 +246,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBAction func openChat(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let chat = storyboard.instantiateViewController(withIdentifier: "Chat")
-        let navController = UINavigationController(rootViewController: chat)
-        navController.modalPresentationStyle = .fullScreen
-        self.present(navController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(chat, animated: true)
     }
     
     func showAlert(){
