@@ -10,9 +10,11 @@ import UIKit
 import CoreLocation
 import MapKit
 import Lottie
+import Firebase
+import FirebaseAuth
 
-class UserViewEventDetailsViewController : UIViewController {
-    
+class UserViewEventDetailsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+
     // Event View Items in Storyboard
     @IBOutlet weak var eventStatusBarView: UIView!
     @IBOutlet weak var eventLocationMKView: MKMapView!
@@ -32,14 +34,24 @@ class UserViewEventDetailsViewController : UIViewController {
     @IBOutlet weak var volunteerSkillTableView: UITableView!
     @IBOutlet weak var volunteerSkillTitleLbl: UILabel!
     @IBOutlet weak var noVolunteersLbl: UILabel!
+    @IBOutlet weak var callBtn: UIButton!
+    @IBOutlet weak var msgBtn: UIButton!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var volunteerSkills:[String] = []
+    let ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // disable navigation bar hide
         navigationController?.hidesBarsOnSwipe = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        let nib = UINib(nibName: "VolunteerSkillsTableViewCell", bundle: nil)
+        volunteerSkillTableView.register(nib, forCellReuseIdentifier: "skillsCell")
+        volunteerSkillTableView.delegate = self
+        volunteerSkillTableView.dataSource = self
+        volunteerSkillTableView.reloadData()
         
         if (appDelegate.selectedEventDetails != nil) {
             // Event Object
@@ -69,17 +81,14 @@ class UserViewEventDetailsViewController : UIViewController {
                     eventStatusBarView.backgroundColor = .orange
                 } else {
                     eventStatusBarView.backgroundColor = .green
-                    volunteerPFPIV.isHidden = true
-                    volunteerNameLbl.isHidden = true
-                    volunteerGenderIV.isHidden = true
-                    volunteerSkillTitleLbl.isHidden = true
-                    volunteerSkillTableView.isHidden = true
+                    hideVolunteerInformation()
                 }
                 
             } else if (eventObject.Status == "Cancelled" || eventObject.Status == "Completed") {
                 eventActionBtn.isEnabled = false
                 if (eventObject.Status == "Cancelled") {
                     eventStatusBarView.backgroundColor = .red
+                    hideVolunteerInformation()
                 } else {
                     eventStatusBarView.backgroundColor = .purple
 
@@ -102,6 +111,21 @@ class UserViewEventDetailsViewController : UIViewController {
                     volunteerGenderIV.isHidden = true
                 }
                 
+                // get skills
+                ref.child("volunteers").child(eventObject.volunteer.UID).observeSingleEvent(of: .value) { DataSnapshot in
+                    let value = DataSnapshot.value as? [String: AnyObject]
+                    
+                    print(value)
+                    if (value != nil) {
+                        if (value!["Qualifications"] != nil) {
+                            for skills in value!["Qualifications"]! as! NSArray {
+                                self.volunteerSkills.append(skills as! String)
+                                print(skills as! String)
+                            }
+                        }
+                        self.volunteerSkillTableView.reloadData()
+                    }
+                }
             }
             
         } else
@@ -131,4 +155,33 @@ class UserViewEventDetailsViewController : UIViewController {
     @IBAction func callVolunteerDidPressed(_ sender: Any) {
     }
     
+    func hideVolunteerInformation() {
+        volunteerPFPIV.isHidden = true
+        volunteerNameLbl.isHidden = true
+        volunteerGenderIV.isHidden = true
+        volunteerSkillTitleLbl.isHidden = true
+        volunteerSkillTableView.isHidden = true
+        callBtn.isHidden = true
+        msgBtn.isHidden = true
+        noVolunteersLbl.isHidden = false
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return volunteerSkills.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell: VolunteerSkillsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "skillsCell", for: indexPath) as! VolunteerSkillsTableViewCell
+        
+        cell.selectionStyle = .none
+        
+        cell.skillsLbl.text = volunteerSkills[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }

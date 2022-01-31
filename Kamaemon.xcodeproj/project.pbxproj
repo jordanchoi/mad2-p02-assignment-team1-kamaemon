@@ -39,6 +39,8 @@
 		A0B16FCC27A7117D00953BBB /* UILabelPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B16FCB27A7117D00953BBB /* UILabelPadding.swift */; };
 		A0B9A030279A7EF300F8E7BD /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A0B9A02F279A7EF300F8E7BD /* FirebaseStorage */; };
 		A0DAF46D27A74A09006D6C4D /* UserViewEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DAF46C27A74A09006D6C4D /* UserViewEventDetailsViewController.swift */; };
+		A0DCA2DC27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCA2DA27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.swift */; };
+		A0DCA2DD27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0DCA2DB27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.xib */; };
 		E66E64C3279308B2002BBE7E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C2279308B2002BBE7E /* FirebaseAuth */; };
 		E66E64C5279308B2002BBE7E /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C4279308B2002BBE7E /* FirebaseAuthCombine-Community */; };
 		E66E64C7279308B2002BBE7E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E66E64C6279308B2002BBE7E /* FirebaseDatabase */; };
@@ -90,6 +92,8 @@
 		A0AF6850279BE06800E5AACF /* 4432-face-scanning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "4432-face-scanning.json"; sourceTree = "<group>"; };
 		A0B16FCB27A7117D00953BBB /* UILabelPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelPadding.swift; sourceTree = "<group>"; };
 		A0DAF46C27A74A09006D6C4D /* UserViewEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewEventDetailsViewController.swift; sourceTree = "<group>"; };
+		A0DCA2DA27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VolunteerSkillsTableViewCell.swift; path = Event/VolunteerSkillsTableViewCell.swift; sourceTree = "<group>"; };
+		A0DCA2DB27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = VolunteerSkillsTableViewCell.xib; path = Event/VolunteerSkillsTableViewCell.xib; sourceTree = "<group>"; };
 		A842F2E0879D96072A3C49E9 /* Pods-Kamaemon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.debug.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.debug.xcconfig"; sourceTree = "<group>"; };
 		B6819080EF999DAD768FF109 /* Pods-Kamaemon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kamaemon.release.xcconfig"; path = "Target Support Files/Pods-Kamaemon/Pods-Kamaemon.release.xcconfig"; sourceTree = "<group>"; };
 		E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */,
 				A09B0DD327A5088E002F6D64 /* UserEventsTableViewCell.swift */,
 				A09B0DD427A5088E002F6D64 /* UserEventsTableViewCell.xib */,
+				A0DCA2DA27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.swift */,
+				A0DCA2DB27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.xib */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				A04445812791BF3600689F32 /* LaunchScreen.storyboard in Resources */,
 				0EA03F5F27959B6700E8BDA9 /* (null) in Resources */,
 				0EF804592796E68A000AA92B /* Assets.xcassets in Resources */,
+				A0DCA2DD27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.xib in Resources */,
 				A09B0DD627A5088E002F6D64 /* UserEventsTableViewCell.xib in Resources */,
 				A04445792791BF3300689F32 /* Main.storyboard in Resources */,
 				A07D290927A3A96A00D886E8 /* User.storyboard in Resources */,
@@ -451,6 +458,7 @@
 				A044457C2791BF3300689F32 /* Kamaemon.xcdatamodeld in Sources */,
 				A08B96792799DC260023C564 /* IdentityVerificationViewController.swift in Sources */,
 				A0DAF46D27A74A09006D6C4D /* UserViewEventDetailsViewController.swift in Sources */,
+				A0DCA2DC27A823CD002CEBF9 /* VolunteerSkillsTableViewCell.swift in Sources */,
 				0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */,
 				E6BC1C00279AA2670049908B /* userDAL.swift in Sources */,
 				0EA923A627A8115E00C8320C /* SharedPrefs.swift in Sources */,
@@ -612,7 +620,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CZ768BK8BN;
+				DEVELOPMENT_TEAM = Q743BBP7N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
@@ -630,7 +638,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon2;
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -647,7 +655,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CZ768BK8BN;
+				DEVELOPMENT_TEAM = Q743BBP7N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
@@ -665,7 +673,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon2;
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

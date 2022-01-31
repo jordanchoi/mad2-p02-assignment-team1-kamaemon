@@ -97,9 +97,9 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                 var completed:Int = 0
                 
                 for e in self.userEventsList {
-                    if ((e.Status == "Completed" || e.EventDate < Date()) && e.Status != "Cancelled") {
+                    if (e.Status == "Completed") {
                         completed += 1
-                    } else if (e.EventDate >= Date() && e.Status == "Accepted") {
+                    } else if (e.EventDate >= Date() && (e.Status == "Accepted" || e.Status == "Ongoing")) {
                         ongoing += 1
                     }
                 }

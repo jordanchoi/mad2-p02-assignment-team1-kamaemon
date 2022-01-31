@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -894,7 +894,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjA-wW-PCh">
-                                <rect key="frame" x="330" y="436" width="42.5" height="31"/>
+                                <rect key="frame" x="330" y="436" width="43.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="mappin.and.ellipse" catalog="system"/>
                                 <connections>
@@ -1864,6 +1864,9 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="wDG-AZ-Db3"/>
                     <navigationItem key="navigationItem" id="IcO-hu-g8u"/>
                     <connections>
+                        <outlet property="completedHours" destination="ilx-hR-5Yw" id="uS2-ye-DIn"/>
+                        <outlet property="todayHours" destination="dtf-aN-VUB" id="56E-jF-dRj"/>
+                        <outlet property="upcomingHours" destination="6XY-S3-0Z8" id="cgC-k8-Ix2"/>
                         <outlet property="user" destination="fQe-ej-oeW" id="Z5R-jV-5Pb"/>
                     </connections>
                 </viewController>
