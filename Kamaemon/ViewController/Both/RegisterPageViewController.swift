@@ -194,6 +194,13 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
                         if #available(iOS 15.0, *) {
                             ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(newUser.BirthDate.ISO8601Format()), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+                            
+                            //here
+                            let storyboard = UIStoryboard(name: "User", bundle: nil)
+                            let controller = storyboard.instantiateViewController(identifier: "UserHome")
+                                        controller.modalPresentationStyle = .fullScreen
+                                        controller.modalTransitionStyle = .flipHorizontal
+                            self.present(controller, animated: true, completion: nil)
                         } else {
                             // Fallback on earlier versions
                         }
