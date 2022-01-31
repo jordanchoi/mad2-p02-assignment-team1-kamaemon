@@ -13,6 +13,8 @@ class OnboardingViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var pageControl: UIPageControl!
     
     @IBAction func getStartedBtnClick(_ sender: Any) {
+        let prefs = SharedPrefsController()
+        prefs.modifyNewUser(isNew: false)
         let controller = storyboard?.instantiateViewController(identifier: "ViewController") as! UIViewController
                     controller.modalPresentationStyle = .fullScreen
                     controller.modalTransitionStyle = .flipHorizontal

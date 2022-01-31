@@ -14,22 +14,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
 
 
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
+    let storyboard2 = UIStoryboard(name: "User", bundle: nil)
        func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
            let prefs = SharedPrefsController()
+           
            if(prefs.IsUserLoggedIn()){
-               guard let windowScene = scene as? UIWindowScene else { return }
-               let vc = storyboard.instantiateViewController (withIdentifier: "home")
-               window = UIWindow(windowScene: windowScene)
-               window?.rootViewController = vc
-               window?.makeKeyAndVisible()
+               if(prefs.isUserVolunteer()){
+                   guard let windowScene = scene as? UIWindowScene else { return }
+                   let vc = storyboard.instantiateViewController (withIdentifier: "home")
+                   window = UIWindow(windowScene: windowScene)
+                   window?.rootViewController = vc
+                   window?.makeKeyAndVisible()
+               }
+               else{
+                   guard let windowScene = scene as? UIWindowScene else { return }
+                   let vc = storyboard2.instantiateViewController (withIdentifier: "UserHome")
+                   window = UIWindow(windowScene: windowScene)
+                   window?.rootViewController = vc
+                   window?.makeKeyAndVisible()
+               }
            }
            else{
-               guard let windowScene = scene as? UIWindowScene else { return }
-               let vc = storyboard.instantiateViewController (withIdentifier: "onboarding") as! OnboardingViewController
-               window = UIWindow(windowScene: windowScene)
-               window?.rootViewController = vc
-               window?.makeKeyAndVisible()
+               if(!prefs.IsNew()){
+                   guard let windowScene = scene as? UIWindowScene else { return }
+                   let vc = storyboard.instantiateViewController (withIdentifier: "ViewController")
+                   window = UIWindow(windowScene: windowScene)
+                   window?.rootViewController = vc
+                   window?.makeKeyAndVisible()
+               }
+               else{
+                   guard let windowScene = scene as? UIWindowScene else { return }
+                   let vc = storyboard.instantiateViewController (withIdentifier: "onboarding") as! OnboardingViewController
+                   window = UIWindow(windowScene: windowScene)
+                   window?.rootViewController = vc
+                   window?.makeKeyAndVisible()
+               }
+               
            }
           
        }
