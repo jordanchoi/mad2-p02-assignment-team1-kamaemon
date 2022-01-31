@@ -109,9 +109,21 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
                 }
                 appDelegate.qualificationsList = q
             }
-           
+            ref.child("Jobs").observe(.value) { snap in
+                            let jobs = snap.value as? [String: AnyObject]
+                            var hours = 0
+                            for i in jobs!.keys{
+                                if(jobs![i]!["volunteerID"] as! String == currentuser!.uid && jobs![i]!["eventStatus"] as! String == "Completed"){
+                                    let jobhours =  jobs![i]!["eventHrs"] as! Int
+                                    hours =  hours + jobhours
+                                }
+                            }
+                            self.hours.text = String(hours)
+                            //if(jobs?["volunteer"])
+                            ref.child("volunteers").child(currentuser!.uid).child("Hours").setValue(hours)
+                        }
             self.Qualifications = appDelegate.qualificationsList
-            self.hours.text = (da?["Hours"] as? String)!
+            //self.hours.text = (da?["Hours"] as? String)!
             //SelectionQualificationViewController().Qualifications =
             DispatchQueue.global(qos: .background).async {
                 DispatchQueue.main.async {
@@ -121,6 +133,8 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
         }
     }
     @IBAction func logOut(_ sender: Any) {
+        let prefs = SharedPrefsController()
+        prefs.modifyLogin(isloggedIn: false, userID: "")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vp = storyboard.instantiateViewController(withIdentifier: "ViewController")
         let navController = UINavigationController(rootViewController: vp)

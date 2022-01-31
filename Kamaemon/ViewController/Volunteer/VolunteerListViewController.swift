@@ -24,6 +24,7 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     
     @objc func refresh(_ sender: AnyObject) {
        // Code to refresh table view
+        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         volunteerList = appDelegate.volunteerList
         print("refreshed")
         tableView.reloadData()
@@ -41,8 +42,6 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        segmented.selectedSegmentIndex = 0;
-        currentTableView = 0
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
         appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
@@ -56,7 +55,7 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         
         let cell: EventTableViewCell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateStyle = .long
         let event = volunteerList[currentTableView][indexPath.row]
         cell.category.text = event.Category
         cell.location.text = event.Location
@@ -97,14 +96,12 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         if(currentTableView == 0){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let accept = storyboard.instantiateViewController(withIdentifier: "Accept")
-            let navController = UINavigationController(rootViewController: accept)
-            self.present(navController, animated: true, completion: nil)
+            self.navigationController?.pushViewController(accept, animated: true)
         }
         else if(currentTableView == 1){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cancel = storyboard.instantiateViewController(withIdentifier: "Cancel")
-            let navController = UINavigationController(rootViewController: cancel)
-            self.present(navController, animated: true, completion: nil)
+            self.navigationController?.pushViewController(cancel, animated: true)
         }
     }
     
