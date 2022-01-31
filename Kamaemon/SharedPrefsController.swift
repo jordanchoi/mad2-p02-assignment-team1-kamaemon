@@ -25,8 +25,7 @@ class SharedPrefsController {
             fatalError("unresolved error \(error), \(error.userInfo)")
         }
     }
-    func isUserVolunteer()->Bool{
-        var volunteer = false
+    func getLoginUID()->String{
         var id = ""
         var prefs:[NSManagedObject] = []
         let context = appDelegate.persistentContainer.viewContext
@@ -38,20 +37,10 @@ class SharedPrefsController {
                 for p in prefs{
                     id = p.value(forKeyPath: "userID") as! String
                 }
-            var ref: DatabaseReference!
-            ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-            ref.child("users").child(id).observeSingleEvent(of: .value, with: { snapshot in
-                let value = snapshot.value as? NSDictionary
-                let cat = value?["UserType"] as! String
-                if(cat == "Volunteer"){
-                    volunteer = true
-                }
-            })
-            
         }catch let error as NSError{
             fatalError("unresolved error \(error), \(error.userInfo)")
         }
-        return volunteer
+        return id
     }
     func deleteRow(){
         var contact:[NSManagedObject] = []
@@ -67,25 +56,6 @@ class SharedPrefsController {
         }catch let error as NSError{
             fatalError("unresolved error \(error), \(error.userInfo)")
         }
-    }
-    func IsUserLoggedIn()->Bool{
-        var login = false
-        var prefs:[NSManagedObject] = []
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SharedPreference")
-        do{
-            prefs = try context.fetch(fetchRequest)
-            print(String(prefs.count))
-                for p in prefs{
-                    login = p.value(forKeyPath: "hasLoggedIn") as! Bool
-                }
-            
-            
-        }catch let error as NSError{
-            fatalError("unresolved error \(error), \(error.userInfo)")
-        }
-        return login
     }
     func modifyNewUser(isNew:Bool){
         let context = appDelegate.persistentContainer.viewContext

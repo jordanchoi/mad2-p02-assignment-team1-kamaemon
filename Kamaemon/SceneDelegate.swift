@@ -7,7 +7,7 @@
 
 import UIKit
 import CircleBar
-
+import Firebase
 class SceneDelegate: UIResponder, UIWindowSceneDelegate{
 
     var window: UIWindow?
@@ -15,24 +15,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
 
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let storyboard2 = UIStoryboard(name: "User", bundle: nil)
+    
        func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-           let prefs = SharedPrefsController()
            
-           if(prefs.IsUserLoggedIn()){
-               if(prefs.isUserVolunteer()){
-                   guard let windowScene = scene as? UIWindowScene else { return }
-                   let vc = storyboard.instantiateViewController (withIdentifier: "home")
-                   window = UIWindow(windowScene: windowScene)
-                   window?.rootViewController = vc
-                   window?.makeKeyAndVisible()
-               }
-               else{
-                   guard let windowScene = scene as? UIWindowScene else { return }
-                   let vc = storyboard2.instantiateViewController (withIdentifier: "UserHome")
-                   window = UIWindow(windowScene: windowScene)
-                   window?.rootViewController = vc
-                   window?.makeKeyAndVisible()
-               }
+           let prefs = SharedPrefsController()
+           let id = prefs.getLoginUID()
+           var volunteer = false
+           
+           var ref: DatabaseReference!
+           ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+           
+           if(id != ""){
+               ref.child("users").child(id).observeSingleEvent(of: .value, with: { [self] snapshot in
+                       let value = snapshot.value as? NSDictionary
+                       let cat = value?["UserType"] as! String
+                       if(cat == "Volunteer"){
+                           volunteer = true
+                       }
+                       if(volunteer){
+                           guard let windowScene = scene as? UIWindowScene else { return }
+                           let vc = storyboard.instantiateViewController (withIdentifier: "home")
+                           window = UIWindow(windowScene: windowScene)
+                           window?.rootViewController = vc
+                           window?.makeKeyAndVisible()
+                       }
+                       else{
+                           guard let windowScene = scene as? UIWindowScene else { return }
+                           let vc = storyboard2.instantiateViewController (withIdentifier: "UserHome")
+                           window = UIWindow(windowScene: windowScene)
+                           window?.rootViewController = vc
+                           window?.makeKeyAndVisible()
+                       }
+                   })
            }
            else{
                if(!prefs.IsNew()){
@@ -49,9 +63,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
                    window?.rootViewController = vc
                    window?.makeKeyAndVisible()
                }
-               
            }
-          
        }
 
     func sceneDidDisconnect(_ scene: UIScene) {

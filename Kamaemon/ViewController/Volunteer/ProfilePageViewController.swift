@@ -134,7 +134,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
     }
     @IBAction func logOut(_ sender: Any) {
         let prefs = SharedPrefsController()
-        prefs.modifyLogin(isloggedIn: false, userID: "")
+        prefs.deleteRow()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vp = storyboard.instantiateViewController(withIdentifier: "ViewController")
         let navController = UINavigationController(rootViewController: vp)
