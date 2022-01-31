@@ -19,6 +19,7 @@ class Event {
     var Status:String = ""
     var Category:String = ""
     var EventDate:Date = Date()
+    var volunteer:User = User()
     
     init(){}
     
