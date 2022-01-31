@@ -64,8 +64,9 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                 if (value != nil) {
                     let dateStr = value!["eventDate"] as! String
                     let eventDate:Date? = formatter4Get.date(from: dateStr)
-                    
-                    let job = Event(desc: value!["eventDesc"] as! String, hours: Int(value!["eventHrs"] as! Int32), location: value!["eventLocation"] as! String, uID: value!["userID"] as! String, vID: value!["volunteerID"] as! String, vName: "", name: value!["eventName"] as! String, stat: value!["eventStatus"] as! String, cat: value!["eventCat"] as! String, date: eventDate! ?? Date())
+                 //error
+                    let dateFormatter = ISO8601DateFormatter()
+                    let job = Event(desc: value!["eventDesc"] as! String, hours: Int(value!["eventHrs"] as! Int32), location: value!["eventLocation"] as! String, uID: value!["userID"] as! String, vID: value!["volunteerID"] as! String, vName: "", name: value!["eventName"] as! String, stat: value!["eventStatus"] as! String, cat: value!["eventCat"] as! String, date: dateFormatter.date(from: value!["eventDate"] as! String)! as Date)
                     
                     var volunteerName:String = ""
                     if (value!["volunteerID"] as! String != "")
