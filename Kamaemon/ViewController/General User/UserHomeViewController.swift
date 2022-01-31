@@ -24,6 +24,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     // Database Reference for Firebase
     var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     var user:User = User()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +76,11 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
                             print(value)
                             if (value != nil)
                             {
-                                job.VolunteerName = value!["Name"] as! String
+                                let formatter4 = DateFormatter()
+                                formatter4.dateFormat = "d MMM yyyy"
+                                var volunteer:User = User(userUID: value!["userUID"] as! String, userType: value!["UserType"] as! String, name: value!["Name"] as! String, gender: value!["Gender"] as! String, phonenumber: value!["PhoneNumber"] as! String, birthdate: formatter4.date(from: value!["DOB"] as! String) ?? Date(), pfpurl: value!["PFPURL"] as! String, isnewuser: value!["isNewUser"] as! Int)
+                                job.volunteer = volunteer
+                                // job.VolunteerName = value!["Name"] as! String
                             }
                         }
                     }
@@ -133,7 +138,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Accepted") {
             cell.statusViewBar.backgroundColor = .orange
             cell.eventStatusLbl.backgroundColor = .orange
-            cell.eventRemarksLbl.text = "Your request has been accepted by \(event.VolunteerName!)"
+            cell.eventRemarksLbl.text = "Your request has been accepted by \(event.volunteer.n)"
         } else if (event.Status == "Cancelled") {
             cell.statusViewBar.backgroundColor = .red
             cell.eventStatusLbl.backgroundColor = .red
@@ -145,7 +150,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Completed") {
             cell.statusViewBar.backgroundColor = .purple
             cell.eventStatusLbl.backgroundColor = .purple
-            cell.eventRemarksLbl.text = "Your request has been completed by \(event.VolunteerName!)"
+            cell.eventRemarksLbl.text = "Your request has been completed by \(event.volunteer.n)"
         }
         else {
             cell.statusViewBar.backgroundColor = .black
@@ -170,6 +175,10 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        appDelegate.selectedEventDetails = userEventsList[indexPath.row]
+//        let destinationVC = UserViewEventDetailsViewController()
+//        destinationVC.eventObject = selectedEvent
+        self.performSegue(withIdentifier: "detailsSegue", sender: self)
         /*
         appDelegate.selectedEvent = volunteerList[currentTableView][indexPath.row]
         if(currentTableView == 0){

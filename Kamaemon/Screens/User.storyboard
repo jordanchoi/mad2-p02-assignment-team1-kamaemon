@@ -652,7 +652,7 @@
                                                     <color key="baseBackgroundColor" name="Green_Main"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <segue destination="Exq-WE-5iW" kind="show" id="8zf-KY-QeP"/>
+                                                    <segue destination="Exq-WE-5iW" kind="show" identifier="" id="8zf-KY-QeP"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -822,7 +822,7 @@
                         <outlet property="totalNumCompletedEventsLbl" destination="q0x-Jp-55r" id="cUm-sj-DbF"/>
                         <outlet property="totalNumEvents" destination="tWK-8n-iEs" id="rPQ-AF-dQK"/>
                         <outlet property="totalNumUpcomingsLbl" destination="RUA-Am-ql4" id="1Ew-6K-JzY"/>
-                        <segue destination="Exq-WE-5iW" kind="show" id="BYH-51-97p"/>
+                        <segue destination="Exq-WE-5iW" kind="show" identifier="detailsSegue" id="BYH-51-97p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2EH-h0-Ekt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -857,7 +857,7 @@
                                                     <constraint firstAttribute="height" constant="6" id="wkU-ES-qRg"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4M-0u-keY">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4M-0u-keY">
                                                 <rect key="frame" x="30" y="27" width="221" height="19"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="19" id="Hpe-sY-wRQ"/>
@@ -890,7 +890,7 @@
                                                     <constraint firstAttribute="height" constant="23.5" id="VYh-o6-Ntp"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DN-S5-Cue">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DN-S5-Cue">
                                                 <rect key="frame" x="65" y="56" width="321" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
@@ -914,10 +914,10 @@
                                                     <constraint firstAttribute="height" constant="23.5" id="RpZ-M3-QT8"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimated Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hg-W0-eWj">
-                                                <rect key="frame" x="65" y="138" width="142" height="26"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimated Duration" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hg-W0-eWj">
+                                                <rect key="frame" x="65" y="138" width="328" height="26"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="142" id="euG-MV-yt6"/>
+                                                    <constraint firstAttribute="width" constant="328" id="euG-MV-yt6"/>
                                                     <constraint firstAttribute="height" constant="26" id="v2J-F0-eFq"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1154,6 +1154,7 @@
                         <outlet property="eventLocLbl" destination="7DN-S5-Cue" id="RSO-F4-Deq"/>
                         <outlet property="eventLocationMKView" destination="PEC-Zk-VGI" id="ctv-Lw-okY"/>
                         <outlet property="eventNameLbl" destination="q4M-0u-keY" id="czR-Qz-2tQ"/>
+                        <outlet property="eventStatusBarView" destination="s4D-Va-UWG" id="WdF-yy-ZAV"/>
                         <outlet property="eventStatusLbl" destination="9xx-cK-lej" id="ivy-1n-lYU"/>
                         <outlet property="noVolunteersLbl" destination="xlS-3B-1ce" id="gFS-qk-dKp"/>
                         <outlet property="volunteerGenderIV" destination="cvM-9f-Trp" id="ifv-HV-zoX"/>
