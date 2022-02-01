@@ -192,7 +192,7 @@
                                             <constraint firstAttribute="height" constant="204" id="1dk-rp-j8a"/>
                                         </constraints>
                                     </mapView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Jdh-P6-xmp">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="fill" placeholder="Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Jdh-P6-xmp">
                                         <rect key="frame" x="45" y="226" width="324" height="129"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
@@ -254,6 +254,9 @@
                                         <rect key="frame" x="310" y="477" width="72" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Search"/>
+                                        <connections>
+                                            <action selector="searchLocationBtnDidPressed:" destination="UpX-4C-TBC" eventType="touchUpInside" id="l1o-EQ-QXM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -314,9 +317,11 @@
                         <outlet property="categorySelect" destination="dX5-9A-dpp" id="4n0-h1-ade"/>
                         <outlet property="date" destination="CFi-d7-ioK" id="Dmm-G6-8Vl"/>
                         <outlet property="des" destination="Jdh-P6-xmp" id="C6k-i7-n3m"/>
+                        <outlet property="eventLocMK" destination="dvU-9f-Dl7" id="gnr-Oq-mj7"/>
                         <outlet property="hours" destination="8GI-oM-h2S" id="Qbd-tL-uQS"/>
                         <outlet property="hoursSelect" destination="VBS-WB-II9" id="QkU-ab-aUr"/>
                         <outlet property="name" destination="x5h-i2-8wI" id="5wg-GR-mfx"/>
+                        <outlet property="searchAddrBtn" destination="953-Jq-9Us" id="nmK-yf-PB4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dKI-3T-Wof" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import DropDown
+import CoreLocation
+import MapKit
 
 class AddEventViewController : UIViewController, UITextFieldDelegate {
     
@@ -22,7 +24,9 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var des: UITextField!
     @IBOutlet weak var name: UITextField!
-
+    @IBOutlet weak var eventLocMK: MKMapView!
+    @IBOutlet weak var searchAddrBtn: UIButton!
+    
     var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     let catDropDown = DropDown()
     let hrsDropDown = DropDown()
@@ -31,11 +35,9 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-        /*
         ref.child("Jobs")
         
-        //date.frame = .init(x: 45, y: 50, width: 325, height: date.bounds.size.height)
+        date.frame = .init(x: 45, y: 50, width: 325, height: date.bounds.size.height)
         catDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.category.text = catDropDown.dataSource[index]
             category.textColor = UIColor.black
@@ -67,6 +69,7 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         address.setLeftPaddingPoints(10)
         des.setLeftPaddingPoints(10)
         name.setLeftPaddingPoints(10)
+    
         
         // Dismiss keyboard on click background
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -122,5 +125,8 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         
         
     }
-         */
+    
+    @IBAction func searchLocationBtnDidPressed(_ sender: Any) {
+    }
+
 }
