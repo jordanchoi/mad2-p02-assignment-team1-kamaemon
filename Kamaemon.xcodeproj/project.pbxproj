@@ -55,6 +55,7 @@
 		E6A97EC427973E4200E7DACC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EC327973E4200E7DACC /* Message.swift */; };
 		E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */; };
 		E6AE62622795530F00B41E63 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE62612795530F00B41E63 /* user.swift */; };
+		E6B70A6527A99F2A00F42145 /* EditProfileUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B70A6427A99F2A00F42145 /* EditProfileUserViewController.swift */; };
 		E6BC1BFD279A88BB0049908B /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */; };
 		E6BC1C00279AA2670049908B /* userDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC1BFF279AA2670049908B /* userDAL.swift */; };
 		E6BC1C02279AAFBD0049908B /* SelectionQualificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */; };
@@ -106,6 +107,7 @@
 		E6A97EC327973E4200E7DACC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPageViewController.swift; sourceTree = "<group>"; };
 		E6AE62612795530F00B41E63 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		E6B70A6427A99F2A00F42145 /* EditProfileUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileUserViewController.swift; sourceTree = "<group>"; };
 		E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		E6BC1BFF279AA2670049908B /* userDAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userDAL.swift; sourceTree = "<group>"; };
 		E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionQualificationViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				E69E705A279D39750062C68D /* UserEventsTableViewController.swift */,
 				A08E153727A375B7008BC096 /* UserProfileTableViewController.swift */,
 				A0DAF46C27A74A09006D6C4D /* UserViewEventDetailsViewController.swift */,
+				E6B70A6427A99F2A00F42145 /* EditProfileUserViewController.swift */,
 			);
 			path = "General User";
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */,
 				0EEE59472796D594009CCD01 /* VolunteerListViewController.swift in Sources */,
 				0EA923A827A8139900C8320C /* SharedPrefsController.swift in Sources */,
+				E6B70A6527A99F2A00F42145 /* EditProfileUserViewController.swift in Sources */,
 				E6A97EC427973E4200E7DACC /* Message.swift in Sources */,
 				E69E705B279D39750062C68D /* UserEventsTableViewController.swift in Sources */,
 			);
@@ -620,7 +624,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CZ768BK8BN;
+				DEVELOPMENT_TEAM = Q743BBP7N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
@@ -638,7 +642,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon2;
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -655,7 +659,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CZ768BK8BN;
+				DEVELOPMENT_TEAM = Q743BBP7N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
@@ -673,7 +677,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon2;
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.p02.team1.Kamaemon4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var verifyPassword:String?
     var window: UIWindow?
     var selectedEventDetails:Event?
-
+    var userprofilevolunteerList : [User] = []
+    var userprofilevolunteerUIDList : [String] = []
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared().isEnabled = true

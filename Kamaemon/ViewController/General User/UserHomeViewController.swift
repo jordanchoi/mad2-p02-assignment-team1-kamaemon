@@ -19,6 +19,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var totalNumEvents: UILabel!
     @IBOutlet weak var eventTableView: UITableView!
     
+    @IBOutlet weak var profilepic: UIImageView!
     //
     var userEventsList:[Event] = []
     // Database Reference for Firebase
@@ -50,6 +51,18 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             print(value!["DOB"] as! String)
             self.user = User(userUID: value!["userUID"] as! String, userType: value!["UserType"] as! String, name: value!["Name"] as! String, gender: value!["Gender"] as! String, phonenumber: value!["PhoneNumber"] as! String, birthdate: formatter4.date(from: value!["DOB"] as! String) ?? Date(), pfpurl: value!["PFPURL"] as! String, isnewuser: value!["isNewUser"] as! Int)
             self.name.text = "Hi " + self.user.n
+            if let url = URL(string: value!["PFPURL"] as! String){
+                if let data = try? Data(contentsOf: url) {
+                                if let image = UIImage(data: data){
+                                    DispatchQueue.main.async {
+//                                        self.profilePic = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                                        self.profilepic.layer.cornerRadius = (self.profilepic.frame.size.width ) / 2
+                                        self.profilepic.clipsToBounds = true
+                                        self.profilepic.image = image
+                                    }
+                                }
+                            }
+            }
         }
         
         // Retrieve all events started by user
