@@ -150,6 +150,8 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                     }
                     else  {
                         print("success")
+                        let prefs = SharedPrefsController()
+                        prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
                         print(authResult?.user.uid)
                         //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
                         //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
@@ -188,6 +190,8 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                     else  {
                         print("success")
                         print(authResult?.user.uid)
+                        let prefs = SharedPrefsController()
+                        prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
                         //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
                         //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
                         var ref: DatabaseReference!

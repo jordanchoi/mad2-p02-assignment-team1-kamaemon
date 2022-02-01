@@ -17,6 +17,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var usernumber: UILabel!
     
+    @IBOutlet weak var profilePic: UIImageView!
     
     @IBOutlet weak var qualificationTable: UITableView!
     
@@ -90,6 +91,18 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
             let UserCat = value?["PhoneNumber"] as? String ?? "Error"
             self.username.text = Name
             self.usernumber.text = UserCat
+            if let url = URL(string: value!["PFPURL"] as! String){
+                if let data = try? Data(contentsOf: url) {
+                                if let image = UIImage(data: data){
+                                    DispatchQueue.main.async {
+//                                        self.profilePic = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                                        self.profilePic.layer.cornerRadius = (self.profilePic.frame.size.width ) / 2
+                                        self.profilePic.clipsToBounds = true
+                                        self.profilePic.image = image
+                                    }
+                                }
+                            }
+            }
         }) { error in
           print(error.localizedDescription)
         }
@@ -134,7 +147,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
     }
     @IBAction func logOut(_ sender: Any) {
         let prefs = SharedPrefsController()
-        prefs.modifyLogin(isloggedIn: false, userID: "")
+        prefs.deleteRow()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vp = storyboard.instantiateViewController(withIdentifier: "ViewController")
         let navController = UINavigationController(rootViewController: vp)

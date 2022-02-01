@@ -13,6 +13,7 @@ class HomeViewController : UIViewController{
     
     @IBOutlet weak var user: UILabel!
     
+    @IBOutlet var profilePic: UIImageView!
     @IBOutlet weak var upcomingHours: UILabel!
     
     @IBOutlet weak var completedHours: UILabel!
@@ -31,7 +32,7 @@ class HomeViewController : UIViewController{
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getUserDets()
     }
@@ -46,6 +47,18 @@ class HomeViewController : UIViewController{
           let value = snapshot.value as? NSDictionary
             let displayName = value?["Name"] as? String ?? "Error"
             self.user.text = "Hello, " + displayName +  "👋"
+            if let url = URL(string: value!["PFPURL"] as! String){
+                if let data = try? Data(contentsOf: url) {
+                                if let image = UIImage(data: data){
+                                    DispatchQueue.main.async {
+//                                        self.profilePic = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                                        self.profilePic.layer.cornerRadius = (self.profilePic.frame.size.width ) / 2
+                                        self.profilePic.clipsToBounds = true
+                                        self.profilePic.image = image
+                                    }
+                                }
+                            }
+            }
         }) { error in
           print(error.localizedDescription)
         }

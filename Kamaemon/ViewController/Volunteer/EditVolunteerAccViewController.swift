@@ -10,9 +10,11 @@ import UIKit
 import DropDown
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
-class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate{
+class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     
+    @IBOutlet weak var profilepic: UIImageView!
     @IBOutlet weak var genderSelect: UIView!
     @IBOutlet weak var mail: UITextField!
     @IBOutlet weak var mobileNum: UITextField!
@@ -52,7 +54,18 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate{
             let mdate = value!["DOB"] as! String
             self.date.date = dateFormatter.date(from: mdate)as? Date ?? Date()
             self.mobileNum.text = value?["PhoneNumber"] as? String ?? "0"
-            //let Name = value?["Name"] as? String ?? "Error"
+            if let url = URL(string: value!["PFPURL"] as! String){
+                if let data = try? Data(contentsOf: url) {
+                                if let image = UIImage(data: data){
+                                    DispatchQueue.main.async {
+//                                        self.profilePic = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                                        self.profilepic.layer.cornerRadius = (self.profilepic.frame.size.width ) / 2
+                                        self.profilepic.clipsToBounds = true
+                                        self.profilepic.image = image
+                                    }
+                                }
+                            }
+            }
         }) { error in
           print(error.localizedDescription)
         }
@@ -91,7 +104,72 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate{
     }
     
     @IBAction func changePFP(_ sender: Any) {
+        // Configuration for camera - delegate to device
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        picker.allowsEditing = true
+        
+        // Set cameraDevice depending on documents to be uploaded.
+        switch ((sender as AnyObject).tag) {
+        case 1:
+            picker.cameraDevice = .rear;
+            break
+        case 2:
+            picker.cameraDevice = .front;
+            picker.cameraFlashMode = .off
+            break
+        default:
+            print("Other buttons clicked..")
+        }
+        
+        present(picker, animated: true)
+        
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerOriginalImage")] as? UIImage {
+            profilepic.image = image
+        }
+        if let url = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            print(url)
+            var ref: DatabaseReference!
+            ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+            let storageRef = Storage.storage().reference()
+                
+            let imagePickerSourceURL = url
+//            let thisurl:String = url.absoluteString
+//            let fullNameArr = thisurl.components(separatedBy: "/")
+//            let firstName: String = fullNameArr[fullNameArr.count-1]
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            let imageRef = storageRef.child("images/pfp/\(uid)_pfp.png")
+
+            let uploadTask = imageRef.putFile(from: imagePickerSourceURL, metadata: nil) {metadata, error in
+              guard let metadata = metadata else {
+                return
+              }
+              // Metadata contains file metadata such as size, content-type.
+              let size = metadata.size
+              // You can also access to download URL after upload.
+                imageRef.downloadURL { url, error in
+                  if let error = error {
+                    // Handle any errors
+                      print(error)
+                  } else {
+                    // Get the download URL for 'images/stars.jpg'
+                      print(url!)
+                      ref.child("users").child(uid).child("PFPURL").setValue(url!.absoluteString)
+                  }
+               }
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
     
     @IBAction func save(_ sender: Any) {
         let dateFormatter = ISO8601DateFormatter()
@@ -109,6 +187,8 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate{
         }
         _ = navigationController?.popViewController(animated: true)
     }
+    
+    
     
     override func viewDidDisappear(_ animated: Bool) {
 //        let dateFormatter = ISO8601DateFormatter()

@@ -62,7 +62,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
                }
              } else {
                  print("User signs in successfully")
-                 prefs.modifyLogin(isloggedIn: true, userID: Auth.auth().currentUser!.uid)
+                 prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
                  //get user and put it to user if user and home if volunteer
                  self.ref.child("users").child((authResult?.user.uid)!).child("UserType").observeSingleEvent(of: .value) { snapshot in
                      print((authResult?.user.uid)!)

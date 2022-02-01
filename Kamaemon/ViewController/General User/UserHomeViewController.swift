@@ -53,7 +53,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         }
         
         // Retrieve all events started by user
-        let eventRef = ref.child("Jobs").queryOrdered(byChild: "userID").queryEqual(toValue: Auth.auth().currentUser?.uid as? String).observe(DataEventType.value, with: { snapshot in
+        let eventRef = ref.child("Jobs").queryOrdered(byChild: "userID").queryEqual(toValue: Auth.auth().currentUser?.uid as? String).observe(.value) { snapshot in
             print(Auth.auth().currentUser?.uid)
             let formatter4Get = DateFormatter()
             formatter4Get.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
