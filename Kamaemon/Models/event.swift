@@ -48,7 +48,8 @@ class Event {
         self.EventDate = date
     }
     // Jordan added constructor for retrieval of events from firebase
-    init(desc:String,hours:Int,location:String,uID:String,vID:String, vName:String, name:String,stat:String,cat:String, date:Date){
+    init(id:String, desc:String,hours:Int,location:String,uID:String,vID:String, vName:String, name:String,stat:String,cat:String, date:Date){
+        self.ID = id
         self.Desc = desc
         self.Hours = hours
         self.Location = location

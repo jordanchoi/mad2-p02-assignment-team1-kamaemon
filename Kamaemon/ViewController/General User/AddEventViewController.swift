@@ -3,7 +3,7 @@
 //  Kamaemon
 //
 //  Created by Jun Hong on 23/1/22.
-//
+//  Modified and Improved by Jordan on 2/2/22
 
 import Foundation
 import UIKit
@@ -11,34 +11,31 @@ import Firebase
 import FirebaseAuth
 import DropDown
 
-class AddEventViewController : UIViewController, UITextFieldDelegate{
+class AddEventViewController : UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var address: UITextField!
-    
     @IBOutlet weak var dateMeet: UIButton!
     @IBOutlet weak var hoursSelect: UIView!
-    
     @IBOutlet weak var hours: UILabel!
-    
     @IBOutlet weak var date: UIDatePicker!
-    
     @IBOutlet weak var categorySelect: UIView!
-    
     @IBOutlet weak var category: UILabel!
-    
     @IBOutlet weak var des: UITextField!
-    
     @IBOutlet weak var name: UITextField!
+
     var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     let catDropDown = DropDown()
     let hrsDropDown = DropDown()
     var cat = ""
     var hrs = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+        /*
         ref.child("Jobs")
         
-        date.frame = .init(x: 45, y: 50, width: 325, height: date.bounds.size.height)
+        //date.frame = .init(x: 45, y: 50, width: 325, height: date.bounds.size.height)
         catDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.category.text = catDropDown.dataSource[index]
             category.textColor = UIColor.black
@@ -125,5 +122,5 @@ class AddEventViewController : UIViewController, UITextFieldDelegate{
         
         
     }
-    
+         */
 }

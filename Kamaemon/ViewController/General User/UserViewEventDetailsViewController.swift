@@ -81,7 +81,7 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
             eventDescLbl.text = eventObject!.Desc
             
             if (eventObject!.Status == "Ongoing") {
-                eventActionBtn.setTitle("End Request - Volunteer has completed.", for: .normal)
+                eventActionBtn.setTitle("Mark as Completed", for: .normal)
                 // color for the status
                 eventStatusBarView.backgroundColor = .blue
             } else if (eventObject!.Status == "Accepted" || eventObject!.Status == "Open") {
@@ -95,6 +95,8 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                 
             } else if (eventObject!.Status == "Cancelled" || eventObject!.Status == "Completed") {
                 eventActionBtn.isEnabled = false
+                callBtn.isEnabled = false
+                msgBtn.isEnabled = false
                 if (eventObject!.Status == "Cancelled") {
                     eventStatusBarView.backgroundColor = .red
                     hideVolunteerInformation()
@@ -158,10 +160,56 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
     }
     
     @IBAction func eventActionDidPressed(_ sender: Any) {
+        var alertTitle:String = "Confirm Cancellation"
+        var alertMessage:String = "Are you sure you want to cancel the request? This action is irreversible and you may have to create a new request."
+        
+        let alertView = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        
         // Event Statuses - Ongoing, Accepted, Canceled, Completed, Open, Expired?
+        if (eventObject!.Status == "Ongoing") {
+            alertTitle = "Confirm Completion"
+            alertMessage = "Are you sure to mark this request as completed by the volunteer?"
+            alertView.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: { _ in
+                alertView.dismiss(animated: true, completion: nil)
+            }))
+            alertView.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
+                // mark as complete
+                self.updateEventStatus(eID: self.eventObject!.ID, status: "Completed")
+                self.eventObject!.Status = "Completed"
+                self.eventStatusLbl.text = self.eventObject!.Status
+                self.eventActionBtn.isEnabled = false
+            }))
+        } else if (eventObject!.Status == "Accepted" || eventObject!.Status == "Open") {
+            alertView.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: { _ in
+                alertView.dismiss(animated: true, completion: nil)
+            }))
+            alertView.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
+                // cancel request
+                self.updateEventStatus(eID: self.eventObject!.ID, status: "Cancelled")
+                self.eventObject!.Status = "Cancelled"
+                self.eventStatusLbl.text = self.eventObject!.Status
+                self.eventActionBtn.isEnabled = false
+            }))
+        } else {
+            
+        }
+        
+        alertView.title = alertTitle
+        alertView.message = alertMessage
+        self.present(alertView, animated: true, completion: nil)
         
     }
     @IBAction func msgVolunteerDidPressed(_ sender: Any) {
+      //  if let editView = storyboard?.instantiateViewController(withIdentifier: "EditContactViewController") as? EditContactViewController {
+  //          editView.selectedIndex = indexPath.row;
+    //        self.navigationController?.pushViewController(editView, animated: true);
+      //  }
+        appDelegate.selectedUser = self.eventObject!.volunteer
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let msgVol = storyboard.instantiateViewController(withIdentifier: "Chat") as? MessageViewController {
+            self.navigationController?.pushViewController(msgVol, animated: true)
+        }
+        
     }
     @IBAction func callVolunteerDidPressed(_ sender: Any) {
     }
@@ -217,6 +265,11 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                 self.focusLocationOnMap(location: p![0].location!)
             }
         })
+    }
+    
+    func updateEventStatus(eID:String,status:String) {
+        let updatedValues = ["eventStatus": status]
+        ref.child("Jobs").child(eID).updateChildValues(updatedValues)
     }
     
     

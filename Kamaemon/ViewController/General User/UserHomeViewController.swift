@@ -53,20 +53,20 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         }
         
         // Retrieve all events started by user
-        let eventRef = ref.child("Jobs").queryOrdered(byChild: "userID").queryEqual(toValue: Auth.auth().currentUser?.uid as? String).observe(.value) { snapshot in
+        let eventRef = ref.child("Jobs").queryOrdered(byChild: "userID").queryEqual(toValue: Auth.auth().currentUser?.uid as? String).observe(DataEventType.value, with: { snapshot in
             print(Auth.auth().currentUser?.uid)
             let formatter4Get = DateFormatter()
             formatter4Get.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            
+            // resets list
+            self.userEventsList = []
             for jobs in snapshot.children.allObjects as! [DataSnapshot] {
                 let value = jobs.value as? [String: AnyObject]
                 print(value)
                 if (value != nil) {
                     let dateStr = value!["eventDate"] as! String
                     let eventDate:Date? = formatter4Get.date(from: dateStr)
-                 //error
-                    let dateFormatter = ISO8601DateFormatter()
-                    let job = Event(desc: value!["eventDesc"] as! String, hours: Int(value!["eventHrs"] as! Int32), location: value!["eventLocation"] as! String, uID: value!["userID"] as! String, vID: value!["volunteerID"] as! String, vName: "", name: value!["eventName"] as! String, stat: value!["eventStatus"] as! String, cat: value!["eventCat"] as! String, date: dateFormatter.date(from: value!["eventDate"] as! String)! as Date)
+                    
+                    let job = Event(id: value!["eventID"] as! String, desc: value!["eventDesc"] as! String, hours: Int(value!["eventHrs"] as! Int32), location: value!["eventLocation"] as! String, uID: value!["userID"] as! String, vID: value!["volunteerID"] as! String, vName: "", name: value!["eventName"] as! String, stat: value!["eventStatus"] as! String, cat: value!["eventCat"] as! String, date: eventDate! ?? Date())
                     
                     var volunteerName:String = ""
                     if (value!["volunteerID"] as! String != "")
@@ -111,13 +111,24 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             }
             
             // perform sorting? -- pushed to back if time permits
-        }
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         // disable navigation bar
         navigationController?.hidesBarsOnSwipe = true
+        eventTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     // TableView
@@ -147,10 +158,11 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
             cell.eventStatusLbl.backgroundColor = .blue
-            cell.eventRemarksLbl.text = "Your request is ongoing"
+            cell.eventRemarksLbl.text = "\(event.volunteer.n) is proceeding with your request."
         } else if (event.Status == "Completed") {
             cell.statusViewBar.backgroundColor = .purple
             cell.eventStatusLbl.backgroundColor = .purple
+            cell.eventStatusLbl.textColor = .white
             cell.eventRemarksLbl.text = "Your request has been completed by \(event.volunteer.n)"
         }
         else {
@@ -173,7 +185,6 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.userEventsList.count
     }
-
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         appDelegate.selectedEventDetails = userEventsList[indexPath.row]
