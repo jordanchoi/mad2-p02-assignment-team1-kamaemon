@@ -95,6 +95,8 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                 
             } else if (eventObject!.Status == "Cancelled" || eventObject!.Status == "Completed") {
                 eventActionBtn.isEnabled = false
+                callBtn.isEnabled = false
+                msgBtn.isEnabled = false
                 if (eventObject!.Status == "Cancelled") {
                     eventStatusBarView.backgroundColor = .red
                     hideVolunteerInformation()
