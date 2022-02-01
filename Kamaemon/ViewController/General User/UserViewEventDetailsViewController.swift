@@ -200,6 +200,16 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
         
     }
     @IBAction func msgVolunteerDidPressed(_ sender: Any) {
+      //  if let editView = storyboard?.instantiateViewController(withIdentifier: "EditContactViewController") as? EditContactViewController {
+  //          editView.selectedIndex = indexPath.row;
+    //        self.navigationController?.pushViewController(editView, animated: true);
+      //  }
+        appDelegate.selectedUser = self.eventObject!.volunteer
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let msgVol = storyboard.instantiateViewController(withIdentifier: "Chat") as? MessageViewController {
+            self.navigationController?.pushViewController(msgVol, animated: true)
+        }
+        
     }
     @IBAction func callVolunteerDidPressed(_ sender: Any) {
     }
