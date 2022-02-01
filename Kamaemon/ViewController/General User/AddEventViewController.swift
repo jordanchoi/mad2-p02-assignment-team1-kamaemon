@@ -33,6 +33,10 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
     var cat = ""
     var hrs = ""
     
+    // MapKit
+    let regionRadius:CLLocationDistance = 1000
+    var previousAnnotation = MKPointAnnotation()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref.child("Jobs")
@@ -126,7 +130,48 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         
     }
     
+    // MapKit Methods
+    // Focus on location
+    func focusLocationOnMap(location: CLLocation) {
+        let coordinateReg = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        eventLocMK.setRegion(coordinateReg, animated: true)
+    }
+    
     @IBAction func searchLocationBtnDidPressed(_ sender: Any) {
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(self.address?.text ?? "", completionHandler: {p, e in
+            if (p != nil) {
+                let lat = String(format: "Lat: %3.12f", p![0].location!.coordinate.latitude)
+                let long = String(format: "Lat: %3.12f", p![0].location!.coordinate.longitude)
+                print("\(lat), \(long)")
+                let setLocAnnotation = MKPointAnnotation()
+                self.eventLocMK.removeAnnotation(self.previousAnnotation)
+                self.eventLocMK.addAnnotation(setLocAnnotation)
+                self.previousAnnotation = setLocAnnotation
+                setLocAnnotation.coordinate = p![0].location!.coordinate
+
+                self.focusLocationOnMap(location: p![0].location!)
+                
+                // reverse geocode
+                geoCoder.reverseGeocodeLocation(p![0].location!) { (placemarks, error) in
+                    if let error = error {
+                        print("Something went wrong retrieving the Geocode location.")
+                    } else {
+                        if let placemarks = placemarks, let placemark = placemarks.first {
+                            self.address!.text = placemark.name
+                        } else {
+                            print("Location not found.")
+                        }
+                    }
+                }
+            }
+            else {
+                let alertView = UIAlertController(title: "Address not found.", message: "The address is not found, please re-enter a valid address.", preferredStyle: UIAlertController.Style.alert)
+                alertView.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: { _ in
+                    alertView.dismiss(animated: true, completion: nil)
+                }))
+            }
+        })
     }
 
 }
