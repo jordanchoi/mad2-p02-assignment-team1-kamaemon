@@ -158,10 +158,11 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
             cell.eventStatusLbl.backgroundColor = .blue
-            cell.eventRemarksLbl.text = "Your request is ongoing"
+            cell.eventRemarksLbl.text = "\(event.volunteer.n) is proceeding with your request."
         } else if (event.Status == "Completed") {
             cell.statusViewBar.backgroundColor = .purple
             cell.eventStatusLbl.backgroundColor = .purple
+            cell.eventStatusLbl.textColor = .white
             cell.eventRemarksLbl.text = "Your request has been completed by \(event.volunteer.n)"
         }
         else {
