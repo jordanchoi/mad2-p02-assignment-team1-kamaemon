@@ -212,6 +212,8 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
         
     }
     @IBAction func callVolunteerDidPressed(_ sender: Any) {
+        let callURL:NSURL = URL(string: "TEL://\(self.eventObject!.volunteer.PhoneNumber)")! as NSURL
+        UIApplication.shared.open(callURL as URL, options: [:], completionHandler: nil)
     }
     
     func hideVolunteerInformation() {
