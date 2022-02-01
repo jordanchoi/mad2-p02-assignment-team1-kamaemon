@@ -24,7 +24,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     
     let dropDown = DropDown()
     let genderDropDown = DropDown()
-    
+    var validCount = 0
     var cat:String = ""
 //    var gender:String = ""
     
@@ -106,11 +106,15 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         self.Password.layer.borderColor = UIColor.red.cgColor
         self.EmailAddress.layer.borderColor = UIColor.red.cgColor
         self.Name.layer.borderColor = UIColor.red.cgColor
+        self.cfmPassword.layer.borderColor = UIColor.red.cgColor
+        self.phonenumber.layer.borderColor = UIColor.red.cgColor
         self.Password.layer.borderWidth = 1.0
         self.EmailAddress.layer.borderWidth = 1.0
         self.Name.layer.borderWidth = 1.0
+        self.cfmPassword.layer.borderWidth = 1.0
+        self.phonenumber.layer.borderWidth = 1.0
         
-        if(Password.text!.count >= 6){
+        if(Password.text!.count >= 7){
             self.Password.layer.borderWidth = 0
         }
         
@@ -122,7 +126,39 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
             self.Name.layer.borderWidth = 0
         }
         
+        if(phonenumber.text != ""){
+            self.phonenumber.layer.borderWidth = 0
+        }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        validCount = 0
+        if(Password.text!.count >= 7){
+            validCount+=1
+        }
+        
+        if(EmailAddress.text != "" && isValidEmail(EmailAddress.text!)){
+            validCount+=1
+        }
+        
+        if(self.Name.text != ""){
+            validCount+=1
+        }
+        
+        if(phonenumber.text != "" && isStringAnInt(string: phonenumber.text!)){
+            self.phonenumber.layer.borderWidth = 0
+            validCount+=1
+        }
+        
+        if(cfmPassword.text!.count > 1 && Password.text == cfmPassword.text){
+            self.cfmPassword.layer.borderWidth = 0
+            validCount+=1
+        }
+    }
+    
+    func isStringAnInt(string: String) -> Bool {
+        return Int(string) != nil
     }
     
     func isValidEmail(_ email: String) -> Bool {
@@ -140,78 +176,83 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     
     @IBAction func createAccount(_ sender: Any) {
         
-        
-        let newUser = User(userUID: "", userType: self.cat, name: self.Name.text!, gender: "", phonenumber: self.phonenumber.text!, birthdate: Date(), pfpurl: "", isnewuser: 0)
-            if (self.lblTitle.text == "Volunteer"){
-                Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
-                    if let error = error as? NSError {
-                        print(error)
-                        self.errorLbl.text = "Something went wrong. Please try again."
-                    }
-                    else  {
-                        print("success")
-                        let prefs = SharedPrefsController()
-                        prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
-                        print(authResult?.user.uid)
-                        //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
-                        //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
-                        var ref: DatabaseReference!
-                        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-                        if #available(iOS 15.0, *) {
-                            ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" :  newUser.BirthDate.ISO8601Format(), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
-                        } else {
-                            // Fallback on earlier versions
+        if(validCount == 5){
+            let newUser = User(userUID: "", userType: self.cat, name: self.Name.text!, gender: "", phonenumber: self.phonenumber.text!, birthdate: Date(), pfpurl: "", isnewuser: 0)
+                if (self.lblTitle.text == "Volunteer"){
+                    Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
+                        if let error = error as? NSError {
+                            print(error)
+                            self.errorLbl.text = "Something went wrong. Please try again."
+                            self.validCount = 0
                         }
-                        
-                        ref.child("volunteers").child((authResult?.user.uid)!).setValue(["Hours" : "0", "Qualifications" : ""])
-                        
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        newUser.UID = (authResult?.user.uid)!
-                        appDelegate.verifyUser = newUser
-                        appDelegate.verifyEmail =  self.EmailAddress.text!
-                        appDelegate.verifyPassword = self.Password.text!
-                        self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
-                        
-                    }
-                }
-    //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    //            appDelegate.verifyUser = newUser
-    //            appDelegate.verifyEmail =  EmailAddress.text!
-    //            appDelegate.verifyPassword = Password.text!
-    //            self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
-                
-            }
-            else{
-                Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
-                    if let error = error as? NSError {
-                        print(error)
-                        self.errorLbl.text = "Something went wrong. Please try again."
-                    }
-                    else  {
-                        print("success")
-                        print(authResult?.user.uid)
-                        let prefs = SharedPrefsController()
-                        prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
-                        //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
-                        //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
-                        var ref: DatabaseReference!
-                        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-                        if #available(iOS 15.0, *) {
-                            ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(newUser.BirthDate.ISO8601Format()), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+                        else  {
+                            print("success")
+                            let prefs = SharedPrefsController()
+                            prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
+                            print(authResult?.user.uid)
+                            //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
+                            //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
+                            var ref: DatabaseReference!
+                            ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+                            if #available(iOS 15.0, *) {
+                                ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" :  newUser.BirthDate.ISO8601Format(), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+                            } else {
+                                // Fallback on earlier versions
+                            }
                             
-                            //here
-                            let storyboard = UIStoryboard(name: "User", bundle: nil)
-                            let controller = storyboard.instantiateViewController(identifier: "UserHome")
-                                        controller.modalPresentationStyle = .fullScreen
-                                        controller.modalTransitionStyle = .flipHorizontal
-                            self.present(controller, animated: true, completion: nil)
-                        } else {
-                            // Fallback on earlier versions
+                            ref.child("volunteers").child((authResult?.user.uid)!).setValue(["Hours" : "0", "Qualifications" : ""])
+                            
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            newUser.UID = (authResult?.user.uid)!
+                            appDelegate.verifyUser = newUser
+                            appDelegate.verifyEmail =  self.EmailAddress.text!
+                            appDelegate.verifyPassword = self.Password.text!
+                            self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
+                            
+                        }
+                    }
+        //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //            appDelegate.verifyUser = newUser
+        //            appDelegate.verifyEmail =  EmailAddress.text!
+        //            appDelegate.verifyPassword = Password.text!
+        //            self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
+                    
+                }
+                else{
+                    Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
+                        if let error = error as? NSError {
+                            print(error)
+                            self.errorLbl.text = "Something went wrong. Please try again."
+                        }
+                        else  {
+                            print("success")
+                            print(authResult?.user.uid)
+                            let prefs = SharedPrefsController()
+                            prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
+                            //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
+                            //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
+                            var ref: DatabaseReference!
+                            ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+                            if #available(iOS 15.0, *) {
+                                ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(newUser.BirthDate.ISO8601Format()), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
+                                
+                                //here
+                                let storyboard = UIStoryboard(name: "User", bundle: nil)
+                                let controller = storyboard.instantiateViewController(identifier: "UserHome")
+                                            controller.modalPresentationStyle = .fullScreen
+                                            controller.modalTransitionStyle = .flipHorizontal
+                                self.present(controller, animated: true, completion: nil)
+                            } else {
+                                // Fallback on earlier versions
+                            }
                         }
                     }
                 }
-            }
-        
+        }
+        else{
+            self.errorLbl.text = "Something went wrong. Please try again."
+            self.validCount = 0
+        }
     }
         
 }
