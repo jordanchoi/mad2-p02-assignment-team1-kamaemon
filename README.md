@@ -3,7 +3,7 @@
 
 Assignment Repository for MAD2 AY2021/22 - Team 1 of T02.
 
-[Kamaemon Banner](Readme Images/Kamaemon_Banner.png)
+<img src="https://github.com/jordanchoi/mad2-p02-assignment-team1-kamaemon/blob/main/Readme%20Images/kamaemon_banner.png" width="20%">
 
 Tutorial Group: T02/P02
 Lecturer: Mr Charles Keck
@@ -16,7 +16,6 @@ The Team:
 * Chua Jun Hong (S10203330)
 
 ## Application Logo
-[Kamaemon](Readme Images/kamaemon.png)
 <img src="https://github.com/jordanchoi/mad2-p02-assignment-team1-kamaemon/blob/main/Readme%20Images/kamaemon.png" width="20%">
 
 ## Application Description
