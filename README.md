@@ -19,10 +19,10 @@ The Team:
 <img src="~/"Readme Images"/kamaemon.png" width="20%">
 
 ## Application Description
-## General Users
+#### General Users
 Are you having troubles with your daily necessities tasks due to old age, injuries, disabilities or et. Cetera? Do you require any form of assistance? Onboard with Kamaemon and make assistance requests to our kind and keen to assist volunteers with your tasks! Be it from medical appointment companion to groceries purchase, we’d have it all!
 
-## Volunteers
+#### Volunteers
 Ever wanted to return to the community but couldn’t managed to get your time to? Perhaps, you do not know where to start due to the complicated and numerous agencies you can volunteer with? Fret not, with Kamaemon, you may volunteer anytime at own time, own target. Simply sign up, get verified and accept requests made by the needy themselves with a single click.
 
 Kamaemon is a lifestyle application built by a team of year two Information Technology students from Ngee Ann Polytechnic, as part of our assignment fulfilment for the Mobile Applications Development II module. 
