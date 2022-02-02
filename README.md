@@ -16,7 +16,7 @@ The Team:
 * Chua Jun Hong (S10203330)
 
 ## Application Logo
-<img src="https://github.com/jordanchoi/mad2-p02-assignment-team1-kamaemon/blob/main/Readme%20Images/kamaemon.png" width="20%">
+<img src="https://github.com/jordanchoi/mad2-p02-assignment-team1-kamaemon/blob/main/Readme%20Images/kamaemon.png" width="100%">
 
 ## Application Description
 #### General Users
