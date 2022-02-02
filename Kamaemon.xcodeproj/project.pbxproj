@@ -89,6 +89,7 @@
 		A08E153727A375B7008BC096 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		A09B0DD327A5088E002F6D64 /* UserEventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserEventsTableViewCell.swift; path = Event/UserEventsTableViewCell.swift; sourceTree = "<group>"; };
 		A09B0DD427A5088E002F6D64 /* UserEventsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserEventsTableViewCell.xib; path = Event/UserEventsTableViewCell.xib; sourceTree = "<group>"; };
+		A0AF07C527AABAFD007C0DAF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A0AF6850279BE06800E5AACF /* 4432-face-scanning.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "4432-face-scanning.json"; sourceTree = "<group>"; };
 		A0B16FCB27A7117D00953BBB /* UILabelPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelPadding.swift; sourceTree = "<group>"; };
 		A0DAF46C27A74A09006D6C4D /* UserViewEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewEventDetailsViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +235,7 @@
 		A04445652791BF3300689F32 = {
 			isa = PBXGroup;
 			children = (
+				A0AF07C527AABAFD007C0DAF /* README.md */,
 				A04445702791BF3300689F32 /* Kamaemon */,
 				A044456F2791BF3300689F32 /* Products */,
 				F30F6FB407DCFE09E6818F57 /* Pods */,
