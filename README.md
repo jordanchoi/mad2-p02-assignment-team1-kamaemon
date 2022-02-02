@@ -16,7 +16,7 @@ The Team:
 * Chua Jun Hong (S10203330)
 
 ## Application Logo
-[Kamaemon](Readme Images/Kamaemon.png)
+[Kamaemon](Readme Images/kamaemon.png)
 
 ## Application Description
 #### General Users
