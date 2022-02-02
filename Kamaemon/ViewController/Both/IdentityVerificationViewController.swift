@@ -172,7 +172,7 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             self.animationView.removeFromSuperview()
                             return
                         }
-                        if (result!.isIdentical) {                      // returns boolean based on confidence determined
+                        if (result!.isIdentical || result!.confidence as! Double >= 0.40) {                      // returns boolean based on confidence determined
 //                            let uid:String = "tofix"
                             
                             //create volunteer user here

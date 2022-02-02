@@ -118,16 +118,12 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
             ref.child("Jobs").childByAutoId().setValue(["eventCat" : event.Category, "eventDate" : String(describing: event.EventDate), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
         }
         
-        
-        
         name.text = ""
         des.text = ""
         category.text = ""
         date.date = Date()
         hours.text = ""
         address.text = ""
-        
-        
     }
     
     // MapKit Methods
