@@ -1739,6 +1739,15 @@
                                     <action selector="openChat:" destination="3J2-Wy-8WU" eventType="touchUpInside" id="Dxd-d7-Svs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="can-mu-2TH">
+                                <rect key="frame" x="35" y="812" width="344" height="50"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Event Complete"/>
+                                <connections>
+                                    <action selector="eventComplete:" destination="3J2-Wy-8WU" eventType="touchUpInside" id="92P-og-Hem"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SMk-eO-iaD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1755,6 +1764,7 @@
                             <constraint firstItem="dax-mD-M5I" firstAttribute="baseline" secondItem="0bN-2W-6Nr" secondAttribute="firstBaseline" id="Fl0-ue-Xkh"/>
                             <constraint firstItem="L6u-ba-r0N" firstAttribute="top" secondItem="Ka5-cO-aAv" secondAttribute="bottom" constant="12" id="FoQ-eE-Xma"/>
                             <constraint firstItem="0bN-2W-6Nr" firstAttribute="leading" secondItem="dax-mD-M5I" secondAttribute="trailing" constant="27" id="GI5-3R-ERK"/>
+                            <constraint firstItem="can-mu-2TH" firstAttribute="leading" secondItem="jA6-AR-XMv" secondAttribute="leading" id="Hdg-ko-0xo"/>
                             <constraint firstItem="92D-MC-dWz" firstAttribute="top" secondItem="L6u-ba-r0N" secondAttribute="top" id="IrO-gb-nVC"/>
                             <constraint firstItem="Ka5-cO-aAv" firstAttribute="trailing" secondItem="L6u-ba-r0N" secondAttribute="trailing" id="Kpf-4o-NeD"/>
                             <constraint firstItem="HjF-8c-jg9" firstAttribute="leading" secondItem="Ka5-cO-aAv" secondAttribute="leading" id="LpD-aC-Icb"/>
@@ -1766,6 +1776,7 @@
                             <constraint firstItem="jA6-AR-XMv" firstAttribute="top" secondItem="Utq-rt-gAj" secondAttribute="bottom" constant="13" id="U7V-ZQ-M1y"/>
                             <constraint firstItem="0bN-2W-6Nr" firstAttribute="top" secondItem="8Bx-Iw-ZEe" secondAttribute="bottom" constant="41" id="WcY-Kt-Kcr"/>
                             <constraint firstItem="92D-MC-dWz" firstAttribute="leading" secondItem="eGF-Ly-voS" secondAttribute="leading" id="X71-d2-eRp"/>
+                            <constraint firstItem="can-mu-2TH" firstAttribute="trailing" secondItem="hVA-GJ-92a" secondAttribute="trailing" id="XLx-6E-gDC"/>
                             <constraint firstItem="8Bx-Iw-ZEe" firstAttribute="top" secondItem="SMk-eO-iaD" secondAttribute="top" id="aIu-Qf-TQL"/>
                             <constraint firstItem="SMk-eO-iaD" firstAttribute="bottom" secondItem="hVA-GJ-92a" secondAttribute="bottom" constant="56" id="abP-pS-2eN"/>
                             <constraint firstItem="hVA-GJ-92a" firstAttribute="leading" secondItem="jA6-AR-XMv" secondAttribute="trailing" constant="10" id="bGw-kh-vWi"/>
@@ -1777,7 +1788,9 @@
                             <constraint firstItem="fSl-IE-9vi" firstAttribute="top" secondItem="L6u-ba-r0N" secondAttribute="bottom" constant="14" id="ieN-cf-2F8"/>
                             <constraint firstItem="u3o-0P-ky5" firstAttribute="leading" secondItem="Ka5-cO-aAv" secondAttribute="trailing" constant="15" id="iu5-ye-kn7"/>
                             <constraint firstItem="Utq-rt-gAj" firstAttribute="top" secondItem="eGF-Ly-voS" secondAttribute="bottom" constant="31" id="mVS-qd-uGv"/>
+                            <constraint firstItem="can-mu-2TH" firstAttribute="bottom" secondItem="SMk-eO-iaD" secondAttribute="bottom" id="ot4-oX-tpa"/>
                             <constraint firstItem="u3o-0P-ky5" firstAttribute="leading" secondItem="92D-MC-dWz" secondAttribute="leading" id="pfV-Rd-jFa"/>
+                            <constraint firstItem="can-mu-2TH" firstAttribute="top" secondItem="hVA-GJ-92a" secondAttribute="bottom" constant="6" id="q4h-iW-oLk"/>
                             <constraint firstItem="HjF-8c-jg9" firstAttribute="top" secondItem="dax-mD-M5I" secondAttribute="bottom" constant="4" id="siP-Y3-6fL"/>
                             <constraint firstItem="Ka5-cO-aAv" firstAttribute="top" secondItem="u3o-0P-ky5" secondAttribute="top" id="t0x-In-4hc"/>
                             <constraint firstItem="fSl-IE-9vi" firstAttribute="leading" secondItem="Utq-rt-gAj" secondAttribute="leading" id="tK2-Ca-4sh"/>
@@ -1788,6 +1801,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
+                        <outlet property="completeEvent" destination="can-mu-2TH" id="cPX-71-6Fn"/>
                         <outlet property="descCancel" destination="Utq-rt-gAj" id="t1y-nT-adm"/>
                         <outlet property="goToMap" destination="0bN-2W-6Nr" id="OVg-X8-dWG"/>
                         <outlet property="hoursCancel" destination="eGF-Ly-voS" id="IOx-sc-PZp"/>
@@ -1800,7 +1814,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gZ-Gm-vSy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3171" y="475"/>
+            <point key="canvasLocation" x="3169.5652173913045" y="474.77678571428567"/>
         </scene>
         <!--Edit Account-->
         <scene sceneID="Khr-JQ-IQb">
