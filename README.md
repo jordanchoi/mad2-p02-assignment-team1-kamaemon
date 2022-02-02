@@ -17,6 +17,7 @@ The Team:
 
 ## Application Logo
 [Kamaemon](Readme Images/kamaemon.png)
+<img src="https://github.com/jordanchoi/mad2-p02-assignment-team1-kamaemon/blob/main/Readme%20Images/kamaemon.png" width="20%">
 
 ## Application Description
 #### General Users
