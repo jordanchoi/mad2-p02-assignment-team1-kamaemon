@@ -26,6 +26,7 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var eventLocMK: MKMapView!
     @IBOutlet weak var searchAddrBtn: UIButton!
+    @IBOutlet weak var errorMsgLbl: UILabel!
     
     var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     let catDropDown = DropDown()
@@ -60,7 +61,7 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         catDropDown.bottomOffset = CGPoint(x: 0, y:(catDropDown.anchorView?.plainView.bounds.height)!)
         catDropDown.direction = .bottom
         
-        hours.text = "Hours"
+        hours.text = "Estimated Duration (Hrs)"
         hrsDropDown.anchorView = hoursSelect
         hrsDropDown.dataSource = ["1","2","3"]
         hrsDropDown.bottomOffset = CGPoint(x: 0, y:(hrsDropDown.anchorView?.plainView.bounds.height)!)
@@ -73,6 +74,11 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         address.setLeftPaddingPoints(10)
         des.setLeftPaddingPoints(10)
         name.setLeftPaddingPoints(10)
+        
+        // set min date to at least tomorrow
+        date.minimumDate = Date() + 1
+        // set max date to 2 months in advanced
+        date.maximumDate = Date() + 60
     
         
         // Dismiss keyboard on click background
@@ -105,25 +111,39 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         hrsDropDown.show()
     }
     @IBAction func createEvent(_ sender: Any) {
-        
-        let event = Event(desc: des.text!, hours: Int(hours.text!)!, location: address.text!, uID: Auth.auth().currentUser!.uid, vID: "", name: name.text!, stat: "Open", cat: category.text!, date: date.date)
-        //String(describing: date.date)
-        
-        if #available(iOS 15.0, *) {
-            let key = ref.childByAutoId().key
-            print(key)
-            ref.child("Jobs").child((key as String?)!).setValue([ "eventID" : (key as String?)!,  "eventCat" : event.Category, "eventDate" : event.EventDate.ISO8601Format(), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+        // validation
+        if (name.text == "" || category.text == "Category" || hours.text == "Estimated Duration (Hrs)" || des.text == "" || address.text == "") {
+            print("There are empty fields.")
+            // show error message
+            errorMsgLbl.text = "All fields must be filled in."
+            errorMsgLbl.isHidden = false
+            
         } else {
-            //let key = ref.childByAutoId().key
-            ref.child("Jobs").childByAutoId().setValue(["eventCat" : event.Category, "eventDate" : String(describing: event.EventDate), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+            let event = Event(desc: des.text!, hours: Int(hours.text!)!, location: address.text!, uID: Auth.auth().currentUser!.uid, vID: "", name: name.text!, stat: "Open", cat: category.text!, date: date.date)
+            //String(describing: date.date)
+            
+            if #available(iOS 15.0, *) {
+                let key = ref.childByAutoId().key
+                print(key)
+                ref.child("Jobs").child((key as String?)!).setValue([ "eventID" : (key as String?)!,  "eventCat" : event.Category, "eventDate" : event.EventDate.ISO8601Format(), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+            } else {
+                //let key = ref.childByAutoId().key
+                ref.child("Jobs").childByAutoId().setValue(["eventCat" : event.Category, "eventDate" : String(describing: event.EventDate), "eventDesc" : event.Desc, "eventHrs" : event.Hours, "eventLocation" : event.Location, "eventName" : event.Name, "eventStatus" : event.Status, "userID" : event.UserID, "volunteerID" : event.VolunteerID])
+            }
+            
+            // reset text fields
+            name.text = ""
+            des.text = ""
+            category.text = ""
+            date.date = Date()
+            hours.text = ""
+            address.text = ""
+            
+            // change tabView
+            self.tabBarController?.selectedIndex = 1
         }
         
-        name.text = ""
-        des.text = ""
-        category.text = ""
-        date.date = Date()
-        hours.text = ""
-        address.text = ""
+        
     }
     
     // MapKit Methods
