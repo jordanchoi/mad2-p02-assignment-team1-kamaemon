@@ -3,7 +3,6 @@
 //  Kamaemon
 //
 //  Created by Jordan Choi on 29/1/22.
-//  Margin codes for Table View Cell retrieved from https://stackoverflow.com/questions/6216839/how-to-add-spacing-between-uitableviewcell
 
 import UIKit
 
