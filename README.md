@@ -39,7 +39,7 @@ These requests may include, but not limited to:
 
 Using this application for profits or monetalization is strictly not allowed. All accepted requests should be purely out of goodwill with no compensations.
 
-####Features
+#### Features
 * Onboarding of Users
 An introduction to Kamaemon
 
