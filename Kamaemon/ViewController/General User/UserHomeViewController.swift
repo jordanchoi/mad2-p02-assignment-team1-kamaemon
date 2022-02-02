@@ -163,7 +163,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Accepted") {
             cell.statusViewBar.backgroundColor = .orange
             cell.eventStatusLbl.backgroundColor = .orange
-            cell.eventRemarksLbl.text = "Your request has been accepted by \(event.volunteer.n)"
+            cell.eventRemarksLbl.text = "Your request has been accepted by \(event.volunteer!.n)"
         } else if (event.Status == "Cancelled") {
             cell.statusViewBar.backgroundColor = .red
             cell.eventStatusLbl.backgroundColor = .red
@@ -171,12 +171,12 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
             cell.eventStatusLbl.backgroundColor = .blue
-            cell.eventRemarksLbl.text = "\(event.volunteer.n) is proceeding with your request."
+            cell.eventRemarksLbl.text = "\(event.volunteer!.n) is proceeding with your request."
         } else if (event.Status == "Completed") {
             cell.statusViewBar.backgroundColor = .purple
             cell.eventStatusLbl.backgroundColor = .purple
             cell.eventStatusLbl.textColor = .white
-            cell.eventRemarksLbl.text = "Your request has been completed by \(event.volunteer.n)"
+            cell.eventRemarksLbl.text = "Your request has been completed by \(event.volunteer!.n)"
         }
         else {
             cell.statusViewBar.backgroundColor = .black

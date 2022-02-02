@@ -109,23 +109,26 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                 eventActionBtn.setTitle("Incorrect Status", for: .normal)
             }
             
+            print(eventObject!.volunteer)
             
+            // Volunteer
             if (eventObject!.volunteer != nil) {
                 // #to load dp from firebase
+
                 //volunteerPFPIV =
-                volunteerNameLbl.text = eventObject!.volunteer.n
-                if (eventObject!.volunteer.Gender == "Male") {
+                volunteerNameLbl.text = eventObject!.volunteer!.n
+                if (eventObject!.volunteer!.Gender == "Male") {
                     volunteerGenderIV.image = UIImage(named: "male")
-                } else if (eventObject!.volunteer.Gender == "Female") {
+                } else if (eventObject!.volunteer!.Gender == "Female") {
                     volunteerGenderIV.image = UIImage(named: "female")
                 } else {
                     volunteerGenderIV.isHidden = true
                 }
-                
+
                 // get skills
-                ref.child("volunteers").child(eventObject!.volunteer.UID).observeSingleEvent(of: .value) { DataSnapshot in
+                ref.child("volunteers").child(eventObject!.volunteer!.UID).observeSingleEvent(of: .value) { DataSnapshot in
                     let value = DataSnapshot.value as? [String: AnyObject]
-                    
+
                     print(value)
                     if (value != nil) {
                         if (value!["Qualifications"] != nil) {
@@ -138,7 +141,6 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                     }
                 }
             }
-            
         } else
         {
             self.dismiss(animated: true, completion: nil)
@@ -212,7 +214,7 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
         
     }
     @IBAction func callVolunteerDidPressed(_ sender: Any) {
-        let callURL:NSURL = URL(string: "TEL://\(self.eventObject!.volunteer.PhoneNumber)")! as NSURL
+        let callURL:NSURL = URL(string: "TEL://\(self.eventObject!.volunteer!.PhoneNumber)")! as NSURL
         UIApplication.shared.open(callURL as URL, options: [:], completionHandler: nil)
     }
     
