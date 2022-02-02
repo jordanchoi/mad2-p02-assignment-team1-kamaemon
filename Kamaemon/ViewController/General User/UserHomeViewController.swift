@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseAuth
+import CircleBar
 
 class UserHomeViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -18,8 +19,8 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var totalNumCompletedEventsLbl: UILabel!
     @IBOutlet weak var totalNumEvents: UILabel!
     @IBOutlet weak var eventTableView: UITableView!
-    
     @IBOutlet weak var profilepic: UIImageView!
+    
     //
     var userEventsList:[Event] = []
     // Database Reference for Firebase
@@ -153,6 +154,13 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         let formatter4Display = DateFormatter()
         formatter4Display.dateFormat = "dd MMM yyyy HH:mm"
         let event = userEventsList[indexPath.row]
+        
+        // Update Statuses first
+        let now:Date = Date()
+        if (event.Status == "Open" && event.EventDate <= now) {
+            event.Status = "Cancelled"
+            updateEventStatus(eID: event.ID, status: "Cancelled")
+        }
     
         // Cell items - Status
         cell.eventStatusLbl.text = event.Status
@@ -163,7 +171,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Accepted") {
             cell.statusViewBar.backgroundColor = .orange
             cell.eventStatusLbl.backgroundColor = .orange
-            cell.eventRemarksLbl.text = "Your request has been accepted by \(event.volunteer!.n)"
+            cell.eventRemarksLbl.text = "Your request has been accepted by \(event.volunteer?.n ?? "")"
         } else if (event.Status == "Cancelled") {
             cell.statusViewBar.backgroundColor = .red
             cell.eventStatusLbl.backgroundColor = .red
@@ -171,12 +179,12 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
             cell.eventStatusLbl.backgroundColor = .blue
-            cell.eventRemarksLbl.text = "\(event.volunteer!.n) is proceeding with your request."
+            cell.eventRemarksLbl.text = "\(event.volunteer?.n ?? "") is proceeding with your request."
         } else if (event.Status == "Completed") {
             cell.statusViewBar.backgroundColor = .purple
             cell.eventStatusLbl.backgroundColor = .purple
             cell.eventStatusLbl.textColor = .white
-            cell.eventRemarksLbl.text = "Your request has been completed by \(event.volunteer!.n)"
+            cell.eventRemarksLbl.text = "Your request has been completed by \(event.volunteer?.n ?? "")"
         }
         else {
             cell.statusViewBar.backgroundColor = .black
@@ -201,24 +209,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         appDelegate.selectedEventDetails = userEventsList[indexPath.row]
-//        let destinationVC = UserViewEventDetailsViewController()
-//        destinationVC.eventObject = selectedEvent
         self.performSegue(withIdentifier: "detailsSegue", sender: self)
-        /*
-        appDelegate.selectedEvent = volunteerList[currentTableView][indexPath.row]
-        if(currentTableView == 0){
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let accept = storyboard.instantiateViewController(withIdentifier: "Accept")
-            accept.modalPresentationStyle = .popover
-            self.present(accept, animated: true, completion: nil)
-        }
-        else if(currentTableView == 1){
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let cancel = storyboard.instantiateViewController(withIdentifier: "Cancel")
-            cancel.modalPresentationStyle = .popover
-            self.present(cancel, animated: true, completion: nil)
-        }
-        */
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -228,5 +219,14 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
+    @IBAction func requestBtnDidPressed(_ sender: Any) {
+        tabBarController?.selectedIndex = 1
+    }
+    
+    func updateEventStatus(eID:String,status:String) {
+        let updatedValues = ["eventStatus": status]
+        ref.child("Jobs").child(eID).updateChildValues(updatedValues)
+    }
+    
 }

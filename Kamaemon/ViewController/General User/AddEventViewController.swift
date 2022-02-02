@@ -12,6 +12,7 @@ import FirebaseAuth
 import DropDown
 import CoreLocation
 import MapKit
+import CircleBar
 
 class AddEventViewController : UIViewController, UITextFieldDelegate {
     
@@ -75,10 +76,18 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         des.setLeftPaddingPoints(10)
         name.setLeftPaddingPoints(10)
         
+        
+        // min and max date available
+        let calendar = Calendar(identifier: .gregorian)
+        var dateComps = DateComponents()
+        dateComps.day = 1
+        let minDate = calendar.date(byAdding: dateComps, to: Date())
+        dateComps.day = 60
+        let maxDate = calendar.date(byAdding: dateComps, to: Date())
         // set min date to at least tomorrow
-//        date.minimumDate = Date() + 1
+        date.minimumDate = minDate
         // set max date to 2 months in advanced
-//        date.maximumDate = Date() + 60
+        date.maximumDate = maxDate
     
         
         // Dismiss keyboard on click background
@@ -140,7 +149,7 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
             address.text = ""
             
             // change tabView
-            self.tabBarController?.selectedIndex = 1
+            tabBarController?.selectedIndex = 0
         }
         
         
@@ -151,6 +160,11 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
     func focusLocationOnMap(location: CLLocation) {
         let coordinateReg = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         eventLocMK.setRegion(coordinateReg, animated: true)
+    }
+    
+    //to add
+    @IBAction func navigateBtnDidPressed(_ sender: Any) {
+        
     }
     
     @IBAction func searchLocationBtnDidPressed(_ sender: Any) {
@@ -189,5 +203,20 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
             }
         })
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        // disable navigation bar
+        navigationController?.hidesBarsOnSwipe = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 }

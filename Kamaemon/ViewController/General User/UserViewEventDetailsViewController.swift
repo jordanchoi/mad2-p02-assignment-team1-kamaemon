@@ -113,8 +113,21 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
             
             // Volunteer
             if (eventObject!.volunteer != nil) {
-                // #to load dp from firebase
+                
+                // load dp from firebase
+                if let url = URL(string: eventObject!.volunteer?.profilepicurl as! String){
+                    if let data = try? Data(contentsOf: url) {
+                                    if let image = UIImage(data: data){
+                                        DispatchQueue.main.async {
+                                            self.volunteerPFPIV.layer.cornerRadius = (self.volunteerPFPIV.frame.size.width ) / 2
+                                            self.volunteerPFPIV.clipsToBounds = true
+                                            self.volunteerPFPIV.image = image
+                                        }
+                                    }
+                                }
+                }
 
+                
                 //volunteerPFPIV =
                 volunteerNameLbl.text = eventObject!.volunteer!.n
                 if (eventObject!.volunteer!.Gender == "Male") {
@@ -180,6 +193,7 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                 self.eventObject!.Status = "Completed"
                 self.eventStatusLbl.text = self.eventObject!.Status
                 self.eventActionBtn.isEnabled = false
+                self.eventStatusBarView.backgroundColor = .purple
             }))
         } else if (eventObject!.Status == "Accepted" || eventObject!.Status == "Open") {
             alertView.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: { _ in
@@ -191,6 +205,7 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                 self.eventObject!.Status = "Cancelled"
                 self.eventStatusLbl.text = self.eventObject!.Status
                 self.eventActionBtn.isEnabled = false
+                self.eventStatusBarView.backgroundColor = .red
             }))
         } else {
             
