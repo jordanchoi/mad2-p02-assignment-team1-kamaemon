@@ -76,9 +76,9 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         name.setLeftPaddingPoints(10)
         
         // set min date to at least tomorrow
-        date.minimumDate = Date() + 1
+//        date.minimumDate = Date() + 1
         // set max date to 2 months in advanced
-        date.maximumDate = Date() + 60
+//        date.maximumDate = Date() + 60
     
         
         // Dismiss keyboard on click background
@@ -134,9 +134,9 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
             // reset text fields
             name.text = ""
             des.text = ""
-            category.text = ""
+            category.text = "Category"
             date.date = Date()
-            hours.text = ""
+            hours.text = "Estimated Durations (Hrs)"
             address.text = ""
             
             // change tabView

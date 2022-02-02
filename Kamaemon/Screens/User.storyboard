@@ -265,7 +265,7 @@
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IZ-Yh-Mbb">
                                         <rect key="frame" x="46" y="588" width="323" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -275,7 +275,7 @@
                                     <constraint firstItem="dX5-9A-dpp" firstAttribute="top" secondItem="VBS-WB-II9" secondAttribute="top" id="11F-zP-V4Q"/>
                                     <constraint firstItem="x5h-i2-8wI" firstAttribute="top" secondItem="FEN-qb-sJI" secondAttribute="bottom" constant="14.5" id="30L-H2-o9l"/>
                                     <constraint firstItem="Uf8-Dm-QLR" firstAttribute="top" secondItem="Zr7-aw-Am8" secondAttribute="top" constant="392" id="3fQ-cb-2LI"/>
-                                    <constraint firstAttribute="trailing" secondItem="0IZ-Yh-Mbb" secondAttribute="trailing" constant="46" id="6Pt-08-Czw"/>
+                                    <constraint firstAttribute="trailing" secondItem="0IZ-Yh-Mbb" secondAttribute="trailing" constant="45" id="6Pt-08-Czw"/>
                                     <constraint firstItem="VBS-WB-II9" firstAttribute="leading" secondItem="dX5-9A-dpp" secondAttribute="trailing" constant="8" symbolic="YES" id="AZX-FO-85S"/>
                                     <constraint firstItem="Jdh-P6-xmp" firstAttribute="leading" secondItem="dvU-9f-Dl7" secondAttribute="leading" id="EAu-f3-vYg"/>
                                     <constraint firstItem="dvU-9f-Dl7" firstAttribute="top" secondItem="Jdh-P6-xmp" secondAttribute="bottom" constant="8" id="Erf-Ob-iGl"/>
@@ -294,8 +294,8 @@
                                     <constraint firstItem="ONA-Ft-tO1" firstAttribute="leading" secondItem="MP8-Gt-eWj" secondAttribute="leading" constant="1" id="d8P-Mn-ezT"/>
                                     <constraint firstAttribute="trailing" secondItem="953-Jq-9Us" secondAttribute="trailing" constant="32" id="g5b-ho-oEb"/>
                                     <constraint firstItem="x5h-i2-8wI" firstAttribute="trailing" secondItem="VBS-WB-II9" secondAttribute="trailing" id="heX-uy-ZHL"/>
-                                    <constraint firstItem="0IZ-Yh-Mbb" firstAttribute="top" secondItem="MP8-Gt-eWj" secondAttribute="bottom" constant="14" id="hzV-rM-biM"/>
-                                    <constraint firstAttribute="bottom" secondItem="0IZ-Yh-Mbb" secondAttribute="bottom" constant="100" id="jR0-6F-vpb"/>
+                                    <constraint firstItem="0IZ-Yh-Mbb" firstAttribute="top" secondItem="MP8-Gt-eWj" secondAttribute="bottom" constant="16" id="hzV-rM-biM"/>
+                                    <constraint firstAttribute="bottom" secondItem="0IZ-Yh-Mbb" secondAttribute="bottom" constant="198" id="jR0-6F-vpb"/>
                                     <constraint firstItem="x5h-i2-8wI" firstAttribute="leading" secondItem="8ig-mg-V3A" secondAttribute="leading" id="lgd-na-uH7"/>
                                     <constraint firstItem="ONA-Ft-tO1" firstAttribute="leading" secondItem="Uf8-Dm-QLR" secondAttribute="trailing" constant="1" id="loo-r5-Xbf"/>
                                     <constraint firstItem="953-Jq-9Us" firstAttribute="top" secondItem="ONA-Ft-tO1" secondAttribute="bottom" constant="-34" id="pDn-i3-GfM"/>
@@ -305,7 +305,7 @@
                                     <constraint firstItem="ONA-Ft-tO1" firstAttribute="top" secondItem="dvU-9f-Dl7" secondAttribute="bottom" constant="8" symbolic="YES" id="vGC-NO-D7d"/>
                                     <constraint firstItem="FEN-qb-sJI" firstAttribute="trailing" secondItem="x5h-i2-8wI" secondAttribute="trailing" id="yK1-9V-ARI"/>
                                     <constraint firstItem="ONA-Ft-tO1" firstAttribute="trailing" secondItem="MP8-Gt-eWj" secondAttribute="trailing" constant="-59" id="z4Z-f7-3VR"/>
-                                    <constraint firstItem="0IZ-Yh-Mbb" firstAttribute="leading" secondItem="Uf8-Dm-QLR" secondAttribute="trailing" id="zJa-EO-fna"/>
+                                    <constraint firstItem="0IZ-Yh-Mbb" firstAttribute="leading" secondItem="Uf8-Dm-QLR" secondAttribute="trailing" constant="1" id="zJa-EO-fna"/>
                                     <constraint firstItem="dX5-9A-dpp" firstAttribute="top" secondItem="x5h-i2-8wI" secondAttribute="bottom" constant="16" id="zTR-sl-74P"/>
                                     <constraint firstItem="dvU-9f-Dl7" firstAttribute="leading" secondItem="Uf8-Dm-QLR" secondAttribute="leading" id="zkl-eA-dju"/>
                                 </constraints>
