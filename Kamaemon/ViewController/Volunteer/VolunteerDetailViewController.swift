@@ -102,10 +102,6 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             /**Ngee Ann**/
             let geoCoder = CLGeocoder()
             geoCoder.geocodeAddressString(event!.Location, completionHandler: { [self]p,e in
-                guard e == nil else {
-                    showAlert()
-                            return
-                        }
                     self.coord2 = (p![0].location)!.coordinate
                     annotation2.coordinate = (p![0].location)!.coordinate
                     annotation2.title = event?.Location
@@ -229,6 +225,17 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         
     }
     
+    @IBAction func call(_ sender: Any) {
+        // DB
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        ref.child("users").child(appDelegate.selectedEvent!.UserID).observeSingleEvent(of: .value, with: { snapshot in
+            let value = snapshot.value as? NSDictionary
+            let number = value?["PhoneNumber"] as! String
+            let callURL:NSURL = URL(string: "TEL://\(number)")! as NSURL
+            UIApplication.shared.open(callURL as URL, options: [:], completionHandler: nil)
+        })
+    }
     @IBAction func accept(_ sender: Any) {
         // DB
         var ref: DatabaseReference!

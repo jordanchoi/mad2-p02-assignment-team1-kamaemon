@@ -71,29 +71,32 @@ class HomeViewController : UIViewController{
                     var completedhours = 0
                     var upcominghours = 0
                     var todayhours = 0
-                    for i in jobs!.keys{
-                        if(jobs![i]!["volunteerID"] as! String == currentuser!.uid){
-                            if(jobs![i]!["eventStatus"] as! String == "Completed"){
-                                let jobhours =  jobs![i]!["eventHrs"] as! Int
-                                completedhours =  completedhours + jobhours
-                            }
-                            else if (Calendar.current.compare((dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date), to: Date(), toGranularity: .day) == .orderedDescending && jobs![i]!["eventStatus"] as! String == "Accepted"){
-                                let upHours = jobs![i]!["eventHrs"] as! Int
-                                upcominghours = upcominghours + upHours     //dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date Date().ISO8601Format()
+                    if(jobs != nil){
+                        for i in jobs!.keys{
+                            if(jobs![i]!["volunteerID"] as! String == currentuser!.uid){
+                                if(jobs![i]!["eventStatus"] as! String == "Completed"){
+                                    let jobhours =  jobs![i]!["eventHrs"] as! Int
+                                    completedhours =  completedhours + jobhours
+                                }
+                                else if (Calendar.current.compare((dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date), to: Date(), toGranularity: .day) == .orderedDescending && jobs![i]!["eventStatus"] as! String == "Accepted"){
+                                    let upHours = jobs![i]!["eventHrs"] as! Int
+                                    upcominghours = upcominghours + upHours     //dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date Date().ISO8601Format()
 
+                                }
+                                else if (Calendar.current.compare((dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date), to: Date(), toGranularity: .day) == .orderedSame && jobs![i]!["eventStatus"] as! String == "Accepted" ){
+                                    let today = jobs![i]!["eventHrs"] as! Int
+                                    todayhours = todayhours + today
+                                  
+                                    //dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date Date().ISO8601Format()
                             }
-                            else if (Calendar.current.compare((dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date), to: Date(), toGranularity: .day) == .orderedSame && jobs![i]!["eventStatus"] as! String == "Accepted" ){
-                                let today = jobs![i]!["eventHrs"] as! Int
-                                todayhours = todayhours + today
-                              
-                                //dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date Date().ISO8601Format()
-                        }
-                        }
+                            }
 
+                        }
+                        self.upcomingHours.text = String(upcominghours)
+                        self.todayHours.text = String(todayhours)
+                        self.completedHours.text = String(completedhours)
                     }
-                    self.upcomingHours.text = String(upcominghours)
-                    self.todayHours.text = String(todayhours)
-                    self.completedHours.text = String(completedhours)
+                    
                     
     }
         
