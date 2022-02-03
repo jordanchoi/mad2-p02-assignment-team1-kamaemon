@@ -35,8 +35,8 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var userNameCancel: UILabel!
     @IBOutlet weak var hoursCancel: UILabel!
     @IBOutlet weak var locationCancel: UILabel!
-    
     @IBOutlet weak var completeEvent: UIButton!
+    
     @IBAction func viewFullMap(_ sender: Any) {
         if (coord2 == nil){
             showAlert()
@@ -159,12 +159,12 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             hours.text = "\(event!.Hours) Hours"
         }
         
-        
-        
         //set button inenabled when not date
-        if(Calendar.current.compare( event!.EventDate, to: Date(), toGranularity: .day) == .orderedDescending){
-            completeEvent.isEnabled = false
-            completeEvent.isUserInteractionEnabled = false
+        if (completeEvent != nil) {
+            if(Calendar.current.compare( event!.EventDate, to: Date(), toGranularity: .day) == .orderedDescending){
+                completeEvent.isEnabled = false
+                completeEvent.isUserInteractionEnabled = false
+            }
         }
     }
     let locationDelegate = LocationDelegate()
