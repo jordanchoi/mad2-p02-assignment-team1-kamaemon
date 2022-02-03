@@ -12,6 +12,7 @@
 		0E071FDA279ABB9C00B2BF1A /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */; };
 		0E73ECBE279C9206009B8363 /* EditVolunteerAccViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */; };
 		0E7BA331279B62C9009F8D87 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7BA330279B62C9009F8D87 /* LocationDelegate.swift */; };
+		0E8E38CC27AB13BB00DAB221 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E38CB27AB13BB00DAB221 /* LeaderboardViewController.swift */; };
 		0E947A182793EF9100A2D7B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E66E64BF279307DC002BBE7E /* GoogleService-Info.plist */; };
 		0E947A1C2794030D00A2D7B9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E947A1B2794030D00A2D7B9 /* UIView.swift */; };
 		0EA03F5F27959B6700E8BDA9 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -50,7 +51,6 @@
 		E69E7057279D0D310062C68D /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E7056279D0D310062C68D /* AddEventViewController.swift */; };
 		E69E7059279D18720062C68D /* UserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69E7058279D18710062C68D /* UserHomeViewController.swift */; };
 		E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EBC2797082400E7DACC /* MessageViewController.swift */; };
-		E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */; };
 		E6A97EC427973E4200E7DACC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A97EC327973E4200E7DACC /* Message.swift */; };
 		E6AE626027954ED800B41E63 /* RegisterPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */; };
 		E6AE62622795530F00B41E63 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AE62612795530F00B41E63 /* user.swift */; };
@@ -65,6 +65,7 @@
 		0E071FD8279ABB9C00B2BF1A /* EventTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EventTableViewCell.xib; path = Event/EventTableViewCell.xib; sourceTree = "<group>"; };
 		0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVolunteerAccViewController.swift; sourceTree = "<group>"; };
 		0E7BA330279B62C9009F8D87 /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
+		0E8E38CB27AB13BB00DAB221 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		0E947A1B2794030D00A2D7B9 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0EA923A527A8115E00C8320C /* SharedPrefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPrefs.swift; sourceTree = "<group>"; };
 		0EA923A727A8139800C8320C /* SharedPrefsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPrefsController.swift; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		E69E7056279D0D310062C68D /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		E69E7058279D18710062C68D /* UserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeViewController.swift; sourceTree = "<group>"; };
 		E6A97EBC2797082400E7DACC /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
-		E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
 		E6A97EC327973E4200E7DACC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPageViewController.swift; sourceTree = "<group>"; };
 		E6AE62612795530F00B41E63 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
@@ -149,13 +149,12 @@
 			children = (
 				E66E64CD279335C4002BBE7E /* HomeViewController.swift */,
 				0EEE59462796D594009CCD01 /* VolunteerListViewController.swift */,
-				E6A97EBC2797082400E7DACC /* MessageViewController.swift */,
-				E6A97EC127970B1F00E7DACC /* ChatsTableViewController.swift */,
 				0EF8045C279763AB000AA92B /* VolunteerDetailViewController.swift */,
 				E6BC1BFC279A88BB0049908B /* ProfilePageViewController.swift */,
 				0E73ECBD279C9206009B8363 /* EditVolunteerAccViewController.swift */,
 				E6BC1C01279AAFBD0049908B /* SelectionQualificationViewController.swift */,
 				0EDFB18227A7E83D00E24996 /* HistoryTableViewController.swift */,
+				0E8E38CB27AB13BB00DAB221 /* LeaderboardViewController.swift */,
 			);
 			path = Volunteer;
 			sourceTree = "<group>";
@@ -175,6 +174,7 @@
 		0E73ECC1279EF96C009B8363 /* Both */ = {
 			isa = PBXGroup;
 			children = (
+				E6A97EBC2797082400E7DACC /* MessageViewController.swift */,
 				0EB49D2C2794955D00C00848 /* OnboardingViewController.swift */,
 				A04445752791BF3300689F32 /* ViewController.swift */,
 				E6AE625F27954ED800B41E63 /* RegisterPageViewController.swift */,
@@ -442,7 +442,6 @@
 			files = (
 				0EF8045B2797331C000AA92B /* event.swift in Sources */,
 				E6AE62622795530F00B41E63 /* user.swift in Sources */,
-				E6A97EC227970B1F00E7DACC /* ChatsTableViewController.swift in Sources */,
 				A09B0DD527A5088E002F6D64 /* UserEventsTableViewCell.swift in Sources */,
 				A08E153827A375B7008BC096 /* UserProfileTableViewController.swift in Sources */,
 				A0B16FCC27A7117D00953BBB /* UILabelPadding.swift in Sources */,
@@ -469,6 +468,7 @@
 				E6BC1BFD279A88BB0049908B /* ProfilePageViewController.swift in Sources */,
 				E6BC1C02279AAFBD0049908B /* SelectionQualificationViewController.swift in Sources */,
 				A04445742791BF3300689F32 /* SceneDelegate.swift in Sources */,
+				0E8E38CC27AB13BB00DAB221 /* LeaderboardViewController.swift in Sources */,
 				E6A97EBD2797082400E7DACC /* MessageViewController.swift in Sources */,
 				0EEE59472796D594009CCD01 /* VolunteerListViewController.swift in Sources */,
 				0EA923A827A8139900C8320C /* SharedPrefsController.swift in Sources */,
@@ -624,7 +624,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CZ768BK8BN;
+				DEVELOPMENT_TEAM = B3PQ5YK4F2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;
@@ -659,7 +659,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CZ768BK8BN;
+				DEVELOPMENT_TEAM = B3PQ5YK4F2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Kamaemon/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kamaemon;

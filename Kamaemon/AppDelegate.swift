@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var selectedEventDetails:Event?
     var userprofilevolunteerList : [User] = []
     var userprofilevolunteerUIDList : [String] = []
+    var highestScorer:[String] = []
+    var highestHrs:[Int] = []
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared().isEnabled = true

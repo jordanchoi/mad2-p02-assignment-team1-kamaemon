@@ -31,7 +31,6 @@ class UserProfileTableViewController : UIViewController{
 //        self.pastVolunteers.dataSource = self
         getCurrentUser(UID: Auth.auth().currentUser!.uid)
        // getVolunteer(UID: Auth.auth().currentUser!.uid)
-        print("hre herer"  + String(appDelegate.userprofilevolunteerUIDList.count))
         //print("hre herer"  + String(userprofilevolunteerUIDList.count))
 //        DispatchQueue.global(qos: .background).async {
 //            DispatchQueue.main.async {

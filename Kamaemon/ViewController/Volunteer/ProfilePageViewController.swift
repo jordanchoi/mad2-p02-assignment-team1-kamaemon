@@ -133,7 +133,7 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
                             }
                             self.hours.text = String(hours)
                             //if(jobs?["volunteer"])
-                            ref.child("volunteers").child(currentuser!.uid).child("Hours").setValue(hours)
+                            ref.child("volunteers").child(currentuser!.uid).child("Hours").setValue("\(hours)")
                         }
             self.Qualifications = appDelegate.qualificationsList
             //self.hours.text = (da?["Hours"] as? String)!
