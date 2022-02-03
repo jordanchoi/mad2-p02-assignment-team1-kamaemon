@@ -102,6 +102,9 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             /**Ngee Ann**/
             let geoCoder = CLGeocoder()
             geoCoder.geocodeAddressString(event!.Location, completionHandler: { [self]p,e in
+                guard e == nil else {
+                                             return
+                                         }
                     self.coord2 = (p![0].location)!.coordinate
                     annotation2.coordinate = (p![0].location)!.coordinate
                     annotation2.title = event?.Location
