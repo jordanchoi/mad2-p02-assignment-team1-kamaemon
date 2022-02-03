@@ -35,6 +35,8 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var userNameCancel: UILabel!
     @IBOutlet weak var hoursCancel: UILabel!
     @IBOutlet weak var locationCancel: UILabel!
+    
+    @IBOutlet weak var completeEvent: UIButton!
     @IBAction func viewFullMap(_ sender: Any) {
         if (coord2 == nil){
             showAlert()
@@ -160,6 +162,14 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             location.text = event?.Location
             hours.text = "\(event!.Hours) Hours"
         }
+        
+        
+        
+        //set button inenabled when not date
+        if(Calendar.current.compare( event!.EventDate, to: Date(), toGranularity: .day) == .orderedDescending){
+            completeEvent.isEnabled = false
+            completeEvent.isUserInteractionEnabled = false
+        }
     }
     let locationDelegate = LocationDelegate()
     var latestLocation: CLLocation? = nil
@@ -258,5 +268,31 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         
         // show the alert
         self.present(alert, animated: true, completion: nil)
+    }
+    @IBAction func eventComplete(_ sender: Any) {
+        
+        var ref: DatabaseReference!
+        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+        
+        // create the alert
+        let alert = UIAlertController(title: "Complete Event", message: "Can you confirm the event is complete?", preferredStyle: UIAlertController.Style.alert)
+
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Yes, I am", style: UIAlertAction.Style.default, handler: { [self] action in
+            // Update status and volunteer ID of event to current user's ID
+            guard let key = ref.child("Jobs").child(String(event!.ID)).key else { return }
+            ref.child("Jobs").child(String(event!.ID)).child("eventStatus").setValue("Completed")
+            //ref.child("Jobs").child(String(event!.ID)).child("volunteerID").setValue(Auth.auth().currentUser!.uid)
+            //appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
+            self.navigationController?.popViewController(animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.cancel, handler: nil))
+
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
+        
     }
 }
