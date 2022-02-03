@@ -12,7 +12,7 @@ Module: Mobile Applications Development II (MAD II)
 Team Name: Team 1 - Kamaemon
 The Team:
 * Choi Shu Yih, Jordan (S10208161D)
-* Balqis Kinanti (S10204973)
+* Balqis Kinanti (S10204973G)
 * Chua Jun Hong (S10203330)
 
 ## Application Logo
@@ -99,6 +99,22 @@ To facilitate the registration of our elderly users, OCR is planned to retrieve 
 * Performance Optimization
 * User Interface & Experience Improvements
 * Much More!
+
+#### Technologies
+Our application used these technologies:
+* Firebase to store the user's data 
+  * Data dictionary can be found [here]https://docs.google.com/document/d/1rm5t4Cz5iZokbQa144g6r2bNCG-U-7qBw3fpQf3eUmY/edit?usp=sharing 
+* CoreData to store the user's login details so they do not have to keep logging in 
+* CoreLocation to get user's current location , GeoCoding to get the coordinates from the user's destination input, and MapView to display it in a map
+* Facial recognition API
+* Cocoapods
+  * Dropdown to make easy dropdown interface
+  * Keyboard Manager so input fields are never hidden
+  * Lottie for animation
+  * Message Kit for chat interface
+* View Controllers like table view controller, tab bar controller and navigation controller
+* Adobe XD for wireframing 
+  * Initial prototype can be found [here]https://xd.adobe.com/view/f518eb1d-e8f7-48df-aa73-e74616b63a73-a04b/
 
 #### Disclaimer:
 The application is in its initial stage of development. Certain features may be buggy, inexhaustive, incomplete or inaccurate. It is not intended for actual release and is still in its testing stage.
