@@ -29,7 +29,7 @@ class HomeViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserDets()
-        //getHighestScorer()
+        getHighestScorer()
         //getTop3()
     }
     
@@ -37,6 +37,7 @@ class HomeViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getUserDets()
+        getHighestScorer()
         //getTop3()
     }
     
@@ -108,12 +109,13 @@ class HomeViewController : UIViewController{
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         ref.child("volunteers").observeSingleEvent(of: .value, with: { [self] snap in
-            let jobs = snap.value as? [String: AnyObject]
+            let volunteer = snap.value as? [String: AnyObject]
+            print("HOW MANY VOLUNTEERS \(volunteer!.count)")
             var highestScorer:String = ""
             var highestHrs:Int = 0
             var hr:Int = 0
-            for i in jobs!.keys{
-                hr = Int((jobs![i]!["Hours"] as! NSString).floatValue)
+            for i in volunteer!.keys{
+                hr = Int((volunteer![i]!["Hours"] as! NSString).floatValue)
                 if(hr  > highestHrs){
                     highestHrs = hr as! Int
                     highestScorer = i
@@ -121,7 +123,7 @@ class HomeViewController : UIViewController{
             }
             
             highestScorerHrs.text = "\(highestHrs)"
-            ref.child("users").child(highestScorer).observeSingleEvent(of: .value, with: { snapshot in
+            ref.child("users").child("\(highestScorer)").observeSingleEvent(of: .value, with: { snapshot in
                 let value = snapshot.value as? NSDictionary
                 let uname = value?["Name"] as! String
                 highestScorerName.text = "Congratulations " + uname + "!"

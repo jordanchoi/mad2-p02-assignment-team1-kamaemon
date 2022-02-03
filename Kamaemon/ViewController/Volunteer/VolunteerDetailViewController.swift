@@ -86,7 +86,6 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        self.goToMap.setTitle("", for: .normal)
         
         locationManager.delegate = locationDelegate
         locationDelegate.locationCallBack = { [self] location in
