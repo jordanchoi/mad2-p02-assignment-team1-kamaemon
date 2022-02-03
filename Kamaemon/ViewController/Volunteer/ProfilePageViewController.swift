@@ -125,15 +125,17 @@ class ProfilePageViewController : UIViewController, UITableViewDataSource, UITab
             ref.child("Jobs").observe(.value) { snap in
                             let jobs = snap.value as? [String: AnyObject]
                             var hours = 0
-                            for i in jobs!.keys{
-                                if(jobs![i]!["volunteerID"] as! String == currentuser!.uid && jobs![i]!["eventStatus"] as! String == "Completed"){
-                                    let jobhours =  jobs![i]!["eventHrs"] as! Int
-                                    hours =  hours + jobhours
+                            if (jobs != nil) {
+                                for i in jobs!.keys{
+                                    if(jobs![i]!["volunteerID"] as! String == currentuser!.uid && jobs![i]!["eventStatus"] as! String == "Completed"){
+                                        let jobhours =  jobs![i]!["eventHrs"] as! Int
+                                        hours =  hours + jobhours
+                                    }
                                 }
+                                self.hours.text = String(hours)
+                                //if(jobs?["volunteer"])
+                                ref.child("volunteers").child(currentuser!.uid).child("Hours").setValue("\(hours)")
                             }
-                            self.hours.text = String(hours)
-                            //if(jobs?["volunteer"])
-                            ref.child("volunteers").child(currentuser!.uid).child("Hours").setValue("\(hours)")
                         }
             self.Qualifications = appDelegate.qualificationsList
             //self.hours.text = (da?["Hours"] as? String)!

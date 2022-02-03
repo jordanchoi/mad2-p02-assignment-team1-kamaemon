@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -197,14 +197,15 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </mapView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="fill" placeholder="Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Jdh-P6-xmp">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" placeholder="Description" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Jdh-P6-xmp">
                                         <rect key="frame" x="45" y="226" width="324" height="129"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="129" id="44m-xw-5ta"/>
+                                            <constraint firstAttribute="width" constant="324" id="bBa-SA-ZnJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" textContentType="name"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" smartInsertDeleteType="yes" textContentType="name"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="5"/>
@@ -302,6 +303,7 @@
                                     <constraint firstItem="Jdh-P6-xmp" firstAttribute="trailing" secondItem="8ig-mg-V3A" secondAttribute="trailing" id="Yop-af-Q9g"/>
                                     <constraint firstItem="Jdh-P6-xmp" firstAttribute="top" secondItem="8ig-mg-V3A" secondAttribute="bottom" constant="15" id="adx-qQ-jRa"/>
                                     <constraint firstItem="ONA-Ft-tO1" firstAttribute="leading" secondItem="MP8-Gt-eWj" secondAttribute="leading" constant="1" id="d8P-Mn-ezT"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jdh-P6-xmp" secondAttribute="trailing" constant="45" id="e24-mV-4x6"/>
                                     <constraint firstAttribute="trailing" secondItem="953-Jq-9Us" secondAttribute="trailing" constant="32" id="g5b-ho-oEb"/>
                                     <constraint firstItem="x5h-i2-8wI" firstAttribute="trailing" secondItem="VBS-WB-II9" secondAttribute="trailing" id="heX-uy-ZHL"/>
                                     <constraint firstItem="0IZ-Yh-Mbb" firstAttribute="top" secondItem="MP8-Gt-eWj" secondAttribute="bottom" constant="16" id="hzV-rM-biM"/>
@@ -326,7 +328,9 @@
                             <constraint firstItem="Zr7-aw-Am8" firstAttribute="trailing" secondItem="qy9-Mm-6EJ" secondAttribute="trailing" id="1Ii-hW-jpa"/>
                             <constraint firstItem="Zr7-aw-Am8" firstAttribute="top" secondItem="qy9-Mm-6EJ" secondAttribute="bottom" constant="35" id="4zz-i1-7rU"/>
                             <constraint firstAttribute="trailing" secondItem="qy9-Mm-6EJ" secondAttribute="trailing" id="Jt5-41-0sp"/>
+                            <constraint firstItem="Zr7-aw-Am8" firstAttribute="leading" secondItem="md4-3l-Bbg" secondAttribute="leading" id="Vc1-in-JC4"/>
                             <constraint firstAttribute="bottom" secondItem="Zr7-aw-Am8" secondAttribute="bottom" constant="79" id="e9a-1S-gDb"/>
+                            <constraint firstItem="Zr7-aw-Am8" firstAttribute="trailing" secondItem="md4-3l-Bbg" secondAttribute="trailing" id="gnd-XS-4jd"/>
                             <constraint firstItem="qy9-Mm-6EJ" firstAttribute="top" secondItem="VlR-Vn-N6p" secondAttribute="top" id="ozm-ez-810"/>
                             <constraint firstItem="qy9-Mm-6EJ" firstAttribute="leading" secondItem="VlR-Vn-N6p" secondAttribute="leading" id="pgt-3t-aEZ"/>
                             <constraint firstItem="Zr7-aw-Am8" firstAttribute="leading" secondItem="qy9-Mm-6EJ" secondAttribute="leading" id="q81-pL-TK4"/>

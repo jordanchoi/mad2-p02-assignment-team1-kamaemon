@@ -29,16 +29,17 @@ class HomeViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserDets()
-        getHighestScorer()
-        getTop3()
+        //getHighestScorer()
+        //getTop3()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getUserDets()
-        getTop3()
+        //getTop3()
     }
+    
     func getUserDets(){
         var currentuser = Auth.auth().currentUser
         var ref: DatabaseReference!
