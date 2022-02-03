@@ -42,3 +42,4 @@ class LeaderboardViewController : UIViewController, UITableViewDataSource, UITab
         return highestHrs.count
     }
 }
+
