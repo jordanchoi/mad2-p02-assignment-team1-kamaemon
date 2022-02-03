@@ -12,7 +12,7 @@ import FirebaseAuth
 
 class SelectionQualificationViewController : UITableViewController{
     
-    var Qualifications : [String] = ["First Aid", "CPR", "Social Skills", "Technical Skills"]
+    var Qualifications : [String] = ["First Aid", "CPR", "Technology", "Gardening", "Pets", "Tutor", "Cooking", "Electrical Skills"]
     var selectedQualifications : [String] = ProfilePageViewController().Qualifications
     //var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
     //var selectedCells: [String] = self().selectedQualifications
