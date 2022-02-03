@@ -29,7 +29,7 @@ class HomeViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserDets()
-        getHighestScorer()
+//        getHighestScorer()
         //getTop3()
     }
     
@@ -37,7 +37,7 @@ class HomeViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getUserDets()
-        getHighestScorer()
+//        getHighestScorer()
         //getTop3()
     }
     
