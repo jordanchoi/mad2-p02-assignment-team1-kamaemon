@@ -561,13 +561,6 @@
                                     <action selector="captureImgWithSender:" destination="Iir-Wd-FFc" eventType="touchDragInside" id="A6e-XF-le5"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="clip" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFO-RG-zgv">
-                                <rect key="frame" x="40" y="339.5" width="334" height="54"/>
-                                <string key="text">To ensure the safety of our users and prevent any abuse, it is necessary that we perform an identity verification for all volunteers.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="It'll only take a minute!" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvv-8I-72A">
                                 <rect key="frame" x="40" y="423.5" width="334" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -646,6 +639,13 @@
                                     <constraint firstAttribute="width" constant="58" id="mcc-6l-9qP"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="center" lineBreakMode="clip" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFO-RG-zgv">
+                                <rect key="frame" x="40" y="317" width="334" height="76"/>
+                                <string key="text">To ensure the safety of our users and prevent any abuse, it is necessary that we perform an identity verification for all volunteers. Note that we will be saving the data for manual checking.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jqQ-yU-oKY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -697,7 +697,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTM-Ez-WLR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-278" y="-719"/>
+            <point key="canvasLocation" x="-278.26086956521743" y="-719.19642857142856"/>
         </scene>
         <!--Item-->
         <scene sceneID="ZD0-vK-rmO">
@@ -1836,7 +1836,7 @@
         <scene sceneID="Khr-JQ-IQb">
             <objects>
                 <viewController id="2Ya-yi-0NU" customClass="EditVolunteerAccViewController" customModule="Kamaemon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="ojP-Mg-Slj">
+                    <view key="view" contentMode="scaleToFill" id="ojP-Mg-Slj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1998,10 +1998,13 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4V-L6-g0i">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4V-L6-g0i">
                                 <rect key="frame" x="228" y="462" width="140" height="31"/>
                                 <date key="date" timeIntervalSinceReferenceDate="665319017.69116294">
                                     <!--2022-01-31 10:50:17 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="189230400">
+                                    <!--2006-12-31 04:00:00 +0000-->
                                 </date>
                             </datePicker>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-1" id="iJu-fd-CCr">

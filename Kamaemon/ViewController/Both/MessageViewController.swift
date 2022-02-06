@@ -30,6 +30,13 @@ class MessageViewController : MessagesViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // remove avatar
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+                layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+                layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+                layout.setMessageIncomingAvatarSize(.zero)
+            }
+        
         // new = true . first time texting after being out
         isNew = true
         
