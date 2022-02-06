@@ -175,7 +175,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Cancelled") {
             cell.statusViewBar.backgroundColor = .red
             cell.eventStatusLbl.backgroundColor = .red
-            cell.eventRemarksLbl.text = "Volunteer had cancelled your request. Finding another volunteer.."
+            cell.eventRemarksLbl.text = "Volunteer had cancelled your request."
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
             cell.eventStatusLbl.backgroundColor = .blue

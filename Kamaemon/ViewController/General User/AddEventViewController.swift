@@ -53,7 +53,7 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         hrsDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.hours.text = hrsDropDown.dataSource[index]
             hours.textColor = UIColor.black
-            hrs = catDropDown.dataSource[index]
+            hrs = hrsDropDown.dataSource[index]
         }
         
         category.text = "Category"
@@ -64,7 +64,7 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         
         hours.text = "Estimated Duration (Hrs)"
         hrsDropDown.anchorView = hoursSelect
-        hrsDropDown.dataSource = ["1","2","3"]
+        hrsDropDown.dataSource = ["1","2","3","4","5","6"]
         hrsDropDown.bottomOffset = CGPoint(x: 0, y:(hrsDropDown.anchorView?.plainView.bounds.height)!)
         hrsDropDown.direction = .bottom
 

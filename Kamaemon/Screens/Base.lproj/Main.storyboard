@@ -1831,7 +1831,7 @@
         <scene sceneID="Khr-JQ-IQb">
             <objects>
                 <viewController id="2Ya-yi-0NU" customClass="EditVolunteerAccViewController" customModule="Kamaemon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ojP-Mg-Slj">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="ojP-Mg-Slj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1993,7 +1993,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4V-L6-g0i">
+                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4V-L6-g0i">
                                 <rect key="frame" x="228" y="462" width="140" height="31"/>
                                 <date key="date" timeIntervalSinceReferenceDate="665319017.69116294">
                                     <!--2022-01-31 10:50:17 +0000-->

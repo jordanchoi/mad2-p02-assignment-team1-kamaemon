@@ -159,7 +159,7 @@ class HomeViewController : UIViewController{
                 var uname:String = ""
                 ref.child("users").child(id).observeSingleEvent(of: .value, with: { snapshot in
                     let value = snapshot.value as? NSDictionary
-                    uname = value?["Name"] as! String
+                        uname = value?["Name"] as! String
                     print(id)
                     print(uname)
                     if(!appDelegate.highestScorer.contains(uname)){
