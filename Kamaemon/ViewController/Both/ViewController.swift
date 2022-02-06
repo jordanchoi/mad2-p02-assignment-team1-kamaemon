@@ -73,22 +73,35 @@ class ViewController: UIViewController, UITextFieldDelegate{
                 
             // if success
              } else {
+                 // update app delegate for verification volunteer
+                 appDelegate.verifyUser = User()
+                 appDelegate.verifyUser?.UID = (authResult?.user.uid)!
                  
-                 // modify core data that a user is logged in and who
-                 prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
-                 self.ref.child("users").child((authResult?.user.uid)!).child("UserType").observeSingleEvent(of: .value) { snapshot in
+                 self.ref.child("users").child((authResult?.user.uid)!).observeSingleEvent(of: .value) { snapshot in
                      
                      // get user type to determine which page to go
-                     let value = snapshot.value as? String
-                     let usertype = value as! String
+                     let value = snapshot.value as? NSDictionary
+                     let usertype = value!["UserType"] as! String
+                     let isVerified = value!["isNewUser"] as! Int
                      
                      // go to volunteer home page
                      if (usertype == "Volunteer"){
-                         self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
-                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                         let home = storyboard.instantiateViewController(withIdentifier: "home")
-                         home.modalPresentationStyle = .fullScreen
-                         self.present(home, animated: true, completion: nil)
+                         if(Int(isVerified) == 1){
+                             self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
+                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                             let home = storyboard.instantiateViewController(withIdentifier: "home")
+                             home.modalPresentationStyle = .fullScreen
+                             self.present(home, animated: true, completion: nil)
+                             // modify core data that a user is logged in and who
+                             prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
+                         }
+                         else{
+                             self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
+                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                             let home = storyboard.instantiateViewController(withIdentifier: "verify")
+                             home.modalPresentationStyle = .popover
+                             self.present(home, animated: true, completion: nil)
+                         }
                      }
                      
                      // go to user home page

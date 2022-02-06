@@ -531,7 +531,7 @@
         <!--Identity Verification View Controller-->
         <scene sceneID="9XV-Ab-GkU">
             <objects>
-                <viewController modalPresentationStyle="pageSheet" id="Iir-Wd-FFc" customClass="IdentityVerificationViewController" customModule="Kamaemon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="verify" modalPresentationStyle="pageSheet" id="Iir-Wd-FFc" customClass="IdentityVerificationViewController" customModule="Kamaemon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CN9-Av-aCN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

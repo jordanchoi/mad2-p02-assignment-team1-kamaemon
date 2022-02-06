@@ -33,11 +33,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
                                volunteer = true
                            }
                            if(volunteer){
-                               guard let windowScene = scene as? UIWindowScene else { return }
-                               let vc = self.storyboard.instantiateViewController (withIdentifier: "home")
-                               self.window = UIWindow(windowScene: windowScene)
-                               self.window?.rootViewController = vc
-                               self.window?.makeKeyAndVisible()
+                               if(value!["isNewUser"] as! Int == 1){
+                                   guard let windowScene = scene as? UIWindowScene else { return }
+                                   let vc = self.storyboard.instantiateViewController (withIdentifier: "home")
+                                   self.window = UIWindow(windowScene: windowScene)
+                                   self.window?.rootViewController = vc
+                                   self.window?.makeKeyAndVisible()
+                               }
+                               else{
+                                   guard let windowScene = scene as? UIWindowScene else { return }
+                                   let vc = self.storyboard.instantiateViewController (withIdentifier: "ViewController")
+                                   self.window = UIWindow(windowScene: windowScene)
+                                   self.window?.rootViewController = vc
+                                   self.window?.makeKeyAndVisible()
+                               }
                            }
                            else{
                                guard let windowScene = scene as? UIWindowScene else { return }

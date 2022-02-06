@@ -194,6 +194,8 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                                 // url of image
                                 nricRef.downloadURL(completion: {url, error in
                                     guard let url = url, error == nil else {
+                                        print("\(uid)")
+                                        print("error here")
                                     return
                                 }
                                                     let urlStr = url.absoluteString
@@ -224,6 +226,9 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             })
                             
                             self.animationView.removeFromSuperview()
+                            
+                            ref.child("users").child(uid).child("isNewUser").setValue(1)
+                            
                             //direct user to login page
                             let controller = self.storyboard?.instantiateViewController(identifier: "home") as! UIViewController
                                         controller.modalPresentationStyle = .fullScreen
