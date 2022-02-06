@@ -103,6 +103,12 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         else if(event.Category == "Errands"){
             cell.img.image = UIImage(named: "errands")
         }
+        else if(event.Category == "Cleaning"){
+            cell.img.image = UIImage(named: "cleaning")
+        }
+        else if(event.Category == "Others"){
+            cell.img.image = UIImage(named: "others")
+        }
         return cell
     }
     

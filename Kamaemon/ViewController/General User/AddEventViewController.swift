@@ -58,7 +58,7 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         
         category.text = "Category"
         catDropDown.anchorView = categorySelect
-        catDropDown.dataSource = ["Errands", "Technology","Company","Health"]
+        catDropDown.dataSource = ["Errands", "Technology","Company","Health","Cleaning","Others"]
         catDropDown.bottomOffset = CGPoint(x: 0, y:(catDropDown.anchorView?.plainView.bounds.height)!)
         catDropDown.direction = .bottom
         
