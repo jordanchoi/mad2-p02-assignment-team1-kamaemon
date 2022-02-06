@@ -81,6 +81,9 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         // set the texts for both views
         event = appDelegate.selectedEvent!
         setTexts(event: event)
+        
+        // map view
+        initMap()
     }
     
     func setTexts(event:Event?){
@@ -173,13 +176,21 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
     func initMap(){
         // delegate
         locationManager.delegate = locationDelegate
+        
+        // initialise annotations
+        let annotation = MKPointAnnotation()
+        let annotation2 = MKPointAnnotation()
+        
+        // initialise route
+        var route = MKRoute()
+        
         locationDelegate.locationCallBack = { [self] location in
+            // remove annotationa and overlays
+            self.map.removeAnnotations(map.annotations)
+            self.map.removeOverlays(self.map.overlays)
+            
             // volunteer's latest location
             self.latestLocation = location
-            
-            // initialise annotations
-            let annotation = MKPointAnnotation()
-            let annotation2 = MKPointAnnotation()
             
             // current location
             self.coord1 = location.coordinate
@@ -219,7 +230,7 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
                     }
                     
                     // plot the line
-                    let route = directionResponse.routes[0]
+                    route = directionResponse.routes[0]
                     self.map.addOverlay(route.polyline)
                     let rect = route.polyline.boundingMapRect
                     self.map.setRegion(MKCoordinateRegion(rect), animated: true)
@@ -233,6 +244,10 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             self.map.addAnnotation(annotation)
             self.map.addAnnotation(annotation2)
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
+        initMap()
     }
     
     // get directions for full map - how to get there
