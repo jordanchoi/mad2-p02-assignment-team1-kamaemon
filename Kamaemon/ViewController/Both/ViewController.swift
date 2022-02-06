@@ -110,6 +110,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
                          let home = storyboard.instantiateViewController(withIdentifier: "UserHome")
                          home.modalPresentationStyle = .fullScreen
                          self.present(home, animated: true, completion: nil)
+                         // modify core data that a user is logged in and who
+                         prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
                      }
                  }
              }

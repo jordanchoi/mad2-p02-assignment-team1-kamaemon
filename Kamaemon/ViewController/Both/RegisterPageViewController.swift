@@ -195,9 +195,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                         
                         // repeated account error
                         if let error = error as? NSError {
-                            self.errorLbl.text = "Please enter a different email"
-                            self.EmailAddress.layer.borderColor = UIColor.red.cgColor
-                            self.EmailAddress.layer.borderWidth = 1.0
+                            return
                         }
                         
                         // success
@@ -236,9 +234,7 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
                         
                         // repeated account error
                         if let error = error as? NSError {
-                            self.errorLbl.text = "Please enter a different email"
-                            self.EmailAddress.layer.borderColor = UIColor.red.cgColor
-                            self.EmailAddress.layer.borderWidth = 1.0
+                            return
                         }
                         
                         // success

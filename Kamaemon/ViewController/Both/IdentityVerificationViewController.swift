@@ -229,6 +229,10 @@ class IdentityVerificationViewController: UIViewController, UIImagePickerControl
                             
                             ref.child("users").child(uid).child("isNewUser").setValue(1)
                             
+                            // prefs
+                            let prefs = SharedPrefsController()
+                            prefs.modifyLogin(isloggedIn: true, userID: uid)
+                            
                             //direct user to login page
                             let controller = self.storyboard?.instantiateViewController(identifier: "home") as! UIViewController
                                         controller.modalPresentationStyle = .fullScreen
