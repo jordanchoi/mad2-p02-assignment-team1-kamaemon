@@ -39,7 +39,7 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate, UII
         }
         
         // label texts set color
-        dateLabel.text = "Date of Birth"
+        dateLabel.text = "Date of Birth (age >= 16)"
         gender.text = "Gender"
         gender.textColor = UIColor.black
         
@@ -64,6 +64,10 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate, UII
             
             self.name.text =  value?["Name"] as? String ?? "Error"
             self.gender.text = value?["Gender"] as? String ?? "Gender"
+            if(self.gender.text == ""){
+                self.gender.text = "Gender"
+                self.gender.textColor = .lightGray
+            }
             let mdate = value!["DOB"] as! String
             self.date.date = dateFormatter.date(from: mdate)as? Date ?? Date()
             self.mobileNum.text = value?["PhoneNumber"] as? String ?? "0"
@@ -174,6 +178,9 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate, UII
         
         // update values
         ref.child("users").child(currentuser!.uid).child("Name").setValue(self.name.text)
+        if(self.gender.text == "Gender"){
+            self.gender.text = ""
+        }
         ref.child("users").child(currentuser!.uid).child("Gender").setValue(self.gender.text)
         ref.child("users").child(currentuser!.uid).child("DOB").setValue(dateFormatter.string(for:self.date.date)! as String)
         ref.child("users").child(currentuser!.uid).child("PhoneNumber").setValue(self.mobileNum.text)
