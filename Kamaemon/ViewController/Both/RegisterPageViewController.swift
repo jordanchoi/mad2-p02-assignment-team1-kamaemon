@@ -12,7 +12,8 @@ import FirebaseAuth
 import DropDown
 
 class RegisterPageViewController : UIViewController , UITextFieldDelegate{
-        
+    
+    // UI elements
     @IBOutlet weak var Name: UITextField!
     @IBOutlet weak var EmailAddress: UITextField!
     @IBOutlet weak var Password: UITextField!
@@ -22,16 +23,16 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var phonenumber: UITextField!
     
+    // initialise dropdown (user type)
     let dropDown = DropDown()
-    let genderDropDown = DropDown()
-    var validCount = 0
+    
+    // store category of user
     var cat:String = ""
-//    var gender:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Initialising user category dropdown
+        // Initialise user category dropdown
         lblTitle.text = "Select User Category"
         dropDown.anchorView = vwDropdown
         dropDown.dataSource = ["Volunteer", "Public User"]
@@ -39,29 +40,12 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
         dropDown.direction = .bottom
         
-        // Real time change when user selects data
+        // real time change when user selects data
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.lblTitle.text = dropDown.dataSource[index]
             lblTitle.textColor = UIColor.black
             cat = dropDown.dataSource[index]
         }
-        
-        // gender dropdown
-        
-        //gender dropdown
-//        genderlabel.text = "Gender"
-//        genderDropDown.anchorView = genderdropdown
-//        genderDropDown.dataSource = ["Male", "Female"]
-//        genderDropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-//        genderDropDown.direction = .bottom
-        
-        // Real time change when user selects data
-//        genderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//            self.genderlabel.text = genderDropDown.dataSource[index]
-//            genderlabel.textColor = UIColor.black
-//            gender = genderDropDown.dataSource[index]
-//        }
-        
         
         // Paddings
         Name.setLeftPaddingPoints(10)
@@ -82,17 +66,10 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         view.addGestureRecognizer(tap)
     }
 
-    // Show options
+    // Show options of user type dropdown
     @IBAction func showOptions(_ sender: Any) {
         dropDown.show()
     }
-    
-    
-    @IBAction func showGender(_ sender: Any) {
-        genderDropDown.show()
-    }
-    
-    
     
     // Background press
     @objc func handleTap() {
@@ -101,66 +78,15 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         Name.resignFirstResponder()
     }
     
-    // Client side validation
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        self.Password.layer.borderColor = UIColor.red.cgColor
-        self.EmailAddress.layer.borderColor = UIColor.red.cgColor
-        self.Name.layer.borderColor = UIColor.red.cgColor
-        self.cfmPassword.layer.borderColor = UIColor.red.cgColor
-        self.phonenumber.layer.borderColor = UIColor.red.cgColor
-        self.Password.layer.borderWidth = 1.0
-        self.EmailAddress.layer.borderWidth = 1.0
-        self.Name.layer.borderWidth = 1.0
-        self.cfmPassword.layer.borderWidth = 1.0
-        self.phonenumber.layer.borderWidth = 1.0
-        
-        if(Password.text!.count >= 7){
-            self.Password.layer.borderWidth = 0
-        }
-        
-        if(EmailAddress.text != "" && isValidEmail(EmailAddress.text!)){
-            self.EmailAddress.layer.borderWidth = 0
-        }
-        
-        if(self.Name.text != ""){
-            self.Name.layer.borderWidth = 0
-        }
-        
-        if(phonenumber.text != ""){
-            self.phonenumber.layer.borderWidth = 0
-        }
-        return true
+    // validate phone number
+    func validate(value: String) -> Bool {
+        let PHONE_REGEX = "[6|8|9]\\d{7}|\\+65[6|8|9]\\d{7}|\\+65\\s[6|8|9]\\d{7}"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result = phoneTest.evaluate(with: value)
+        return result
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        validCount = 0
-        if(Password.text!.count >= 7){
-            validCount+=1
-        }
-        
-        if(EmailAddress.text != "" && isValidEmail(EmailAddress.text!)){
-            validCount+=1
-        }
-        
-        if(self.Name.text != ""){
-            validCount+=1
-        }
-        
-        if(phonenumber.text != "" && isStringAnInt(string: phonenumber.text!)){
-            self.phonenumber.layer.borderWidth = 0
-            validCount+=1
-        }
-        
-        if(cfmPassword.text!.count > 1 && Password.text == cfmPassword.text){
-            self.cfmPassword.layer.borderWidth = 0
-            validCount+=1
-        }
-    }
-    
-    func isStringAnInt(string: String) -> Bool {
-        return Int(string) != nil
-    }
-    
+    // validate email
     func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
 
@@ -168,190 +94,176 @@ class RegisterPageViewController : UIViewController , UITextFieldDelegate{
         return emailPred.evaluate(with: email)
     }
     
-    // Return key
+    // return key
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
+    // Return to original state
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.EmailAddress.layer.borderWidth = 0
+        self.Password.layer.borderWidth = 0
+        self.Name.layer.borderWidth = 0
+        self.phonenumber.layer.borderWidth = 0
+        self.cfmPassword.layer.borderWidth = 0
+        self.vwDropdown.layer.borderWidth = 0
+        self.errorLbl.text = ""
+    }
+    
+    // on click create account
     @IBAction func createAccount(_ sender: Any) {
+        // validations
+        var notValid = 0
         
-        if(validCount == 5){
+        if(Password.text!.count < 8){
+            errorLbl.text = "Password must be at least 8 characters"
+            self.Password.layer.borderColor = UIColor.red.cgColor
+            self.Password.layer.borderWidth = 1.0
+            notValid  += 1
+        }
+        
+        if(!isValidEmail(EmailAddress.text!)){
+            errorLbl.text = "Please enter a valid email"
+            self.EmailAddress.layer.borderColor = UIColor.red.cgColor
+            self.EmailAddress.layer.borderWidth = 1.0
+            notValid  += 1
+        }
+        
+        if(EmailAddress.text == ""){
+            errorLbl.text = "Please enter an email address"
+            self.EmailAddress.layer.borderColor = UIColor.red.cgColor
+            self.EmailAddress.layer.borderWidth = 1.0
+            notValid  += 1
+        }
+        
+        if(self.Name.text == ""){
+            errorLbl.text = "Please enter a name"
+            self.Name.layer.borderColor = UIColor.red.cgColor
+            self.Name.layer.borderWidth = 1.0
+            notValid  += 1
+        }
+        
+        if(phonenumber.text == ""){
+            errorLbl.text = "Please enter a mobile number"
+            self.phonenumber.layer.borderColor = UIColor.red.cgColor
+            self.phonenumber.layer.borderWidth = 1.0
+            notValid  += 1
+        }
+        
+        if(!validate(value: phonenumber.text!)){
+            errorLbl.text = "Please enter a valid mobile number"
+            self.phonenumber.layer.borderColor = UIColor.red.cgColor
+            self.phonenumber.layer.borderWidth = 1.0
+            notValid  += 1
+        }
+        
+        if(cfmPassword.text! == ""){
+            errorLbl.text = "Please confirm your password"
+            self.cfmPassword.layer.borderColor = UIColor.red.cgColor
+            self.cfmPassword.layer.borderWidth = 1.0
+            notValid  += 1
+        }
+        
+        if(Password.text != cfmPassword.text){
+            errorLbl.text = "Ensure that the two password match"
+            self.cfmPassword.layer.borderColor = UIColor.red.cgColor
+            self.cfmPassword.layer.borderWidth = 1.0
+            self.Password.layer.borderColor = UIColor.red.cgColor
+            self.Password.layer.borderWidth = 1.0
+            notValid  += 1
+        }
+        
+        if(cat == ""){
+            self.vwDropdown.layer.borderColor = UIColor.red.cgColor
+            self.vwDropdown.layer.borderWidth = 1.0
+            errorLbl.text = "Please select a user type"
+            notValid  += 1
+        }
+        
+        // if pass valid test
+        if(notValid == 0){
+            
+            // create user object
             let newUser = User(userUID: "", userType: self.cat, name: self.Name.text!, gender: "", phonenumber: self.phonenumber.text!, birthdate: Date(), pfpurl: "", isnewuser: 0)
+            
+                // volunteer
                 if (self.lblTitle.text == "Volunteer"){
+                    
+                    // add user email and password in db
                     Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
+                        
+                        // repeated account error
                         if let error = error as? NSError {
-                            print(error)
-                            self.errorLbl.text = "Something went wrong. Please try again."
-                            self.validCount = 0
+                            self.errorLbl.text = "Please enter a different email"
+                            self.EmailAddress.layer.borderColor = UIColor.red.cgColor
+                            self.EmailAddress.layer.borderWidth = 1.0
                         }
+                        
+                        // success
                         else  {
-                            print("success")
-                            let prefs = SharedPrefsController()
-                            prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
-                            print(authResult?.user.uid)
-                            //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
-                            //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
+                            
+                            // create user object in firebase
                             var ref: DatabaseReference!
                             ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
                             if #available(iOS 15.0, *) {
                                 ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" :  newUser.BirthDate.ISO8601Format(), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
                             } else {
-                                // Fallback on earlier versions
+                                return
                             }
                             
+                            // create volunteer object in firebase with default hrs and qualification
                             ref.child("volunteers").child((authResult?.user.uid)!).setValue(["Hours" : "0", "Qualifications" : ""])
                             
+                            // update app delegate
                             let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             newUser.UID = (authResult?.user.uid)!
                             appDelegate.verifyUser = newUser
                             appDelegate.verifyEmail =  self.EmailAddress.text!
                             appDelegate.verifyPassword = self.Password.text!
-                            self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
                             
+                            // go to identity verification
+                            self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
                         }
                     }
-        //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //            appDelegate.verifyUser = newUser
-        //            appDelegate.verifyEmail =  EmailAddress.text!
-        //            appDelegate.verifyPassword = Password.text!
-        //            self.performSegue(withIdentifier:"toIdentityVerificationSegue", sender: nil)
-                    
                 }
-                else{
+            
+                // general user
+                if (self.lblTitle.text == "Public User"){
+                    
+                    // add user email and passsword in db
                     Auth.auth().createUser(withEmail: EmailAddress.text!, password: Password.text!) { (authResult, error) in
+                        
+                        // repeated account error
                         if let error = error as? NSError {
-                            print(error)
-                            self.errorLbl.text = "Something went wrong. Please try again."
+                            self.errorLbl.text = "Please enter a different email"
+                            self.EmailAddress.layer.borderColor = UIColor.red.cgColor
+                            self.EmailAddress.layer.borderWidth = 1.0
                         }
+                        
+                        // success
                         else  {
-                            print("success")
-                            print(authResult?.user.uid)
+                            // update core data that user and logged in
                             let prefs = SharedPrefsController()
                             prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
-                            //let u = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!)
-                            //let newUser = User(userUID: (authResult?.user.uid)!, userType: self.cat, name: self.Name.text!, gender: self.gender, phonenumber: self.phonenumber.text!, birthdate: self.birthdate.date, pfpurl: "", isnewuser: 0)
+                            
+                            // create user object in firebase
                             var ref: DatabaseReference!
                             ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
                             if #available(iOS 15.0, *) {
                                 ref.child("users").child((authResult?.user.uid)!).setValue(["userUID" :(authResult?.user.uid)!, "UserType" : newUser.UserType, "Name" : newUser.n, "Gender" : newUser.Gender, "PhoneNumber" : newUser.PhoneNumber, "DOB" : String(newUser.BirthDate.ISO8601Format()), "PFPURL" : newUser.profilepicurl, "isNewUser" : newUser.isNewUser])
                                 
-                                //here
+                                // go to user home page
                                 let storyboard = UIStoryboard(name: "User", bundle: nil)
                                 let controller = storyboard.instantiateViewController(identifier: "UserHome")
-                                            controller.modalPresentationStyle = .fullScreen
-                                            controller.modalTransitionStyle = .flipHorizontal
+                                controller.modalPresentationStyle = .fullScreen
                                 self.present(controller, animated: true, completion: nil)
                             } else {
-                                // Fallback on earlier versions
+                                return
                             }
                         }
                     }
                 }
         }
-        else{
-            self.errorLbl.text = "Something went wrong. Please try again."
-            self.validCount = 0
-        }
     }
-        
 }
-    
-//    
-//import Foundation
-//import UIKit
-//import Firebase
-//import FirebaseAuth
-//
-//class MyListTableViewController : UITableViewController{
-//    var testList : [String] = []
-//    var count = 0
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        //self.navigationController?.setNavigationBarHidden(false, animated: true)
-//        
-//        
-//        var ref: DatabaseReference!
-//        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-//        ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in
-//          // Get user value
-//            let value = snapshot.value as? NSDictionary
-//            print("----View did load----")
-//            print(value)
-//            print("----View did load----")
-//            print(value?.allValues)
-//            print("----View did load----")
-//            for i in value!.allValues{
-//                let string = i as? String ?? "Error"
-//                self.testList.append(string)
-//                self.count = self.testList.count
-//            }
-//        }) { error in
-//          print(error.localizedDescription)
-//        }
-//        self.tableView.reloadData();
-//    }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        var ref: DatabaseReference!
-//        ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-//        ref.child("test").observeSingleEvent(of: .childAdded, with: { snapshot in
-//            ref.child("test").child("beta").observeSingleEvent(of: .value, with: { snapshot in
-//              // Get user value
-//                let value = snapshot.value as? NSDictionary
-//                print("----View will appear----")
-//                print(value)
-//                print("----View will appear----")
-//                print(value?.allValues)
-//                print("----View will appear----")
-//                for i in value!.allValues{
-//                    for k in self.testList{
-//                        let string = i as? String ?? "Error"
-//                        if (i as! String != k){
-//                            self.testList.append(string)
-//                        }
-//                    }
-//                }
-//            
-//            }) { error in
-//              print(error.localizedDescription)
-//            }
-//        }) { error in
-//          print(error.localizedDescription)
-//        }
-//        self.tableView.reloadData();
-//    }
-//    
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-////        var transactList:[Transaction] = []
-////        transactList = usercontroller.RetrieveAllTransactionsbyUser(user: AppDelegate.user!)
-//        
-//        return self.count
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = self.tableView.dequeueReusableCell(withIdentifier: "session", for: indexPath)
-////        var transactList:[Transaction] = []
-////        transactList = usercontroller.RetrieveAllTransactionsbyUser(user: AppDelegate.user!)
-////
-////        let transact = transactList[indexPath.row]
-//        
-//        cell.textLabel!.text = "\(testList[indexPath.row])"
-//        cell.detailTextLabel!.text = "\(testList[indexPath.row])"
-//        
-//        return cell
-//    }
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//}
-//
-//    

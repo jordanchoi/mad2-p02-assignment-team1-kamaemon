@@ -10,9 +10,17 @@ import Firebase
 import FirebaseAuth
 
 class ViewController: UIViewController, UITextFieldDelegate{
+    
+    // core data
     let prefs = SharedPrefsController()
+    
+    // app delegate
     let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+    
+    // firebase db reference
     var ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
+    
+    // UI elements
     @IBOutlet weak var EmailAddress: UITextField!
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var newUser: UILabel!
@@ -20,56 +28,61 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // set padding of text fields
         EmailAddress.setLeftPaddingPoints(10)
         Password.setLeftPaddingPoints(10)
         
-        // Clear button
+        // clear button
         EmailAddress.clearButtonMode = .whileEditing
         Password.clearButtonMode = .whileEditing
         
-        // Dismiss keyboard on return
+        // dismiss keyboard on return
         EmailAddress.delegate = self
         Password.delegate = self
         
-        // Dismiss keyboard on click background
+        // dismiss keyboard on click background
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tap)
-
-//        Auth.auth().createUser(withEmail: "honglec162003@gmail.com", password: "123456789") { authResult, error in
-//
-//            print("success")
-//        }
-        
-        
     }
 
+    // on click login
     @IBAction func LogIn(_ sender: Any) {
         Auth.auth().signIn(withEmail: EmailAddress!.text!, password: Password!.text!) { [self] (authResult, error) in
-            if let error = error as? NSError {
+            
+            // if error
+            if let error = error as NSError? {
                switch AuthErrorCode(rawValue: error.code) {
+                   
+               // if error is wrong password, display to user
                case .wrongPassword:
                    self.errorlabel.text = "Invalid Password"
                    self.Password.layer.borderColor = UIColor.red.cgColor
                    self.Password.layer.borderWidth = 1.0
+                   
+               // if error is invalid email, display to user
                case .invalidEmail:
                    self.errorlabel.text = "Invalid Email"
                    self.EmailAddress.layer.borderColor = UIColor.red.cgColor
                    self.EmailAddress.layer.borderWidth = 1.0
-                 // Error: Indicates the email address is malformed.
+                   
+               // return
                default:
-                   print("Error: \(error.localizedDescription)")
+                   return
                }
+                
+            // if success
              } else {
-                 print("User signs in successfully")
+                 
+                 // modify core data that a user is logged in and who
                  prefs.modifyLogin(isloggedIn: true,userID: Auth.auth().currentUser!.uid)
-                 //get user and put it to user if user and home if volunteer
                  self.ref.child("users").child((authResult?.user.uid)!).child("UserType").observeSingleEvent(of: .value) { snapshot in
-                     print((authResult?.user.uid)!)
+                     
+                     // get user type to determine which page to go
                      let value = snapshot.value as? String
-                     print(value)
                      let usertype = value as! String
                      
+                     // go to volunteer home page
                      if (usertype == "Volunteer"){
                          self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
                          let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -77,25 +90,17 @@ class ViewController: UIViewController, UITextFieldDelegate{
                          home.modalPresentationStyle = .fullScreen
                          self.present(home, animated: true, completion: nil)
                      }
+                     
+                     // go to user home page
                      else{
-                         //self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
                          let storyboard = UIStoryboard(name: "User", bundle: nil)
                          let home = storyboard.instantiateViewController(withIdentifier: "UserHome")
                          home.modalPresentationStyle = .fullScreen
                          self.present(home, animated: true, completion: nil)
                      }
                  }
-                 
-//                 self.appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
-//                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                 let home = storyboard.instantiateViewController(withIdentifier: "home") as! UIViewController
-//                 home.modalPresentationStyle = .fullScreen
-//                 self.present(home, animated: true, completion: nil)
              }
         }
-        
-        
-//        appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
     }
     
     // Background press
@@ -118,7 +123,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         return true
     }
     
-    
+    // go to register page
     @IBAction func here(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let home = storyboard.instantiateViewController(withIdentifier: "register") as! UIViewController

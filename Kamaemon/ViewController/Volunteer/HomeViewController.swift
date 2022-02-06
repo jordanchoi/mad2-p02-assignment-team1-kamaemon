@@ -11,6 +11,7 @@ import FirebaseAuth
 import Firebase
 class HomeViewController : UIViewController{
     
+    // UI elements
     @IBOutlet weak var user: UILabel!
     @IBOutlet weak var highestScorerHrs: UILabel!
     @IBOutlet weak var highestScorerName: UILabel!
@@ -18,93 +19,94 @@ class HomeViewController : UIViewController{
     @IBOutlet weak var upcomingHours: UILabel!
     @IBOutlet weak var completedHours: UILabel!
     @IBOutlet weak var todayHours: UILabel!
+    
+    // go to volunteer's page
     @IBAction func goToVolunteerPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vp = storyboard.instantiateViewController(withIdentifier: "VolunteerPage")
-        let navController = UINavigationController(rootViewController: vp)
-        self.present(navController, animated: true, completion: nil)
+        tabBarController?.selectedIndex = 1
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserDets()
 //        getHighestScorer()
-        //getTop3()
+//        getTop3()
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getUserDets()
 //        getHighestScorer()
-        //getTop3()
+//        getTop3()
     }
     
     func getUserDets(){
-        var currentuser = Auth.auth().currentUser
+        // instantiate user variable
+        let currentuser = Auth.auth().currentUser
+        
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
-        print(Auth.auth().currentUser!.uid)
-        ref.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value, with: { snapshot in
-          // Get user value
+        
+        ref.child("users").child(currentuser!.uid).observeSingleEvent(of: .value, with: { snapshot in
+            
+          // Get and display user info
           let value = snapshot.value as? NSDictionary
+            
+            // name
             let displayName = value?["Name"] as? String ?? "Error"
             self.user.text = "Hello, " + displayName +  "👋"
+            
+            // profile picture
             if let url = URL(string: value!["PFPURL"] as! String){
                 if let data = try? Data(contentsOf: url) {
-                                if let image = UIImage(data: data){
-                                    DispatchQueue.main.async {
-//                                        self.profilePic = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-                                        self.profilePic.layer.cornerRadius = (self.profilePic.frame.size.width ) / 2
-                                        self.profilePic.clipsToBounds = true
-                                        self.profilePic.image = image
-                                    }
-                                }
-                            }
+                    if let image = UIImage(data: data){
+                        DispatchQueue.main.async {
+                            self.profilePic.layer.cornerRadius = (self.profilePic.frame.size.width ) / 2
+                            self.profilePic.clipsToBounds = true
+                            self.profilePic.image = image
+                        }
+                    }
+                }
             }
         }) { error in
           print(error.localizedDescription)
         }
         
+        // date formatter
         let dateFormatter = ISO8601DateFormatter()
-                ref.child("Jobs").observe(.value) { snap in
-                    let jobs = snap.value as? [String: AnyObject]
-                    var completedhours = 0
-                    var upcominghours = 0
-                    var todayhours = 0
-                    if(jobs != nil){
-                        for i in jobs!.keys{
-                            if(jobs![i]!["volunteerID"] as! String == currentuser!.uid){
-                                if(jobs![i]!["eventStatus"] as! String == "Completed"){
-                                    let jobhours =  jobs![i]!["eventHrs"] as! Int
-                                    completedhours =  completedhours + jobhours
-                                }
-                                else if (Calendar.current.compare((dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date), to: Date(), toGranularity: .day) == .orderedDescending && jobs![i]!["eventStatus"] as! String == "Accepted"){
-                                    let upHours = jobs![i]!["eventHrs"] as! Int
-                                    upcominghours = upcominghours + upHours     //dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date Date().ISO8601Format()
-
-                                }
-                                else if (Calendar.current.compare((dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date), to: Date(), toGranularity: .day) == .orderedSame && jobs![i]!["eventStatus"] as! String == "Accepted" ){
-                                    let today = jobs![i]!["eventHrs"] as! Int
-                                    todayhours = todayhours + today
-                                  
-                                    //dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date Date().ISO8601Format()
-                            }
-                            }
-
-                        }
-                        self.upcomingHours.text = String(upcominghours)
-                        self.todayHours.text = String(todayhours)
-                        self.completedHours.text = String(completedhours)
-                    }
-                    
-                    
-    }
         
-         //set the textts
+        ref.child("Jobs").observe(.value) { snap in
+            let jobs = snap.value as? [String: AnyObject]
+            
+            // set as 0 for dashboard
+            var completed = 0
+            var upcoming = 0
+            var today = 0
+            
+            // if there are jobs
+            if(jobs != nil){
+                for i in jobs!.keys{
+                    if(jobs![i]!["volunteerID"] as! String == currentuser!.uid){
+                        if(jobs![i]!["eventStatus"] as! String == "Completed"){
+                            completed = completed + 1
+                        }
+                        else if (Calendar.current.compare((dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date), to: Date(), toGranularity: .day) == .orderedDescending && jobs![i]!["eventStatus"] as! String == "Accepted"){
+                            upcoming = upcoming + 1
+                        }
+                        else if (Calendar.current.compare((dateFormatter.date(from: jobs![i]!["eventDate"] as! String)! as Date), to: Date(), toGranularity: .day) == .orderedSame && jobs![i]!["eventStatus"] as! String == "Accepted" ){
+                            today = today + 1
+                        }
+                    }
+                }
+                
+                // display - ignore hours i.e change to task count instead of hours
+                self.upcomingHours.text = String(upcoming)
+                self.todayHours.text = String(today)
+                self.completedHours.text = String(completed)
+            }
+        }
     }
     
+    // get highest scorer for leaderboard
     func getHighestScorer(){
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
@@ -133,6 +135,7 @@ class HomeViewController : UIViewController{
         }
     }
     
+    // get top 3 user details
     func getTop3(){
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
         var ref: DatabaseReference!

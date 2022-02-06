@@ -10,52 +10,73 @@ import Foundation
 import UIKit
 
 class VolunteerListViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
+    // appdelegate
     let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
-    var testList : [String] = []
-    var volunteerList : [[Event]] = []
     
-    let refreshControl = UIRefreshControl()
+    // initialise variables
+    var volunteerList : [[Event]] = []
     var currentTableView:Int!
+    
+    // refresh control
+    let refreshControl = UIRefreshControl()
+    
+    // UI elements
     @IBOutlet weak var tableView: UITableView!
+    
+    // switch the segmented control
     @IBAction func switchTableViewAction(_ sender: UISegmentedControl) {
         currentTableView = sender.selectedSegmentIndex
         tableView.reloadData()
     }
     
+    // refresh data
     @objc func refresh(_ sender: AnyObject) {
-       // Code to refresh table view
         appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         volunteerList = appDelegate.volunteerList
-        print("refreshed")
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
     
     override func viewDidLoad() {
+        // register cell
         self.tableView.register(UINib(nibName: "EventTableViewCell", bundle: .main), forCellReuseIdentifier: "eventCell")
-        currentTableView = 0
+        
+        // add refresh
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
+        
+        // load data
         appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         volunteerList = appDelegate.volunteerList
+        
+        // set current selected index as 0
+        currentTableView = 0
+        
         tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // add refresh
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
+        
+        // load data
         appDelegate.PopulateList(UID: Auth.auth().currentUser!.uid)
         volunteerList = appDelegate.volunteerList
+        
         self.tableView.reloadData()
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // DB
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         
         let cell: EventTableViewCell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
+        
+        // get event details based on current selected view and row
         let event = volunteerList[currentTableView][indexPath.row]
         cell.category.text = event.Category
         cell.location.text = event.Location
@@ -69,6 +90,7 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
         })
         cell.selectionStyle = .none
         
+        // display different images for each category
         if(event.Category == "Health"){
             cell.img.image = UIImage(named: "health")
         }
@@ -85,19 +107,20 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("current: "
-              + String(volunteerList[currentTableView].count))
         return volunteerList[currentTableView].count
     }
-
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         appDelegate.selectedEvent = volunteerList[currentTableView][indexPath.row]
+        
+        // go to accept view if user is in explore page
         if(currentTableView == 0){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let accept = storyboard.instantiateViewController(withIdentifier: "Accept")
             self.navigationController?.pushViewController(accept, animated: true)
         }
+        
+        // go to cancel view if user in 'my event' page
         else if(currentTableView == 1){
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let cancel = storyboard.instantiateViewController(withIdentifier: "Cancel")
