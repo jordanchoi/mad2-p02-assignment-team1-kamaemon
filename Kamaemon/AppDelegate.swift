@@ -110,7 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if(details.key == "volunteerID"){
                         // Populate list of volunteer activities that are open
                         if(details.value as! String == ""){
-                            print("getting data...")
                             let event = (events.value! as AnyObject)
                             let id = event["eventID"]!!
                             let desc = event["eventDesc"]!!
@@ -124,10 +123,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let date = event["eventDate"]!!
                         
                             let dateFormatter = ISO8601DateFormatter()
-                            openEventList.append(
-                                Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
-                                     )
-                            )
+                            if(event["eventStatus"]!! as! String != "Cancelled By User"){
+                                openEventList.append(
+                                    Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                         )
+                                )
+                            }
                         }
                         
                         // Populate list of volunteer activities that user have selected and have not done
@@ -144,19 +145,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             let category = event["eventCat"]!!
                             let date = event["eventDate"]!!
                             let dateFormatter = ISO8601DateFormatter()
-                            if(event["eventStatus"]!! as! String != "Completed"){
-                                joinedEventList.append(
-                                    Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
-                                         )
-                                )
-                            }
-                            else{
-                                doneEventList.append(
-                                    Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
-                                         )
-                                )
-                            }
                             
+                            if(event["eventStatus"]!! as! String != "Cancelled By User"){
+                                if(event["eventStatus"]!! as! String != "Completed"){
+                                    joinedEventList.append(
+                                        Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                             )
+                                    )
+                                }
+                                else{
+                                    doneEventList.append(
+                                        Event(id: id as! String, desc: desc as! String, hours: hrs as! Int, location: loc as! String, uID: user as! String, vID: volunteer as! String, name: name as! String, stat: status as! String, cat: category as! String, date: dateFormatter.date(from: date as! String)! as Date
+                                             )
+                                    )
+                                }
+                            }
                         }
                     }
                     self.volunteerList[1] = joinedEventList

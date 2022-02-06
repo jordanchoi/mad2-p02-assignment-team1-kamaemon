@@ -175,7 +175,7 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
         } else if (event.Status == "Cancelled") {
             cell.statusViewBar.backgroundColor = .red
             cell.eventStatusLbl.backgroundColor = .red
-            cell.eventRemarksLbl.text = "You had cancelled this request."
+            cell.eventRemarksLbl.text = "Volunteer had cancelled your request. Finding another volunteer.."
         } else if (event.Status == "Ongoing") {
             cell.statusViewBar.backgroundColor = .blue
             cell.eventStatusLbl.backgroundColor = .blue
@@ -185,13 +185,17 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             cell.eventStatusLbl.backgroundColor = .purple
             cell.eventStatusLbl.textColor = .white
             cell.eventRemarksLbl.text = "Your request has been completed by \(event.volunteer?.n ?? "")"
+        } else if (event.Status == "Cancelled By User") {
+            cell.statusViewBar.backgroundColor = .black
+            cell.eventStatusLbl.backgroundColor = .black
+            cell.eventStatusLbl.textColor = .white
+            cell.eventRemarksLbl.text = "You had cancelled this request."
         }
         else {
             cell.statusViewBar.backgroundColor = .black
             cell.eventStatusLbl.backgroundColor = .black
             cell.eventStatusLbl.textColor = .white
             cell.eventRemarksLbl.text = ""
-            
         }
         
         // Cell items - Status

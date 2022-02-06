@@ -104,7 +104,11 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                     eventStatusBarView.backgroundColor = .purple
 
                 }
-            } else
+            }else if(eventObject!.Status == "Cancelled By User"){
+                eventActionBtn.isEnabled = false
+                callBtn.isEnabled = false
+                msgBtn.isEnabled = false
+            }else
             {
                 eventActionBtn.setTitle("Incorrect Status", for: .normal)
             }
@@ -141,13 +145,17 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
                 // get skills
                 ref.child("volunteers").child(eventObject!.volunteer!.UID).observeSingleEvent(of: .value) { DataSnapshot in
                     let value = DataSnapshot.value as? [String: AnyObject]
-
-                    print(value)
                     if (value != nil) {
-                        if (value!["Qualifications"] != nil) {
-                            for skills in value!["Qualifications"]! as! NSArray {
-                                self.volunteerSkills.append(skills as! String)
-                                print(skills as! String)
+                        // no qualification
+                        if(value!["Qualifications"] is String){
+                            return
+                        }
+                        // qualification list
+                        else{
+                            if (value!["Qualifications"] != nil) {
+                                for skills in value!["Qualifications"]! as! NSArray {
+                                    self.volunteerSkills.append(skills as! String)
+                                }
                             }
                         }
                         self.volunteerSkillTableView.reloadData()
@@ -201,7 +209,7 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
             }))
             alertView.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
                 // cancel request
-                self.updateEventStatus(eID: self.eventObject!.ID, status: "Cancelled")
+                self.updateEventStatus(eID: self.eventObject!.ID, status: "Cancelled By User")
                 self.eventObject!.Status = "Cancelled"
                 self.eventStatusLbl.text = self.eventObject!.Status
                 self.eventActionBtn.isEnabled = false
