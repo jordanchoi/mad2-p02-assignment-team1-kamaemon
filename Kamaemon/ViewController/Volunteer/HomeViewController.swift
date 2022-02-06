@@ -53,7 +53,7 @@ class HomeViewController : UIViewController{
             
             // name
             let displayName = value?["Name"] as? String ?? "Error"
-            self.user.text = "Hello, " + displayName +  "👋"
+            self.user.text = "Hello, " + displayName
             
             // profile picture
             if let url = URL(string: value!["PFPURL"] as! String){
@@ -113,7 +113,6 @@ class HomeViewController : UIViewController{
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
         ref.child("volunteers").observeSingleEvent(of: .value, with: { [self] snap in
             let volunteer = snap.value as? [String: AnyObject]
-            print("HOW MANY VOLUNTEERS \(volunteer!.count)")
             var highestScorer:String = ""
             var highestHrs:Int = 0
             var hr:Int = 0
