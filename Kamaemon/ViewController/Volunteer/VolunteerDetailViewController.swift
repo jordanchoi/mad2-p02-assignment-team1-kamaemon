@@ -81,9 +81,6 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
         // set the texts for both views
         event = appDelegate.selectedEvent!
         setTexts(event: event)
-        
-        // map view
-        initMap()
     }
     
     func setTexts(event:Event?){

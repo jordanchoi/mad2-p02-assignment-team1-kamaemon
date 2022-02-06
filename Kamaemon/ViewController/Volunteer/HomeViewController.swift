@@ -28,15 +28,15 @@ class HomeViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserDets()
-//        getHighestScorer()
-//        getTop3()
+        getHighestScorer()
+        getTop3()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getUserDets()
-//        getHighestScorer()
-//        getTop3()
+        getHighestScorer()
+        getTop3()
     }
     
     func getUserDets(){
@@ -107,6 +107,7 @@ class HomeViewController : UIViewController{
     }
     
     // get highest scorer for leaderboard
+    // must have at least 1 user in db that hour > 0
     func getHighestScorer(){
         var ref: DatabaseReference!
         ref = Database.database(url: "https://kamaemon-default-rtdb.asia-southeast1.firebasedatabase.app/").reference()
