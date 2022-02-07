@@ -32,12 +32,26 @@ class EditProfileUserViewController : UIViewController, UITextFieldDelegate, UII
         // Real time change when user selects data
         genderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.gender.text = genderDropDown.dataSource[index]
-            gender.textColor = UIColor.black
+            gender.textColor = UIColor { tc in
+                switch tc.userInterfaceStyle {
+                case .dark:
+                    return UIColor.white
+                default:
+                    return UIColor.black
+                }
+            }
             usergender = genderDropDown.dataSource[index]
             
         }
         dateLabel.text = "Date of Birth"
-        gender.textColor = UIColor.black
+        gender.textColor = UIColor { tc in
+            switch tc.userInterfaceStyle {
+            case .dark:
+                return UIColor.white
+            default:
+                return UIColor.black
+            }
+        }
         gender.text = "Gender"
         genderDropDown.anchorView = genderSelect
         genderDropDown.dataSource = ["Male", "Female"]

@@ -46,13 +46,27 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         date.frame = .init(x: 45, y: 50, width: 325, height: date.bounds.size.height)
         catDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.category.text = catDropDown.dataSource[index]
-            category.textColor = UIColor.black
+            category.textColor = UIColor { tc in
+                switch tc.userInterfaceStyle {
+                case .dark:
+                    return UIColor.white
+                default:
+                    return UIColor.black
+                }
+            }
             cat = catDropDown.dataSource[index]
         }
         
         hrsDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.hours.text = hrsDropDown.dataSource[index]
-            hours.textColor = UIColor.black
+            hours.textColor = UIColor { tc in
+                switch tc.userInterfaceStyle {
+                case .dark:
+                    return UIColor.white
+                default:
+                    return UIColor.black
+                }
+            }
             hrs = hrsDropDown.dataSource[index]
         }
         

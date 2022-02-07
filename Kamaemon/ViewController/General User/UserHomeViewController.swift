@@ -30,7 +30,26 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        GetAndReloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        GetAndReloadData()
+        eventTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    func GetAndReloadData(){
         // disable navigation bar
         navigationController?.hidesBarsOnSwipe = true
         
@@ -129,23 +148,6 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             
             // perform sorting? -- pushed to back if time permits
         })
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        // disable navigation bar
-        navigationController?.hidesBarsOnSwipe = true
-        eventTableView.reloadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     // TableView

@@ -34,14 +34,28 @@ class EditVolunteerAccViewController:UIViewController , UITextFieldDelegate, UII
         // real time change when user selects data
         genderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.gender.text = genderDropDown.dataSource[index]
-            gender.textColor = UIColor.black
+            gender.textColor = UIColor { tc in
+                switch tc.userInterfaceStyle {
+                case .dark:
+                    return UIColor.white
+                default:
+                    return UIColor.black
+                }
+            }
             usergender = genderDropDown.dataSource[index]
         }
         
         // label texts set color
         dateLabel.text = "Date of Birth (age >= 16)"
         gender.text = "Gender"
-        gender.textColor = UIColor.black
+        gender.textColor = UIColor { tc in
+            switch tc.userInterfaceStyle {
+            case .dark:
+                return UIColor.white
+            default:
+                return UIColor.black
+            }
+        }
         
         // data for gender and set up dropdown
         genderDropDown.anchorView = genderSelect

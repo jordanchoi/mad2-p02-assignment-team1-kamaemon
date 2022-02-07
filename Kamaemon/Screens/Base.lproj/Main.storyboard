@@ -1639,12 +1639,13 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="Qee-K6-QBX">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="rectangle.portrait.and.arrow.right" catalog="system" id="YLw-AD-aK3">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="logOut:" destination="Qgm-t4-xYe" id="UYJ-wg-cHp"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="60L-Qo-xyY">
-                            <color key="tintColor" systemColor="tintColor"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="2Ya-yi-0NU" kind="show" id="FND-Pn-m98"/>
                             </connections>
@@ -2005,17 +2006,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQs-zO-CWg">
-                                <rect key="frame" x="30" y="310" width="352" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="qaZ-kG-6vj"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Change Profile Picture"/>
-                                <connections>
-                                    <action selector="changePFP:" destination="2Ya-yi-0NU" eventType="touchUpInside" id="7mE-bv-ObX"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="BEu-aJ-pLC">
                                 <rect key="frame" x="30" y="347" width="349" height="45"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -2125,10 +2115,21 @@
                                 <rect key="frame" x="125" y="130" width="165" height="146"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="162" id="rJC-sZ-Tps"/>
-                                    <constraint firstAttribute="height" constant="168" id="zbT-Pb-1Om"/>
+                                    <constraint firstAttribute="width" constant="165" id="rJC-sZ-Tps"/>
+                                    <constraint firstAttribute="height" constant="146" id="zbT-Pb-1Om"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQs-zO-CWg">
+                                <rect key="frame" x="31" y="284" width="352" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="qaZ-kG-6vj"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Change Profile Picture"/>
+                                <connections>
+                                    <action selector="changePFP:" destination="2Ya-yi-0NU" eventType="touchUpInside" id="7mE-bv-ObX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Os-3x-rVH"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -2138,18 +2139,18 @@
                             <constraint firstItem="t57-Rp-wDK" firstAttribute="leading" secondItem="E9f-FK-49e" secondAttribute="leading" id="6gh-ax-Bpj"/>
                             <constraint firstItem="tzS-gd-Jen" firstAttribute="trailing" secondItem="t57-Rp-wDK" secondAttribute="trailing" id="BPc-vx-bLi"/>
                             <constraint firstItem="E9f-FK-49e" firstAttribute="top" secondItem="t57-Rp-wDK" secondAttribute="bottom" constant="8" id="FSC-aq-PBv"/>
-                            <constraint firstItem="iJu-fd-CCr" firstAttribute="centerX" secondItem="YQs-zO-CWg" secondAttribute="centerX" constant="1.5" id="HGF-wl-i4p"/>
+                            <constraint firstItem="iJu-fd-CCr" firstAttribute="centerX" secondItem="YQs-zO-CWg" secondAttribute="centerX" constant="0.5" id="HGF-wl-i4p"/>
                             <constraint firstItem="tzS-gd-Jen" firstAttribute="top" secondItem="ZeB-5Q-3Zd" secondAttribute="bottom" constant="8" symbolic="YES" id="HLK-R5-3dl"/>
-                            <constraint firstItem="YQs-zO-CWg" firstAttribute="top" secondItem="iJu-fd-CCr" secondAttribute="bottom" constant="34" id="Jf5-yS-ehm"/>
+                            <constraint firstItem="YQs-zO-CWg" firstAttribute="top" secondItem="iJu-fd-CCr" secondAttribute="bottom" constant="8" id="Jf5-yS-ehm"/>
                             <constraint firstItem="6Os-3x-rVH" firstAttribute="trailing" secondItem="q4V-L6-g0i" secondAttribute="trailing" constant="46" id="N3r-ge-evE"/>
                             <constraint firstItem="t57-Rp-wDK" firstAttribute="top" secondItem="q4V-L6-g0i" secondAttribute="bottom" constant="15" id="NPi-Pz-b3q"/>
                             <constraint firstItem="TfY-FV-Phs" firstAttribute="top" secondItem="E9f-FK-49e" secondAttribute="bottom" constant="20" id="NRu-3K-ox3"/>
                             <constraint firstItem="BEu-aJ-pLC" firstAttribute="trailing" secondItem="ZeB-5Q-3Zd" secondAttribute="trailing" id="Nhf-iC-Hb6"/>
                             <constraint firstItem="6Os-3x-rVH" firstAttribute="bottom" secondItem="b3i-zh-iGA" secondAttribute="bottom" constant="166" id="TSl-Mh-ys2"/>
-                            <constraint firstItem="YQs-zO-CWg" firstAttribute="centerX" secondItem="BEu-aJ-pLC" secondAttribute="centerX" id="WI4-tP-hwF"/>
+                            <constraint firstItem="YQs-zO-CWg" firstAttribute="centerX" secondItem="BEu-aJ-pLC" secondAttribute="centerX" constant="2.5" id="WI4-tP-hwF"/>
                             <constraint firstItem="TfY-FV-Phs" firstAttribute="leading" secondItem="b3i-zh-iGA" secondAttribute="leading" id="XHY-R8-4ze"/>
                             <constraint firstItem="ZeB-5Q-3Zd" firstAttribute="leading" secondItem="tzS-gd-Jen" secondAttribute="leading" id="YA7-2w-Yn8"/>
-                            <constraint firstItem="iJu-fd-CCr" firstAttribute="top" secondItem="6Os-3x-rVH" secondAttribute="top" constant="25" id="Z5m-7i-cdW"/>
+                            <constraint firstItem="iJu-fd-CCr" firstAttribute="top" secondItem="6Os-3x-rVH" secondAttribute="top" constant="42" id="Z5m-7i-cdW"/>
                             <constraint firstItem="tzS-gd-Jen" firstAttribute="top" secondItem="ZeB-5Q-3Zd" secondAttribute="bottom" constant="8" id="ZZR-ab-kgq"/>
                             <constraint firstAttribute="bottom" secondItem="E9f-FK-49e" secondAttribute="bottom" constant="290" id="aCO-zB-Ukm"/>
                             <constraint firstItem="BEu-aJ-pLC" firstAttribute="leading" secondItem="6Os-3x-rVH" secondAttribute="leading" constant="30" id="bro-Tx-oiG"/>
@@ -2158,10 +2159,10 @@
                             <constraint firstItem="t57-Rp-wDK" firstAttribute="top" secondItem="tzS-gd-Jen" secondAttribute="bottom" constant="6" id="e72-I8-lcc"/>
                             <constraint firstItem="q4V-L6-g0i" firstAttribute="top" secondItem="ZeB-5Q-3Zd" secondAttribute="bottom" constant="13" id="fMM-m8-oIO"/>
                             <constraint firstItem="E9f-FK-49e" firstAttribute="leading" secondItem="b3i-zh-iGA" secondAttribute="leading" id="fdx-ww-kTE"/>
-                            <constraint firstItem="YQs-zO-CWg" firstAttribute="leading" secondItem="6Os-3x-rVH" secondAttribute="leading" constant="30" id="gRZ-NL-Rgu"/>
+                            <constraint firstItem="YQs-zO-CWg" firstAttribute="leading" secondItem="6Os-3x-rVH" secondAttribute="leading" constant="31" id="gRZ-NL-Rgu"/>
                             <constraint firstItem="TfY-FV-Phs" firstAttribute="trailing" secondItem="b3i-zh-iGA" secondAttribute="trailing" id="iDc-dO-CNe"/>
                             <constraint firstItem="t57-Rp-wDK" firstAttribute="trailing" secondItem="E9f-FK-49e" secondAttribute="trailing" id="ibL-Ii-mrS"/>
-                            <constraint firstItem="BEu-aJ-pLC" firstAttribute="top" secondItem="YQs-zO-CWg" secondAttribute="bottom" constant="6" id="jd4-0M-6in"/>
+                            <constraint firstItem="BEu-aJ-pLC" firstAttribute="top" secondItem="YQs-zO-CWg" secondAttribute="bottom" constant="32" id="jd4-0M-6in"/>
                             <constraint firstItem="iJu-fd-CCr" firstAttribute="centerX" secondItem="ojP-Mg-Slj" secondAttribute="centerX" id="kkB-lE-Tu1"/>
                             <constraint firstItem="q4V-L6-g0i" firstAttribute="leading" secondItem="6Os-3x-rVH" secondAttribute="leading" constant="228" id="ptX-4v-L9c"/>
                             <constraint firstItem="tzS-gd-Jen" firstAttribute="leading" secondItem="t57-Rp-wDK" secondAttribute="leading" id="tlW-wY-hrf"/>
@@ -2368,9 +2369,6 @@
         </systemColor>
         <systemColor name="tertiarySystemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
