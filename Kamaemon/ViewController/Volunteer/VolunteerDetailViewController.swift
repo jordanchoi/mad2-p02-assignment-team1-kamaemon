@@ -152,8 +152,16 @@ class VolunteerDetailViewController: UIViewController, MKMapViewDelegate{
             name.text = event?.Name
             time.text = dateFormatter.string(from: event!.EventDate)
             desc.text = " " + event!.Desc
+            self.desc.adjustsFontSizeToFitWidth = true
+            self.desc.minimumScaleFactor = 0.5
             location.text = event?.Location
             hours.text = "\(event!.Hours) Hours"
+            self.userName.adjustsFontSizeToFitWidth = true
+            self.userName.minimumScaleFactor = 0.5
+            self.name.adjustsFontSizeToFitWidth = true
+            self.name.minimumScaleFactor = 0.5
+            self.location.adjustsFontSizeToFitWidth = true
+            self.location.minimumScaleFactor = 0.5
         }
         
         //set button inenabled when not date

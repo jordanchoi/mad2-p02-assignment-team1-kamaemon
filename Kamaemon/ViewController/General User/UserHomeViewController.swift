@@ -52,6 +52,9 @@ class UserHomeViewController : UIViewController, UITableViewDataSource, UITableV
             print(value!["DOB"] as! String)
             self.user = User(userUID: value!["userUID"] as! String, userType: value!["UserType"] as! String, name: value!["Name"] as! String, gender: value!["Gender"] as! String, phonenumber: value!["PhoneNumber"] as! String, birthdate: formatter4.date(from: value!["DOB"] as! String) ?? Date(), pfpurl: value!["PFPURL"] as! String, isnewuser: value!["isNewUser"] as! Int)
             self.name.text = "Hi " + self.user.n
+            self.name.numberOfLines = 0
+            self.name.adjustsFontSizeToFitWidth = true
+            self.name.minimumScaleFactor = 0.5
             if let url = URL(string: value!["PFPURL"] as! String){
                 if let data = try? Data(contentsOf: url) {
                                 if let image = UIImage(data: data){

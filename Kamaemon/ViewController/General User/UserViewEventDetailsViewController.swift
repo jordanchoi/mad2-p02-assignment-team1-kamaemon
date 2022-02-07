@@ -80,6 +80,10 @@ class UserViewEventDetailsViewController : UIViewController, UITableViewDataSour
             estDurationLbl.text = "This request will take approximately \(eventObject!.Hours) hours"
             eventDescLbl.text = eventObject!.Desc
             
+            self.eventDescLbl.adjustsFontSizeToFitWidth = true
+            self.eventDescLbl.minimumScaleFactor = 0.5
+            self.eventNameLbl.adjustsFontSizeToFitWidth = true
+            self.eventNameLbl.minimumScaleFactor = 0.5
             if (eventObject!.Status == "Ongoing") {
                 eventActionBtn.setTitle("Mark as Completed", for: .normal)
                 // color for the status

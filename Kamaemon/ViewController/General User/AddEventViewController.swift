@@ -68,6 +68,10 @@ class AddEventViewController : UIViewController, UITextFieldDelegate {
         hrsDropDown.bottomOffset = CGPoint(x: 0, y:(hrsDropDown.anchorView?.plainView.bounds.height)!)
         hrsDropDown.direction = .bottom
 
+        des.sizeToFit()
+        des.adjustsFontSizeToFitWidth = true
+        des.minimumFontSize = 10
+        
         address.delegate = self
         des.delegate = self
         name.delegate = self

@@ -28,6 +28,9 @@ class HomeViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserDets()
+        user.adjustsFontSizeToFitWidth = true
+        user.minimumScaleFactor = 0.5
+        user.numberOfLines = 0
         getHighestScorer()
         getTop3()
     }
@@ -35,8 +38,11 @@ class HomeViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         getUserDets()
-        getHighestScorer()
-        getTop3()
+        user.numberOfLines = 0
+        user.adjustsFontSizeToFitWidth = true
+        user.minimumScaleFactor = 0.5
+        
+        
     }
     
     func getUserDets(){
@@ -54,7 +60,6 @@ class HomeViewController : UIViewController{
             // name
             let displayName = value?["Name"] as? String ?? "Error"
             self.user.text = "Hello, " + displayName
-            
             // profile picture
             if let url = URL(string: value!["PFPURL"] as! String){
                 if let data = try? Data(contentsOf: url) {

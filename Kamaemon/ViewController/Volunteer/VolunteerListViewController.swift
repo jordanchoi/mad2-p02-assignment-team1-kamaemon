@@ -89,7 +89,12 @@ class VolunteerListViewController : UIViewController, UITableViewDataSource, UIT
             cell.userName.text = "By: " + uname
         })
         cell.selectionStyle = .none
-        
+        cell.name.adjustsFontSizeToFitWidth = true
+        cell.name.minimumScaleFactor = 0.5
+        cell.location.adjustsFontSizeToFitWidth = true
+        cell.location.minimumScaleFactor = 0.5
+        cell.userName.adjustsFontSizeToFitWidth = true
+        cell.userName.minimumScaleFactor = 0.5
         // display different images for each category
         if(event.Category == "Health"){
             cell.img.image = UIImage(named: "health")
